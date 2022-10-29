@@ -1,0 +1,356 @@
+<template>
+    <!-- ===========头部导航============ -->
+    <div class="nav">
+        <router-link to="/" class="nav-index"></router-link>
+        <i class="nav-san"></i>
+    </div>
+    <!-- =============注册====================== -->
+    <div class="regist-bg">
+        <div class="regist-panel">
+            <div class="regist-head">
+                <div class="regist-acc">会员注册</div>
+                <div class="already-acc">
+                    <span>已注册</span>
+                    <router-link to="/login">可直接登录</router-link >
+                </div>
+            </div>
+            <!-- =============注册form====================== -->
+            <div class="login-form">
+                <div class="error"></div>
+                <div class="login-user">
+                    <i class="user-img"><img src="/svg/regist-user.svg" alt=""></i>
+                    <input type="text" class="user" placeholder="请输入手机号码">
+                </div>
+                <div class="login-pwd">
+                    <i class="pwd-img"><img src="/svg/login-pwd.svg" alt=""></i>
+                    <input type="password" class="pwd" placeholder="密码">
+                </div>
+                <div class="login-pwd1">
+                    <i class="pwd-img"><img src="/svg/login-pwd.svg" alt=""></i>
+                    <input type="password" class="pwd" placeholder="请再次输入密码">
+                </div>
+                <div class="pwd-none"></div>
+                <!-- ===============底部 -->
+                <div class="login-tiaokuan">
+                    <input type="checkbox">
+                    <strong>我已阅读并接受以下条款：</strong>
+                    <a href="">《唯品会服务条款》</a>
+                    <a href="">《唯品会隐私政策》</a>
+                    <a href="">《唯品支付用户服务协议》</a>
+                </div>
+                <div class="no-agree"></div>
+                <a href="../pages/login.html" class="zhuce">立即注册</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+</script>
+
+<style scoped>
+/* ===============头部导航================== */
+.nav {
+    position: relative;
+    z-index: 1;
+    margin-right: auto;
+    margin-left: auto;
+    width: 1000px;
+    height: 100px;
+    zoom: 1;
+    /* border: 1px solid; */
+}
+
+.nav .nav-index {
+    background-image: url("../images/maodian.png");
+    background-position: -308px -57px;
+    width: 125px;
+    height: 100px;
+    /* border: 1px solid; */
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.nav .nav-san {
+    background-image: url("../images/maodian.png");
+    background-position: 0 0;
+    width: 304px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+/* ===========================登录背景========================= */
+
+.regist-bg {
+    /* border: 1px solid; */
+    width: 100%;
+    height: 650px;
+    background-image: url("../images/login-bg.jpg");
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+/* =====================注册框=================== */
+.regist-bg .regist-panel {
+    width: 360px;
+    height: 510px;
+    background-color: #fff;
+    margin-top: 50px;
+    margin-left: 900px;
+    position: absolute;
+}
+
+.regist-bg .regist-panel .regist-head {
+    width: 360px;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+.regist-bg .regist-panel .regist-acc {
+    width: 178px;
+    vertical-align: top;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 50px;
+    overflow: hidden;
+    color: #575557;
+    cursor: default;
+    float: left;
+    cursor: pointer;
+}
+
+.regist-bg .regist-panel .already-acc {
+    width: 140px;
+    height: 50px;
+    float: left;
+    font-family: "微软雅黑";
+    float: right;
+    font-size: 14px;
+    position: relative;
+    top: 15px;
+    right: 20px;
+}
+
+.regist-bg .regist-panel .already-acc a {
+    text-decoration: none;
+}
+
+/* ===================注册表单区============================ */
+.login-bg .login-panel .login-form {
+    width: 300px;
+    height: 400px;
+    /* background: white; */
+    margin-left: 30px;
+}
+
+/* ======提示用户手机号码输入有误 */
+.regist-bg .regist-panel .login-form .error {
+    /* display: none; */
+    width: 200px;
+    margin-left: 50px;
+    height: 15px;
+    float: left;
+    /* border: 1px solid; */
+    font-size: 10px;
+    line-height: 15px;
+    position: relative;
+    top: 20px;
+    text-align: left;
+    padding-left: 40px;
+    color: rgb(206, 27, 27);
+    font-weight: bolder;
+
+}
+
+/* =========用户区 */
+.regist-bg .regist-panel .login-form .login-user {
+    padding-left: 40px;
+    margin-left: 40px;
+    position: relative;
+    top: 40px;
+    width: 248px;
+    height: 40px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+}
+
+.regist-bg .regist-panel .login-form .login-user .user-img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid; */
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    float: left;
+
+}
+
+/* 用户名输入框 */
+.regist-bg .regist-panel .login-form .login-user input[type=text] {
+    width: 220px;
+    height: 20px;
+    position: absolute;
+    top: 13px;
+    left: 40px;
+    float: left;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+    background-color: #fff;
+    ;
+
+
+}
+
+/* ==========密码区 */
+.regist-bg .regist-panel .login-form .login-pwd {
+    padding-left: 40px;
+    margin-left: 40px;
+    position: relative;
+    top: 75px;
+    width: 248px;
+    height: 40px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.regist-bg .regist-panel .login-form .login-pwd1 {
+    padding-left: 40px;
+    margin-left: 40px;
+    position: relative;
+    top: 110px;
+    width: 248px;
+    height: 40px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.regist-bg .regist-panel .login-form .login-pwd .pwd-img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid; */
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    float: left;
+
+}
+
+.regist-bg .regist-panel .login-form .login-pwd1 .pwd-img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid; */
+    position: absolute;
+    top: 10px;
+    left: 9px;
+    float: left;
+
+}
+
+.regist-bg .regist-panel .login-form .login-pwd input[type=password] {
+    width: 220px;
+    height: 20px;
+    position: absolute;
+    top: 13px;
+    left: 40px;
+    float: left;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+    background-color: #fff;
+    ;
+}
+
+.regist-bg .regist-panel .login-form .login-pwd1 input[type=password] {
+    width: 220px;
+    height: 20px;
+    position: absolute;
+    top: 13px;
+    left: 40px;
+    float: left;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+    background-color: #fff;
+    ;
+}
+
+/* 两次密码输入不一致 */
+.regist-bg .regist-panel .login-form .pwd-none {
+    /* display: none; */
+    width: 200px;
+    height: 15px;
+    margin-left: 50px;
+    /* border: 1px solid; */
+    font-size: 10px;
+    line-height: 20px;
+    margin-top: 120px;
+    text-align: center;
+    color: rgb(206, 27, 27);
+    font-weight: bolder;
+
+}
+
+/* ===========底部条款================== */
+.regist-bg .regist-panel .login-form .login-tiaokuan {
+    width: 280px;
+    height: 40px;
+    /* border: 1px solid; */
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.regist-bg .regist-panel .login-form .login-tiaokuan strong {
+    font-size: 12px;
+}
+
+.regist-bg .regist-panel .login-form .login-tiaokuan a {
+    font-size: 10px;
+    color: #f10180;
+    text-decoration: none;
+}
+
+.regist-bg .regist-panel .login-form .zhuce {
+    display: block;
+    width: 280px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    font-size: 20px;
+    background-color: #f10180;
+    color: #fff;
+    font-weight: bolder;
+    margin-left: 40px;
+    margin-top: 15px;
+    border: none;
+
+}
+
+.regist-bg .regist-panel .login-form .no-agree {
+    width: 200px;
+    margin-left: 50px;
+    height: 15px;
+    /* border: 1px solid; */
+    margin-top: 10px;
+    font-size: 10px;
+    line-height: 20px;
+    text-align: center;
+    color: rgb(206, 27, 27);
+    font-weight: bolder;
+    text-align: left;
+
+}
+</style>

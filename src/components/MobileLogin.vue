@@ -1,0 +1,294 @@
+<template>
+    <!-- 短信验证登录 -->
+    <div class="login-form2">
+        <!-- ====短信登录=== -->
+
+        <div class="login-user">
+            <i class="user-img"><img src="/svg/phone.svg" alt=""></i>
+            <input type="text" class="user" placeholder="请输入要验证的手机号码">
+        </div>
+        <div class="user-none"></div>
+        <div class="row-2">
+            <div class="code">
+                <i class="code-img"><img src="/svg/code.svg" alt=""></i>
+                <input type="password" class="pwd" placeholder="请输入验证码">
+            </div>
+            <a href="#">获取验证码</a>
+        </div>
+        <div class="code-none"></div>
+        <div class="login-tiaokuan">
+            <input type="checkbox">
+            <strong>我已阅读并接受以下条款：</strong>
+            <a href="">《唯品会服务条款》</a>
+            <a href="">《唯品会隐私政策》</a>
+            <a href="">《唯品支付用户服务协议》</a>
+        </div>
+        <div class="no-agree"></div>
+        <a href="../index.html" class="denglu">登录</a>
+        <div class="fooder">
+            <div class="wechat">
+                <i class="i1"></i>
+                <span class="weixin-img"></span>
+                <i class="i2"></i>
+            </div>
+            <router-link to="/register" class="register">免费注册</router-link>
+        </div>
+    </div>
+</template>
+
+<script>
+</script>
+
+<style scoped>
+/* =========================短信登陆 ============================ */
+/* =========用户区 */
+.login-bg .login-panel .login-form2 {
+    width: 300px;
+    height: 450px;
+    /* background-color: rgb(245, 229, 229); */
+    margin: 0 auto;
+    /* border :1px solid; */
+}
+.login-bg .login-panel .login-form2 .login-user {
+    padding-left: 40px;
+    margin-left: 5px;
+    position: relative;
+    top: 40px;
+    width: 248px;
+    height: 40px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+.login-bg .login-panel .login-form2 .login-user .user-img {
+    display: block;
+    width: 25px;
+    height: 25px;
+    /* border: 1px solid; */
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    float: left;
+
+}
+
+/* 用户名输入框 */
+.login-bg .login-panel .login-form2 .login-user input[type=text] {
+    width: 220px;
+    height: 20px;
+    position: absolute;
+    background-color: #fff;
+    top: 13px;
+    left: 40px;
+    float: left;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+
+
+}
+
+/* 提示用户名为空 */
+.login-bg .login-panel .login-form2 .user-none {
+    /* display: none; */
+    width: 150px;
+    height: 20px;
+    float: left;
+    /* border: 1px solid; */
+
+    font-size: 10px;
+    line-height: 20px;
+    margin-top: 50px;
+    color: rgb(206, 27, 27);
+    font-weight: bolder;
+    margin-left: 15px;
+}
+
+/* ====验证码=== */
+.login-bg .login-panel .login-form2 .row-2 {
+    width: 300px;
+    height: 40px;
+}
+
+.login-bg .login-panel .login-form2 .row-2 .code {
+    padding-left: 40px;
+    margin-left: 5px;
+    position: relative;
+    top: 20px;
+    width: 150px;
+    height: 40px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    float: left;
+}
+
+.login-bg .login-panel .login-form2 .row-2 .code .code-img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid; */
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    float: left;
+
+}
+
+.login-bg .login-panel .login-form2 .row-2 .code input[type=password] {
+    width: 120px;
+    height: 20px;
+    position: absolute;
+    /* background-color: rgb(137, 102, 102); */
+    background-color: #fff;
+    top: 13px;
+    left: 40px;
+    float: left;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+    float: left;
+}
+
+.login-bg .login-panel .login-form2 .row-2 a {
+    float: left;
+    padding: 0;
+    width: 80px;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    color: #e00078;
+    background-color: #fcedf2;
+    border: 1px solid #ffbee0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 20px;
+    margin-left: 8px;
+    text-decoration: none;
+}
+
+.login-bg .login-panel .login-form2 .code-none {
+    width: 285px;
+    height: 20px;
+    float: left;
+    /* border: 1px solid; */
+
+    font-size: 10px;
+    line-height: 20px;
+    margin-top: 10px;
+    color: rgb(206, 27, 27);
+    font-weight: bolder;
+    margin-left: 15px;
+    float: left;
+}
+
+.login-bg .login-panel .login-form2 .login-tiaokuan {
+    width: 280px;
+    float: left;
+    height: 40px;
+    /* border: 1px solid; */
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.login-bg .login-panel .login-form2 .login-tiaokuan input[type=checkbox] {
+    float: left;
+    margin-right: 5px;
+}
+
+.login-bg .login-panel .login-form2 .login-tiaokuan strong {
+    float: left;
+    font-size: 12px;
+}
+
+.login-bg .login-panel .login-form2 .login-tiaokuan a {
+    float: left;
+    font-size: 10px;
+    color: #f10180;
+    text-decoration: none;
+}
+
+.login-bg .login-panel .login-form2 .no-agree {
+    float: left;
+    width: 280px;
+    height: 20px;
+    /* border: 1px solid; */
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 10px;
+    line-height: 20px;
+    text-align: center;
+    color: rgb(206, 27, 27);
+    font-weight: bolder;
+    text-align: left;
+
+}
+
+.login-bg .login-panel .login-form2 .denglu {
+    float: left;
+    text-decoration: none;
+    display: block;
+    width: 280px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 5px;
+    background-color: #f10180;
+    color: #fff;
+    font-weight: bolder;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+}
+
+/* ========微信登陆================== */
+.login-bg .login-panel .login-form2 .fooder {
+    width: 100%;
+    height: 130px;
+    /* background-color: rgb(244, 210, 210); */
+    margin-top: 25px;
+}
+
+.login-bg .login-panel .login-form2 .fooder .wechat {
+    width: 100%;
+    height: 40px;
+    /* border: 1px solid; */
+}
+
+.login-bg .login-panel .login-form2 .fooder .wechat .i1,
+.i2 {
+    display: block;
+    width: 120px;
+    float: left;
+    margin-top: 20px;
+    border-top: 1px solid #cac9c9;
+}
+
+.login-bg .login-panel .login-form2 .fooder .wechat .weixin-img {
+    width: 40px;
+    float: left;
+    height: 40px;
+    background-image: url("../images/maodian.png");
+    background-position: -580px -161px;
+    position: relative;
+    z-index: 3;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.login-bg .login-panel .login-form2 .fooder .register {
+    height: 14px;
+    color: #333;
+    line-height: 24px;
+    font-size: 14px;
+    float: left;
+    padding-left: 75%;
+    text-decoration: none;
+}
+</style>
