@@ -3,25 +3,15 @@
   <SecondHeader></SecondHeader>
   <ShopNavigation></ShopNavigation>
   <RightNavigation></RightNavigation>
-  <div v-for="cart in cartList" :key="cart.proAttributeInfoId">
-    <span>{{cart.proAttributeInfoId}}:{{cart.proName}}</span>
-  </div>
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
   <!-- 轮播图开始 -->
   <div class="banner">
     <div class="wrap">
       <div class="banner-box">
-        <div class="layui-carousel" id="test10">
-          <div carousel-item="">
-            <div><img src="/images/temp/banner1.jpg" width="100%" height="100%"></div>
-            <div><img src="/images/temp/banner2.jpg" width="100%" height="100%"></div>
-          </div>
-        </div>
+        <el-carousel height="460px" indicator-position="outside">
+          <el-carousel-item v-for="item in tupian" :key="item.src">
+            <img :src="item" />
+          </el-carousel-item>
+        </el-carousel>
       </div>
     </div>
   </div>
@@ -32,27 +22,27 @@
       <!--广告区头牌-->
       <div class="home-box">
         <a href="#">
-          <img src="/images/temp/超级大牌日.jpg" alt="">
+          <img src="/images/temp/超级大牌日.jpg" alt="" />
         </a>
       </div>
       <!--广告区-->
       <div class="adver">
         <div class="abver-a">
           <router-link to="/productList">
-            <img src="/images/temp/广告1.jpg" alt="">
+            <img src="/images/temp/广告1.jpg" alt="" />
           </router-link>
         </div>
         <div class="abver-b">
-          <img src="/images/temp/广告2.jpg" alt="">
+          <img src="/images/temp/广告2.jpg" alt="" />
         </div>
         <div class="abver-c">
-          <img src="/images/temp/广告3.jpg" alt="">
+          <img src="/images/temp/广告3.jpg" alt="" />
         </div>
       </div>
       <!--每日必看模块-->
       <div class="home-box">
         <a href="#">
-          <img src="/images/temp/每日必看.jpg" alt="">
+          <img src="/images/temp/每日必看.jpg" alt="" />
         </a>
       </div>
       <!--商品排行榜-->
@@ -60,22 +50,22 @@
         <div class="shop-nav">
           <!--排行榜表头-->
           <div class="shop-a">
-            <img src="/images/temp/排行榜.png">
+            <img src="/images/temp/排行榜.png" />
             <span>90%的会员都在买</span>
           </div>
           <div class="shop-b">
             <div class="itms">
-              <img src="/images/temp/旁行榜1.jpg" alt="" class="goods-img">
+              <img src="/images/temp/旁行榜1.jpg" alt="" class="goods-img" />
               <p class="name">￥1350</p>
               <p class="price">特卖价</p>
             </div>
             <div class="itms">
-              <img src="/images/temp/排行榜2.jpg" alt="" class="goods-img">
+              <img src="/images/temp/排行榜2.jpg" alt="" class="goods-img" />
               <p class="name">￥1350</p>
               <p class="price">特卖价</p>
             </div>
             <div class="itms">
-              <img src="/images/temp/排行榜3.jpg" alt="" class="goods-img">
+              <img src="/images/temp/排行榜3.jpg" alt="" class="goods-img" />
               <p class="name">￥1350</p>
               <p class="price">特卖价</p>
             </div>
@@ -84,22 +74,22 @@
         <div class="shop-nav-b">
           <!--今日降价表头-->
           <div class="shop-a">
-            <img src="/images/temp/今日降价.jpg">
+            <img src="/images/temp/今日降价.jpg" />
             <span>直播爆款抢先购</span>
           </div>
           <div class="shop-b">
             <div class="itms">
-              <img src="/images/temp/旁行榜1.jpg" alt="" class="goods-img">
+              <img src="/images/temp/旁行榜1.jpg" alt="" class="goods-img" />
               <p class="name">￥1350</p>
               <p class="price">特卖价</p>
             </div>
             <div class="itms">
-              <img src="/images/temp/排行榜2.jpg" alt="" class="goods-img">
+              <img src="/images/temp/排行榜2.jpg" alt="" class="goods-img" />
               <p class="name">￥1350</p>
               <p class="price">特卖价</p>
             </div>
             <div class="itms">
-              <img src="/images/temp/排行榜3.jpg" alt="" class="goods-img">
+              <img src="/images/temp/排行榜3.jpg" alt="" class="goods-img" />
               <p class="name">￥1350</p>
               <p class="price">特卖价</p>
             </div>
@@ -110,14 +100,14 @@
       <div class="rebate">
         <!--                前一个盒子-->
         <div class="rebate-nav">
-          <img src="/images/temp/折扣区.jpg" alt="">
+          <img src="/images/temp/折扣区.jpg" alt="" />
           <span class="rebate-a">1</span>
           <span class="rebate-b">折起</span>
           <span class="rebate-c">伊芙丽eifini女装专场</span>
         </div>
         <!--                后一个盒子-->
         <div class="rebate-nav-b">
-          <img src="/images/temp/折扣区.jpg" alt="">
+          <img src="/images/temp/折扣区.jpg" alt="" />
           <span class="rebate-a">1</span>
           <span class="rebate-b">折起</span>
           <span class="rebate-c">伊芙丽eifini女装专场</span>
@@ -127,20 +117,12 @@
   </div>
 </template>
 <script setup>
-import YiRanHeader from '@/components/YiRanHeader.vue'
-import SecondHeader from '@/components/SecondHeader.vue'
-import ShopNavigation from '@/components/ShopNavigation.vue'
-import RightNavigation from '@/components/RightNavigation.vue'
-import {reactive,ref} from 'vue'
-import cartApi from '@/api/cart.js'
-let cartList = ref()
-cartApi.getCart(101)
-  .then(
-    response => {
-      cartList.value= reactive(response.data.cartList)
-    }
-  )
-  console.log(cartList)
+import YiRanHeader from "@/components/YiRanHeader.vue";
+import SecondHeader from "@/components/SecondHeader.vue";
+import ShopNavigation from "@/components/ShopNavigation.vue";
+import RightNavigation from "@/components/RightNavigation.vue";
+let tupian = ["https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.jpg","https://b.appsimg.com/upload/momin/2022/10/27/60/1666855175963.jpg","https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.jpg"]
+
 </script>
 <style scoped>
 .content {
@@ -157,15 +139,19 @@ cartApi.getCart(101)
   width: 100%;
   height: 460px;
 }
-
 .banner-box {
   position: relative;
   margin-top: 50px;
   width: 100%;
   height: 460px;
-  /*background-color: aqua;*/
 }
-
+.el-carousel__item h3 {
+  display: flex;
+  color: #475669;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+}
 /* 轮播图结束  */
 /* 主体开始 */
 .content {
@@ -230,7 +216,6 @@ cartApi.getCart(101)
   float: left;
   width: 100%;
   height: 70px;
-
 }
 
 .shop-a img {
@@ -256,7 +241,7 @@ cartApi.getCart(101)
   height: 170px;
   margin-bottom: 14px;
   margin-left: 14px;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
 }
 
 .goods-img {
@@ -304,7 +289,7 @@ cartApi.getCart(101)
   float: left;
   height: 273px;
   margin: 40px 0px 0px 12px;
-  background-color: #9F9F9F;
+  background-color: #9f9f9f;
 }
 
 .rebate-nav-b {
@@ -312,7 +297,7 @@ cartApi.getCart(101)
   float: left;
   height: 273px;
   margin: 40px 0px 0px 39px;
-  background-color: #9F9F9F;
+  background-color: #9f9f9f;
 }
 
 .rebate-name {
