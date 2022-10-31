@@ -28,12 +28,14 @@
       <!--广告区-->
       <div class="adver">
         <div class="abver-a">
-          <router-link to="/productList">
+          <router-link to="/productList?kindId=107">
             <img src="/images/temp/广告1.jpg" alt="" />
           </router-link>
         </div>
         <div class="abver-b">
-          <img src="/images/temp/广告2.jpg" alt="" />
+          <router-link to="/productList?brandId=2121212">
+            <img src="/images/temp/广告2.jpg" alt="" />
+          </router-link>
         </div>
         <div class="abver-c">
           <img src="/images/temp/广告3.jpg" alt="" />

@@ -310,7 +310,6 @@ function deleteByCartId(cartId) {
 .ui-step-icon .iconfont {
     font-size: 30px;
     margin: 0;
-    color: #b7b7b7;
     color: rgba(0, 0, 0, 0.25);
     *color: #b7b7b7;
     line-height: 30px;
