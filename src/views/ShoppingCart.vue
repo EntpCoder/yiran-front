@@ -85,7 +85,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="goods-item" v-for="c in cartList" :key="c.proAttributeInfoId">
+                <tr class="goods-item" v-for="c in cartList" :key="c.cartId">
                     <!-- 商品信息 -->
                     <td class="product-item">
                         <!-- 选框 -->
@@ -116,8 +116,7 @@
                         </div>
                     </td>
                     <td class="actions-item">
-                        <a class="order-button-del" href="javascript:;"
-                            @click="deleteByCartId(c.proAttributeInfoId)">删除</a>
+                        <a class="order-button-del" href="javascript:;" @click="deleteByCartId(c.cartId)">删除</a>
                     </td>
                 </tr>
             </tbody>
@@ -134,14 +133,14 @@
                 </div>
                 <div class="price-panel-item layui-col-md1">
                     共
-                    <span class="product-num">3</span>
+                    <span class="product-num">{{ cartList.length }}</span>
                     件商品
                 </div>
             </div>
             <!-- 金额面板 -->
             <div class="orders-price layui-row">
-                <div class="sum-price-text layui-col-md1 layui-col-md-offset10">总金额:</div>
-                <div class="sum-price layui-col-md1">￥1888</div>
+                <div class="sum-price-text layui-col-md1 layui-col-md-offset10">总金额:{{data.sumNum}}</div>
+                <div class="sum-price layui-col-md1"></div>
             </div>
             <!-- 结算 -->
             <div class="orders-settlement layui-row">
@@ -157,28 +156,51 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onBeforeMount, computed } from 'vue'
 import cartApi from '@/api/cart.js'
-let cartList = ref()
-cartApi.getCart(101)
-    .then(
+// 购物车数据对象
+let cartList = ref([])
+let data = reactive({})
+// 页面挂挂载完毕执行
+onBeforeMount(() => {
+    getCart()
+})
+data.sumNum = computed({
+    get() {
+        let sum =0
+        cartList.value.forEach((cart)=>{
+            sum += cart.sellingPrice*cart.nums
+        })
+        return sum.toFixed(2)
+    },
+    set() {
+    }
+})
+// 请求购物车数据
+function getCart() {
+    cartApi.getCart(101).then(
         response => {
+            console.log(response)
             cartList.value = reactive(response.data.cartList)
         }
     )
+}
 function decrease(cart) {
     cart.nums--
+    cartApi.updataNums(cart)
 }
 function increase(cart) {
     cart.nums++
+    cartApi.updataNums(cart)
 }
+// 删除
 function deleteByCartId(cartId) {
-    console.log(cartId)
-    cartApi.deleleCartById(cartId)
-        .then(
-            response => {
-                console.log(response)
-            })
+    cartApi.deleleCartById(cartId).then(
+        response => {
+            if (response.code === 200) {
+                getCart()
+            }
+        })
 }
 </script>
 

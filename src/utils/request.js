@@ -4,7 +4,10 @@ import axios from 'axios'
 // 创建axios实例
 const service = axios.create({
   baseURL: 'http://localhost:2177/', // api的base_url
-  timeout: 20000 // 请求超时时间
+  timeout: 20000, // 请求超时时间
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
 })
 // http response 拦截器
 service.interceptors.response.use(
