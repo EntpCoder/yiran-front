@@ -2,7 +2,7 @@ import request from '@/utils/request'
 export default {
   getCart(userId) {
     return request({
-      url: `/cart/test/userCart/${userId}`,
+      url: `/cart/userCart/${userId}`,
       method: 'get'
     })
   },
@@ -10,6 +10,13 @@ export default {
     return request({
       url: `/cart/deleCart/${cartId}`,
       method: 'delete'
+    })
+  },
+  updataNums(cart){
+    return request({
+      url: `/cart/updataNums`,
+      method: 'post',
+      data:{cartId:cart.cartId,nums:cart.nums}
     })
   }
 }
