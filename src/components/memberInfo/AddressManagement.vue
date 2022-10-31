@@ -62,92 +62,104 @@
             <i class="layui-icon" style="font-size: 15px; color: rgb(97,137,248); margin-left: 50px;">&#xe672;</i>
             为便于向您交付商品或服务，您需提供收货人姓名、收货地址、收货人手机号码，如您不提供，我们将无法为您提供配送服务。
         </div>
-        <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <label class="layui-form-label">*姓名:</label>
-                <div class="layui-inline">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请输入收货人姓名"
-                        autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">*手机号:</label>
-                <div class="layui-inline">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请填写手机号码"
-                        autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">*收货时间:</label>
-                <div class="layui-input-inline">
-                    <select class="receiving-time" lay-verify="">
-                        <option value="">请选择收货时间</option>
-                        <option value="010">周一至周日均可收货</option>
-                        <option value="021">周六、日节假日收货</option>
-                        <option value="0571">周一至周五收货</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">*所在地区</label>
-                <div class="layui-input-inline">
-                    <select name="quiz1">
-                        <option value="">请选择省</option>
-                        <option value="浙江省" selected="">浙江省</option>
-                        <option value="江西省">江西省</option>
-                        <option value="福建省">福建省</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="quiz2">
-                        <option value="">请选择市</option>
-                        <option value="杭州">杭州</option>
-                        <option value="宁波" disabled="">宁波</option>
-                        <option value="温州">温州</option>
-                        <option value="温州">台州</option>
-                        <option value="温州">绍兴</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="quiz3">
-                        <option value="">请选择县/区</option>
-                        <option value="西湖区">西湖区</option>
-                        <option value="余杭区">余杭区</option>
-                        <option value="拱墅区">临安市</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">*详细地址</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请填入详细地址"
-                        class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">地址类型</label>
-                <div class="layui-input-block">
-                    <input type="radio" name="sex" value="家庭" title="家庭" checked>
-                    <input type="radio" name="sex" value="公司" title="公司">
-                    <input type="radio" name="sex" value="其他" title="其他">
-                    <i id="address-type-tips" class="layui-icon"
-                        style="font-size: 15px; color: rgb(97,137,248);">&#xe607;</i>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" style="background-color: rgb(241,1,128);" lay-submit
-                        lay-filter="formDemo">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </form>
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item label="姓名" prop="name">
+    <el-input style="width:200px"></el-input>
+  </el-form-item>
+  <el-form-item label="手机号码" prop="tel">
+    <el-input style="width:200px"></el-input>
+  </el-form-item>
+  <el-form-item label="收货时间" prop="region">
+    <el-select v-model="ruleForm.region" placeholder="请选择收货时间">
+      <el-option label="周一至周日均可收货" value="shanghai"></el-option>
+      <el-option label="周六、日节假日收货" value="beijing"></el-option>
+      <el-option label="周一至周五收货" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="所在地区" prop="region">
+    <el-col :span="8">
+    <el-select v-model="ruleForm.region" placeholder="请选择省">
+      <el-option label="周一至周日均可收货" value="shanghai"></el-option>
+      <el-option label="周六、日节假日收货" value="beijing"></el-option>
+      <el-option label="周一至周五收货" value="beijing"></el-option>
+    </el-select>
+    </el-col>
+    <el-col :span="8">
+    <el-select v-model="ruleForm.region" placeholder="请选择市">
+      <el-option label="周一至周日均可收货" value="shanghai"></el-option>
+      <el-option label="周六、日节假日收货" value="beijing"></el-option>
+      <el-option label="周一至周五收货" value="beijing"></el-option>
+    </el-select>
+    </el-col>
+    <el-col :span="8">
+    <el-select v-model="ruleForm.region" placeholder="请选择区/县">
+      <el-option label="周一至周日均可收货" value="shanghai"></el-option>
+      <el-option label="周六、日节假日收货" value="beijing"></el-option>
+      <el-option label="周一至周五收货" value="beijing"></el-option>
+    </el-select>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="详细地址" prop="address">
+    <el-input style="width:600px"></el-input>
+  </el-form-item>
+  <el-form-item label="地址类型" prop="resource">
+    <el-radio-group v-model="ruleForm.resource">
+      <el-radio label="家庭"></el-radio>
+      <el-radio label="公司"></el-radio>
+      <el-radio label="其他"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+    <el-button @click="resetForm('ruleForm')">重置</el-button>
+  </el-form-item>
+</el-form>
     </div>
 </template>
 <script>
-export default {
-
-}
+ export default {
+    data() {
+      return {
+        ruleForm: {
+          name: '',
+          nicheng: '',
+          date1: '',
+          type: [],
+          resource: '',
+          tel:''
+        },
+        rules: {
+          name: [
+            { required: true, message: '请输入登录名名称', trigger: 'blur' },
+          ],
+          nicheng: [
+          { required: true, message: '请输入昵称', trigger: 'blur' },
+          ],
+          date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          tel: [
+            { required: true, message: '请输入手机号', trigger: 'blur' },
+          ],
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
 </script>
 
 <style scoped>

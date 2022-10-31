@@ -24,7 +24,6 @@
                     <a id="aa" href="javascript:;">我的交易</a>
                     <dl class="layui-nav-child">
                         <dd><router-link to="/memberInfo/orderManagement">订单管理</router-link></dd>
-                        <dd><a href="after-sales.html">退换/售后</a></dd>
                         <dd><router-link to="/memberInfo/addressManagement">收获地址</router-link></dd>
                     </dl>
                 </li>
