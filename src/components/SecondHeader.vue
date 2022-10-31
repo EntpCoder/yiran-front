@@ -25,8 +25,8 @@
                     <ul class="header-right">
                         <li class="cart">
                             <img src="/svg/gouwuche.svg" class="gouwu-img">
-                            <a href="pages/car.html">购物车
-                                <span>(0)</span></a>
+                            <router-link to="/cart">购物车
+                                <span>(0)</span></router-link>
                             <div class="cart-list">
                                 购物车中没有商品赶快去选购把！
                             </div>

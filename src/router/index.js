@@ -4,6 +4,8 @@ import LoginPage from '@/views/LoginPage.vue'
 import RegisterPage from '@/views/RegisterPage.vue'
 import ProductDetail from '@/views/ProductDetail.vue'
 import MemberInfoPage from '@/views/MemberInfoPage.vue'
+import ShoppingCart from '@/views/ShoppingCart.vue'
+import OrderConfirm from '@/views/OrderConfirm.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -78,6 +80,16 @@ const router = createRouter({
           component: () => import('@/components/memberInfo/AddressManagement.vue'),
         }
       ]
+    },
+    {
+      path:'/cart',
+      component:ShoppingCart,
+      meta:{title:'购物车'}
+    },
+    {
+      path:'/orderConfirm',
+      component:OrderConfirm,
+      meta:{title:'订单确认'},
     }
   ]
 })

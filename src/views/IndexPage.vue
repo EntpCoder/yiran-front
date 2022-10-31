@@ -122,6 +122,12 @@ import YiRanHeader from '@/components/YiRanHeader.vue'
 import SecondHeader from '@/components/SecondHeader.vue'
 import ShopNavigation from '@/components/ShopNavigation.vue'
 import RightNavigation from '@/components/RightNavigation.vue'
+import test from '@/api/test.js'
+test.test()
+  .then(
+    response=>{
+      console.log(response.items)
+    })
 </script>
 
 <style scoped>
