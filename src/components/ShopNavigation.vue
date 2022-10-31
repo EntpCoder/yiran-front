@@ -272,10 +272,6 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
 }
-.slide > ul > li:hover,a:hover {
-  color: rgb(241  , 1, 128);
-  background-color: rgb(255, 255, 255); 
-}
 .slide > ul > li > a {
   font-size: 14px;
 }
