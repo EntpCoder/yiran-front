@@ -85,7 +85,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="goods-item">
+                <tr class="goods-item" v-for="c in cartList" :key="c.proAttributeInfoId">
                     <!-- 商品信息 -->
                     <td class="product-item">
                         <!-- 选框 -->
@@ -93,123 +93,31 @@
                             <input type="checkbox" />
                         </div>
                         <div class="product-img">
-                            <img width="70px" height="70px" src="/images/temp/测试数据1.jpg">
+                            <img width="70px" height="70px" :src="c.proMainImageAddress">
                         </div>
                         <div class="product-info">
-                            <div class="title">粗跟仙女风单鞋低跟浅口通勤平底女鞋 安妮208003</div>
-                            <p>尺码 39</p>
+                            <div class="title">{{ c.proName }}</div>
+                            <p>尺码{{ c.sizeType }}-颜色{{ c.colorName }}</p>
                         </div>
                     </td>
-                    <td class="price-item"><strong>￥999</strong></td>
+                    <td class="price-item"><strong>￥{{ c.sellingPrice }}</strong></td>
                     <!-- 数量组件 -->
                     <td class="quantity-item">
                         <div class="layui-btn-group">
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" @click="decrease(c)">
                                 <i class="layui-icon">&#xe67e;</i>
                             </button>
                             <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <input class="product-num" type="text" value="1" readonly="readonly" />
+                                <input class="product-num" type="text" :value="c.nums" readonly="readonly" />
                             </button>
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" @click="increase(c)">
                                 <i class="layui-icon">&#xe654;</i>
                             </button>
                         </div>
                     </td>
                     <td class="actions-item">
-                        <a class="order-button-del" href="javascript:;">删除</a>
-                    </td>
-                </tr>
-                <tr class="goods-item">
-                    <td class="product-item">
-                        <div class="m-checkbox">
-                            <input type="checkbox" />
-                        </div>
-                        <div class="product-img">
-                            <img width="70px" height="70px" src="/images/temp/测试数据1.jpg"/>
-                        </div>
-                        <div class="product-info">
-                            <div class="title">粗跟仙女风单鞋低跟浅口通勤平底女鞋 安妮208003</div>
-                            <p>尺码 39</p>
-                        </div>
-                    </td>
-                    <td class="price-item"><strong>￥233</strong></td>
-                    <td class="quantity-item">
-                        <div class="layui-btn-group">
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <i class="layui-icon">&#xe67e;</i>
-                            </button>
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <input class="product-num" type="text" value="1" readonly="readonly" />
-                            </button>
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <i class="layui-icon">&#xe654;</i>
-                            </button>
-                        </div>
-                    </td>
-                    <td class="actions-item">
-                        <a class="order-button-del" href="javascript:;">删除</a>
-                    </td>
-                </tr>
-                <tr class="goods-item">
-                    <td class="product-item">
-                        <div class="m-checkbox">
-                            <input type="checkbox" />
-                        </div>
-                        <div class="product-img">
-                            <img width="70px" height="70px" src="/images/temp/测试数据1.jpg">
-                        </div>
-                        <div class="product-info">
-                            <div class="title">【舒适透气】夏季潮牌休闲短袖t恤经典LOGO印花男式短袖t恤</div>
-                            <p>尺码 38</p>
-                        </div>
-                    </td>
-                    <td class="price-item"><strong>￥659</strong></td>
-                    <td class="quantity-item">
-                        <div class="layui-btn-group">
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <i class="layui-icon">&#xe67e;</i>
-                            </button>
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <input class="product-num" type="text" value="1" readonly="readonly" />
-                            </button>
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <i class="layui-icon">&#xe654;</i>
-                            </button>
-                        </div>
-                    </td>
-                    <td class="actions-item">
-                        <a class="order-button-del" href="javascript:;">删除</a>
-                    </td>
-                </tr>
-                <tr class="goods-item">
-                    <td class="product-item">
-                        <div class="m-checkbox">
-                            <input type="checkbox" />
-                        </div>
-                        <div class="product-img">
-                            <img width="70px" height="70px" src="/images/temp/测试数据1.jpg">
-                        </div>
-                        <div class="product-info">
-                            <div class="title">粗跟仙女风单鞋低跟浅口通勤平底女鞋 安妮208003</div>
-                            <p>尺码 39</p>
-                        </div>
-                    </td>
-                    <td class="price-item"><strong>￥1888</strong></td>
-                    <td class="quantity-item">
-                        <div class="layui-btn-group">
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <i class="layui-icon">&#xe67e;</i>
-                            </button>
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <input class="product-num" type="text" value="1" readonly="readonly" />
-                            </button>
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                                <i class="layui-icon">&#xe654;</i>
-                            </button>
-                        </div>
-                    </td>
-                    <td class="actions-item">
-                        <a class="order-button-del" href="javascript:;">删除</a>
+                        <a class="order-button-del" href="javascript:;"
+                            @click="deleteByCartId(c.proAttributeInfoId)">删除</a>
                     </td>
                 </tr>
             </tbody>
@@ -248,8 +156,30 @@
     </div>
 </template>
 
-<script>
-
+<script setup>
+import { reactive, ref } from 'vue'
+import cartApi from '@/api/cart.js'
+let cartList = ref()
+cartApi.getCart(101)
+    .then(
+        response => {
+            cartList.value = reactive(response.data.cartList)
+        }
+    )
+function decrease(cart) {
+    cart.nums--
+}
+function increase(cart) {
+    cart.nums++
+}
+function deleteByCartId(cartId) {
+    console.log(cartId)
+    cartApi.deleleCartById(cartId)
+        .then(
+            response => {
+                console.log(response)
+            })
+}
 </script>
 
 <style scoped>
@@ -654,7 +584,8 @@
     background-color: rgb(244, 52, 153);
     line-height: 60px;
 }
-.product-img img{
+
+.product-img img {
     width: 70px;
     height: 70px;
 }

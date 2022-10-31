@@ -3,6 +3,15 @@
   <SecondHeader></SecondHeader>
   <ShopNavigation></ShopNavigation>
   <RightNavigation></RightNavigation>
+  <div v-for="cart in cartList" :key="cart.proAttributeInfoId">
+    <span>{{cart.proAttributeInfoId}}:{{cart.proName}}</span>
+  </div>
+    <el-button>Default</el-button>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
   <!-- 轮播图开始 -->
   <div class="banner">
     <div class="wrap">
@@ -122,22 +131,27 @@ import YiRanHeader from '@/components/YiRanHeader.vue'
 import SecondHeader from '@/components/SecondHeader.vue'
 import ShopNavigation from '@/components/ShopNavigation.vue'
 import RightNavigation from '@/components/RightNavigation.vue'
-import test from '@/api/test.js'
-test.test()
+import {reactive,ref} from 'vue'
+import cartApi from '@/api/cart.js'
+let cartList = ref()
+cartApi.getCart(101)
   .then(
-    response=>{
-      console.log(response.items)
-    })
+    response => {
+      cartList.value= reactive(response.data.cartList)
+    }
+  )
+  console.log(cartList)
 </script>
-
 <style scoped>
-.content{
+.content {
   text-align: center;
 }
-.wrap{
-    width: 1226px;
-    margin: 0 auto;
+
+.wrap {
+  width: 1226px;
+  margin: 0 auto;
 }
+
 /* 轮播图开始  */
 .banner {
   width: 100%;
