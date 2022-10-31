@@ -66,18 +66,40 @@ const router = createRouter({
     },
     {
       path:'/memberInfo',
-      redirect: '/memberInfo/orderManagement',
+      redirect: '/memberInfo/orderManagement/allOrders',
       component:MemberInfoPage,
       children:[
         {
           path:'orderManagement',
+          redirect: '/memberInfo/orderManagement/allOrders',
           meta:{title:'订单管理'},
-          component: () => import('@/components/memberInfo/OrderManagement.vue')
+          component: () => import('@/components/memberInfo/OrderManagement.vue'),
+          children:[
+            {
+              path:'allOrders',
+              component: () => import('@/components/memberInfo/AllOrders.vue'),
+            }
+          ]
         },
         {
           path:'addressManagement',
           meta:{title:'地址管理'},
           component: () => import('@/components/memberInfo/AddressManagement.vue'),
+        },
+        {
+          path:'couponsManagement',
+          meta:{title:'优惠券管理'},
+          component: () => import('@/components/memberInfo/CouponsManagement.vue'),
+        },
+        {
+          path:'infoManagement',
+          meta:{title:'个人资料管理'},
+          component: () => import('@/components/memberInfo/InfoManagement.vue'),
+        },
+        {
+          path:'orderdetail',
+          meta:{title:'订单详情'},
+          component: () => import('@/components/memberInfo/OrderDetail.vue'),
         }
       ]
     },

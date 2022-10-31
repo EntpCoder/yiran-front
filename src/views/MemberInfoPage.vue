@@ -31,14 +31,13 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">我的资产</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="my-coupons.html">优惠券</a></dd>
-                        <dd><a href="my-coins.html">唯品币</a></dd>
+                        <dd><router-link to="/memberInfo/couponsManagement">优惠券</router-link></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">我的账户</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="my-info.html">我的资料</a></dd>
+                        <dd><router-link to="/memberInfo/infoManagement">我的资料</router-link></dd>
                     </dl>
                 </li>
             </ul>
