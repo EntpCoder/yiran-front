@@ -85,6 +85,12 @@
                 </tr>
             </thead>
             <tbody>
+                <tr v-if="!cartList.length && !data.isLoad">
+                    请添加商品后，再来查看~~~
+                </tr>
+                <tr v-if="data.isLoad">
+                    加载中~~~
+                </tr>
                 <tr class="goods-item" v-for="c in cartList" :key="c.cartId">
                     <!-- 商品信息 -->
                     <td class="product-item">
@@ -139,7 +145,7 @@
             </div>
             <!-- 金额面板 -->
             <div class="orders-price layui-row">
-                <div class="sum-price-text layui-col-md1 layui-col-md-offset10">总金额:{{data.sumNum}}</div>
+                <div class="sum-price-text layui-col-md-offset10">总金额:{{ data.sumPrice }}</div>
                 <div class="sum-price layui-col-md1"></div>
             </div>
             <!-- 结算 -->
@@ -160,16 +166,16 @@ import { reactive, ref, onBeforeMount, computed } from 'vue'
 import cartApi from '@/api/cart.js'
 // 购物车数据对象
 let cartList = ref([])
-let data = reactive({})
+let data = reactive({ isLoad: true, sumPrice: 0.0 })
 // 页面挂挂载完毕执行
 onBeforeMount(() => {
     getCart()
 })
-data.sumNum = computed({
+data.sumPrice = computed({
     get() {
-        let sum =0
-        cartList.value.forEach((cart)=>{
-            sum += cart.sellingPrice*cart.nums
+        let sum = 0
+        cartList.value.forEach((cart) => {
+            sum += cart.sellingPrice * cart.nums
         })
         return sum.toFixed(2)
     },
@@ -180,8 +186,8 @@ data.sumNum = computed({
 function getCart() {
     cartApi.getCart(101).then(
         response => {
-            console.log(response)
             cartList.value = reactive(response.data.cartList)
+            data.isLoad = false
         }
     )
 }
