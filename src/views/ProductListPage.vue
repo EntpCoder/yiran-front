@@ -170,7 +170,7 @@
     <div class="pro-show-page page-1">
         <ul class="pro-ul">
             <li class="pro-li">
-                <router-link to="/productDetail" class="li-li">
+                <router-link :to="{ path: '/productDetail/explainSize/101' }" class="li-li">
                     <span class="pro-1-img"></span>
                     <!-- ==商品价格== -->
                     <div class="pro-price-item">
@@ -857,91 +857,105 @@ import RightNavigation from '@/components/RightNavigation.vue'
 .filter .pro-page .page-total .page-num {
     color: #f32b80;
 }
+
 /* ==商品=============== */
 /* =============商品列表====================== */
 /* ===========商品小框框========== */
-.pro-show-page{
+.pro-show-page {
     width: 80%;
-    height:auto;
+    height: auto;
     float: left;
     /* border: 1px solid; */
     margin: 0 150px;
     min-width: 1000px;
 }
 
-.pro-show-page .pro-ul .pro-li{
+.pro-show-page .pro-ul .pro-li {
     width: 224px;
     height: 344px;
     float: left;
     margin: 20px 8px;
     border: 1px solid white;
 }
-.pro-show-page .pro-ul .pro-li .li-li{
+
+.pro-show-page .pro-ul .pro-li .li-li {
     width: 218px;
     height: 338px;
     float: left;
     border: solid 1px #e7e7e7;
     margin: 2px 2px;
 }
-.pro-show-page .pro-ul .pro-li:hover{
+
+.pro-show-page .pro-ul .pro-li:hover {
     border: 1px solid #f32b80;
 }
-.pro-show-page .pro-ul .pro-li:hover .li-li{
+
+.pro-show-page .pro-ul .pro-li:hover .li-li {
     border: solid 1px white;
 }
+
 /* ==============商品框框内容================ */
-.page-1{
+.page-1 {
     display: block;
 }
-.page-2{
-    display: none;
-}
-.page-3{
-    display: none;
-}
-.page-4{
-    display: none;
-}
-.page-5{
+
+.page-2 {
     display: none;
 }
 
-.pro-show-page .pro-ul .pro-li .li-li .pro-1-img{
+.page-3 {
+    display: none;
+}
+
+.page-4 {
+    display: none;
+}
+
+.page-5 {
+    display: none;
+}
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-1-img {
     display: block;
     width: 216px;
     height: 218px;
     margin: auto;
     background-image: url("../images/pro-1-img.jpg");
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-2-img{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-2-img {
     display: block;
     width: 216px;
     height: 218px;
     margin: auto;
     background-image: url("../images/pro-2-img.jpg");
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-3-img{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-3-img {
     display: block;
     width: 216px;
     height: 218px;
     margin: auto;
     background-image: url("../images/pro-3-img.jpg");
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-4-img{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-4-img {
     display: block;
     width: 216px;
     height: 218px;
     margin: auto;
     background-image: url("../images/pro-4-img.jpg");
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-5-img{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-5-img {
     display: block;
     width: 216px;
     height: 218px;
     margin: auto;
     background-image: url("../images/pro-5-img.jpg");
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-price-item{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-price-item {
     width: 210px;
     height: 20px;
     /* border: 1px solid; */
@@ -949,9 +963,10 @@ import RightNavigation from '@/components/RightNavigation.vue'
     color: #333333;
     margin-top: 10px;
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .temai{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .temai {
     display: block;
-    width:40px;
+    width: 40px;
     height: 20px;
     /* border: 1px solid; */
     color: #fff;
@@ -963,8 +978,9 @@ import RightNavigation from '@/components/RightNavigation.vue'
     float: left;
 
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .pro-pri{
-    width:70px;
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .pro-pri {
+    width: 70px;
     height: 20px;
     float: left;
     /* border: 1px solid; */
@@ -976,7 +992,8 @@ import RightNavigation from '@/components/RightNavigation.vue'
     margin-top: 3px;
 
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .pre-price{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .pre-price {
     text-decoration: line-through;
     float: left;
     color: #999;
@@ -988,7 +1005,8 @@ import RightNavigation from '@/components/RightNavigation.vue'
     /* border: 1px solid; */
     margin-top: 6px;
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .pro-noe-zhekou{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-price-item .pro-noe-zhekou {
     float: left;
     color: #999;
     line-height: 14px;
@@ -998,8 +1016,9 @@ import RightNavigation from '@/components/RightNavigation.vue'
     /* border: 1px solid; */
     margin-top: 6px;
 }
+
 /* =========近60天内最低价============ */
-.pro-show-page .pro-ul .pro-li .li-li .lower_price_60{
+.pro-show-page .pro-ul .pro-li .li-li .lower_price_60 {
     line-height: 14px;
     font-size: 14px;
     padding-top: 6px;
@@ -1007,10 +1026,11 @@ import RightNavigation from '@/components/RightNavigation.vue'
     width: 210px;
     height: 14px;
     /* border: 1px solid; */
-    margin: auto; 
-    margin: 5px 0;  
+    margin: auto;
+    margin: 5px 0;
 }
-.pro-show-page .pro-ul .pro-li .li-li .pro-name-text{
+
+.pro-show-page .pro-ul .pro-li .li-li .pro-name-text {
     text-overflow: ellipsis;
     min-height: 36px;
     float: left;

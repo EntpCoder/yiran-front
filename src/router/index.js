@@ -44,7 +44,6 @@ const router = createRouter({
     {
       path:'/productDetail',
       component:ProductDetail,
-      redirect:'/productDetail/explainSize',
       children:[
         {
           path:'consultation',
@@ -59,7 +58,7 @@ const router = createRouter({
           component:() => import('@/components/productDetail/ProductShow.vue')
         },
         {
-          path:'explainSize',
+          path:'explainSize/:id',
           component:() => import('@/components/productDetail/ProductExplainSize.vue')
         }
       ]

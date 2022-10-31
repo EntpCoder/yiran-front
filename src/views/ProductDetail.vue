@@ -208,17 +208,17 @@
         </div>
     </div>
     <div class="detail-container">
-      <div class="maodian-box">
-        <div class="maodian-ul">
-          <ul>
-            <router-link to="/productDetail/explainSize">规格参数</router-link>
-            <router-link to="/productDetail/show">商品展示</router-link>
-            <router-link to="/productDetail/comment">全部评价</router-link>
-            <router-link to="/productDetail/consultation">商品咨询</router-link>
-          </ul>
+        <div class="maodian-box">
+            <div class="maodian-ul">
+                <ul>
+                    <router-link to="/productDetail/explainSize/123">规格参数</router-link>
+                    <router-link to="/productDetail/show">商品展示</router-link>
+                    <router-link to="/productDetail/comment">全部评价</router-link>
+                    <router-link to="/productDetail/consultation">商品咨询</router-link>
+                </ul>
+            </div>
         </div>
-      </div>
-      <RouterView></RouterView>
+        <RouterView></RouterView>
     </div>
 </template>
 
@@ -227,6 +227,12 @@ import YiRanHeader from '@/components/YiRanHeader.vue'
 import SecondHeader from '@/components/SecondHeader.vue'
 import ShopNavigation from '@/components/ShopNavigation.vue'
 import RightNavigation from '@/components/RightNavigation.vue'
+import {  ref } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const proId = ref()
+// 获取路由中的商品id
+proId.value = route.params.id
 </script>
 
 <style scoped>
@@ -683,21 +689,24 @@ import RightNavigation from '@/components/RightNavigation.vue'
     margin-left: 154px;
     margin-top: -5px;
 }
-.detail-container{
+
+.detail-container {
     width: 1000px;
     /* height: 100px; */
     /* background-color: rgb(194, 255, 230); */
     margin: 0 auto;
     margin-top: 150px;
 }
+
 /* 锚点-头标题栏 */
-.detail-container .maodian-box{
+.detail-container .maodian-box {
     width: 100%;
     background-color: rgb(255, 195, 195);
     height: 36px;
     margin-bottom: 15px;
 }
-.detail-container .maodian-box .maodian-ul{
+
+.detail-container .maodian-box .maodian-ul {
     width: 100%;
     height: 100%;
     border-top: 1px solid #e7e7e7;
@@ -705,10 +714,12 @@ import RightNavigation from '@/components/RightNavigation.vue'
     background-color: #fff;
     border-right: 1px solid #e7e7e7;
 }
-.detail-container .maodian-box .maodian-ul ul{
+
+.detail-container .maodian-box .maodian-ul ul {
     position: relative;
 }
-.detail-container .maodian-box .maodian-ul ul a{
+
+.detail-container .maodian-box .maodian-ul ul a {
     cursor: pointer;
     float: left;
     padding: 0 15px;
@@ -719,7 +730,8 @@ import RightNavigation from '@/components/RightNavigation.vue'
     color: #333;
     border-left: 1px solid #e7e7e7;
 }
-.detail-container .maodian-box .maodian-ul ul a:hover{
+
+.detail-container .maodian-box .maodian-ul ul a:hover {
     border-bottom: 3px solid #f10180;
     color: #f10180;
 }

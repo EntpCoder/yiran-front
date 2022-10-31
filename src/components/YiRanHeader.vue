@@ -222,7 +222,7 @@
     float: left;
     width: 20px;
     height: 20px;
-    background: url("./svg/user-img.svg");
+    background: url("/svg/user-img.svg");
     margin-right: 5px;
     margin-top: 3px;
 }
@@ -245,13 +245,13 @@
 .head .head-center .zhuce .zhuce-img {
     width: 20px;
     height: 20px;
-    background-image: url("../svg/zuce.svg");
+    background-image: url("/svg/zuce.svg");
     float: left;
     margin-top: 3px;
 }
 
 .head .head-center .zhuce:hover .zhuce-img {
-    background-image: url("../svg/zuce-hover.svg");
+    background-image: url("/svg/zuce-hover.svg");
 }
 
 .head .head-center .zhuce:hover .zhuce-name {
@@ -281,13 +281,13 @@
 .head .head-center .qiandao .qiandao-img {
     width: 20px;
     height: 20px;
-    background-image: url("../svg/qiandao-img.svg");
+    background-image: url("/svg/qiandao-img.svg");
     float: left;
     margin-top: 3px;
 }
 
 .head .head-center .qiandao:hover .qiandao-img {
-    background-image: url("../svg/qiandao-img-hover.svg");
+    background-image: url("/svg/qiandao-img-hover.svg");
 }
 
 .head .head-center .qiandao:hover .qiandao-name {
