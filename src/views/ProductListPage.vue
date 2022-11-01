@@ -24,8 +24,8 @@
     <!-- =======================大筛选=========================== -->
     <div class="shaixuan shaixuan1" >
         <span class="leibie pinlei">品牌</span>
-        <ul class="ul-item" v-for="(value,key) in filtrate.brandMap" :key="key">
-            <li class="group-li"><span>{{value}}</span></li>
+        <ul class="ul-item">
+            <li class="group-li" v-for="b in brandList" :key="b.brandId"><span>{{b.brandName}}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -37,7 +37,7 @@
     <div class="shaixuan shaixuan2">
         <span class="leibie chima">品类</span>
         <ul class="ul-item">
-            <li class="group-li"><span>XS</span></li>
+            <li class="group-li" v-for="k in kindList" :key="k.menuId"><span>{{k.title}}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -49,7 +49,7 @@
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">尺码</span>
         <ul class="ul-item">
-            <li class="group-li"><span>棉</span></li>
+            <li class="group-li" v-for="s in sizeList" :key="s.sizeId"><span>{{s.sizeType}}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -61,7 +61,7 @@
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">颜色</span>
         <ul class="ul-item">
-            <li class="group-li"><span>棉</span></li>
+            <li class="group-li" v-for="c in colorList" :key="c.colorId"><span>{{c.colorName}}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -143,7 +143,10 @@ import productApi from '@/api/product.js'
 
 //商品数据对象
 let productList = ref([])
-let filtrate = reactive({})
+let brandList = ref([])
+let kindList = ref([])
+let colorList = ref([])
+let sizeList = ref([])
 
 const route = useRoute()
 let brandId = route.query.brandId
@@ -167,7 +170,7 @@ onMounted(() => {
 function getProListByBrandId(brandId){
     productApi.getProListByBrandId(brandId).then(
         response=>{
-            console.log(response)
+            //console.log(response)
             productList.value = reactive(response.data.result)
         }
     )
@@ -184,21 +187,30 @@ function getProListByKindId(kindId){
 }
 //筛选栏
 function getFiltrateByBrandId(brandId){
-    productApi.getProListByKindId(brandId).then(
+    productApi.getFiltrateByBrandId(brandId).then(
         response=>{
-            //console.log(response)
-            filtrate.value = reactive(response.data.result)
+            console.log(response.data.result)
+            brandList.value = reactive(response.data.result.brandList)
+            kindList.value = reactive(response.data.result.kindList)
+            sizeList.value = reactive(response.data.result.sizeList)
+            colorList.value = reactive(response.data.result.colorList)
         }
     )
 }
 function getFiltrateByKindId(kindId){
-    productApi.getProListByKindId(kindId).then(
+    productApi.getFiltrateByKindId(kindId).then(
         response=>{
             console.log(response)
-            filtrate.value = reactive(response.data.result)
+            brandList.value = reactive(response.data.result.brandList)
+            kindList.value = reactive(response.data.result.kindList)
+            sizeList.value = reactive(response.data.result.sizeList)
+            colorList.value = reactive(response.data.result.colorList)
         }
     )
 }
+//多条件筛选
+
+
 </script>
 
 <script>

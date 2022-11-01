@@ -14,15 +14,19 @@ export default {
     },
     getFiltrateByKindId(kindId) {
       return request({
-        url: `/product/getFiltrate/${kindId}`,
+        url: `/product/getFiltrate?kindId=${kindId}`,
         method: 'get'
       })
     },
     getFiltrateByBrandId(brandId) {
       return request({
-        url: `/product/getFiltrate/${brandId}`,
+        url: `/product/getFiltrate?brandId=${brandId}`,
         method: 'get'
       })
     },
-
+    getByBrandKindSizeColor(brandId,kindIdArr,sizeIdArr,colorIdArr){
+      return request({
+        url: `/product/getByBrandKindSizeColor?brandId=${brandId}&kindIdArr=${kindIdArr}&sizeIdArr=${sizeIdArr}&colorIdArr=${colorIdArr}`
+      })
+    }
 }
