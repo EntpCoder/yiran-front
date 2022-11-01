@@ -68,7 +68,7 @@
     height: 25px;
     /* border: 1px solid; */
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 11px;
     float: left;
 
@@ -131,7 +131,7 @@
     height: 20px;
     /* border: 1px solid; */
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 11px;
     float: left;
 
@@ -149,7 +149,6 @@
     outline: none;
     border: none;
     padding: 0 10px;
-    float: left;
 }
 
 .login-bg .login-panel .login-form2 .row-2 a {
@@ -173,7 +172,6 @@
 .login-bg .login-panel .login-form2 .code-none {
     width: 285px;
     height: 20px;
-    float: left;
     /* border: 1px solid; */
 
     font-size: 10px;
@@ -220,7 +218,6 @@
     margin-left: 10px;
     font-size: 10px;
     line-height: 20px;
-    text-align: center;
     color: rgb(206, 27, 27);
     font-weight: bolder;
     text-align: left;

@@ -13,28 +13,19 @@
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <!-- <div class="layui-col-md3">
             <div class="pinpai-like">
                 <span class="like-img"></span>
                 <span class="like-text">收藏商品</span>
                 <span class="like-num">(1234567)</span>
             </div>
-        </div>
+        </div> -->
     </div>
     <!-- =======================大筛选=========================== -->
-    <div class="shaixuan shaixuan1">
-        <span class="leibie pinlei">品类</span>
-        <ul class="ul-item">
-            <li class="group-li"><span>女款针织衫</span></li>
-            <li class="group-li"><span>连衣裙</span></li>
-            <li class="group-li"><span>半身裙</span></li>
-            <li class="group-li"><span>女款女绒服</span></li>
-            <li class="group-li"><span>女款针织衫</span></li>
-            <li class="group-li"><span>女款针织衫</span></li>
-            <li class="group-li"><span>女款针织衫</span></li>
-            <li class="group-li"><span>女款针织衫</span></li>
-            <li class="group-li"><span>女款针织衫</span></li>
-            <li class="group-li"><span>女款针织衫</span></li>
+    <div class="shaixuan shaixuan1" >
+        <span class="leibie pinlei">品牌</span>
+        <ul class="ul-item" v-for="(value,key) in filtrate.brandMap" :key="key">
+            <li class="group-li"><span>{{value}}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -44,13 +35,9 @@
         <div class="clean"></div>
     </div>
     <div class="shaixuan shaixuan2">
-        <span class="leibie chima">尺码</span>
+        <span class="leibie chima">品类</span>
         <ul class="ul-item">
             <li class="group-li"><span>XS</span></li>
-            <li class="group-li"><span>S</span></li>
-            <li class="group-li"><span>M</span></li>
-            <li class="group-li"><span>L</span></li>
-            <li class="group-li"><span>XL</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -60,20 +47,9 @@
         <div class="clean"></div>
     </div>
     <div class="shaixuan shaixuan3">
-        <span class="leibie chima">面料</span>
+        <span class="leibie chima">尺码</span>
         <ul class="ul-item">
             <li class="group-li"><span>棉</span></li>
-            <li class="group-li"><span>纯棉</span></li>
-            <li class="group-li"><span>棉混纺</span></li>
-            <li class="group-li"><span>真丝</span></li>
-            <li class="group-li"><span>莱赛尔</span></li>
-            <li class="group-li"><span>羊毛</span></li>
-            <li class="group-li"><span>羊绒</span></li>
-            <li class="group-li"><span>羊毛混纺</span></li>
-            <li class="group-li"><span>牛仔</span></li>
-            <li class="group-li"><span>真皮</span></li>
-            <li class="group-li"><span>PU</span></li>
-
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -83,47 +59,9 @@
         <div class="clean"></div>
     </div>
     <div class="shaixuan shaixuan3">
-        <span class="leibie chima">面料</span>
+        <span class="leibie chima">颜色</span>
         <ul class="ul-item">
             <li class="group-li"><span>棉</span></li>
-            <li class="group-li"><span>纯棉</span></li>
-            <li class="group-li"><span>棉混纺</span></li>
-            <li class="group-li"><span>真丝</span></li>
-            <li class="group-li"><span>莱赛尔</span></li>
-            <li class="group-li"><span>羊毛</span></li>
-            <li class="group-li"><span>羊绒</span></li>
-            <li class="group-li"><span>羊毛混纺</span></li>
-            <li class="group-li"><span>牛仔</span></li>
-            <li class="group-li"><span>真皮</span></li>
-            <li class="group-li"><span>PU</span></li>
-
-        </ul>
-        <span class="other-item">
-            <button class="clean-all">清空已选</button>
-            <button class="more more1">更多</button>
-            <button class="duoxuan duoxiuan1">多选</button>
-        </span>
-        <div class="clean"></div>
-    </div>
-    <div class="shaixuan shaixuan3">
-        <span class="leibie chima">面料</span>
-        <ul class="ul-item">
-            <li class="group-li"><span>棉</span></li>
-            <li class="group-li"><span>纯棉</span></li>
-            <li class="group-li"><span>棉混纺</span></li>
-            <li class="group-li"><span>真丝</span></li>
-            <li class="group-li"><span>莱赛尔</span></li>
-            <li class="group-li"><span>羊毛</span></li>
-            <li class="group-li"><span>羊绒</span></li>
-            <li class="group-li"><span>羊毛混纺</span></li>
-            <li class="group-li"><span>棉</span></li>
-            <li class="group-li"><span>纯棉</span></li>
-            <li class="group-li"><span>棉混纺</span></li>
-            <li class="group-li"><span>真丝</span></li>
-            <li class="group-li"><span>莱赛尔</span></li>
-            <li class="group-li"><span>羊毛</span></li>
-            <li class="group-li"><span>羊绒</span></li>
-            <li class="group-li"><span>羊毛混纺</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -133,7 +71,7 @@
         <div class="clean"></div>
     </div>
     <!-- ======================小筛选============================== -->
-    <div class="filter">
+    <div class="filter" v-if="productList[0]">
         <div class="pro-oper">
             <div class="oper oper-all">综合</div>
             <div class="oper oper-xiaoliang">销量</div>
@@ -161,7 +99,7 @@
         </div>
         <div class="pro-page">
             <span class="page-total">
-                <span class="page-num">815</span>
+                <span class="page-num">{{productList[0].proCount}}</span>
                 件商品
             </span>
         </div>
@@ -201,9 +139,11 @@ import RightNavigation from '@/components/RightNavigation.vue'
 import {reactive,ref,onMounted} from 'vue'
 import { useRoute } from 'vue-router'
 import productApi from '@/api/product.js'
-import proFiltrateApi from '@/api/product.js'
+
+
 //商品数据对象
 let productList = ref([])
+let filtrate = reactive({})
 
 const route = useRoute()
 let brandId = route.query.brandId
@@ -215,9 +155,12 @@ onMounted(() => {
 
     if(brandId){
         getProListByBrandId(brandId)
+        getFiltrateByBrandId(brandId)
+        
     }
     if(kindId){
         getProListByKindId(kindId)
+        getFiltrateByKindId(kindId)
     }
 })
 //根据品牌查商品
@@ -232,16 +175,33 @@ function getProListByBrandId(brandId){
 }
 //根据品类查商品
 function getProListByKindId(kindId){
-    proFiltrateApi.getProListByKindId(kindId).then(
+    productApi.getProListByKindId(kindId).then(
         response=>{
-            console.log(response)
+            //console.log(response)
             productList.value = reactive(response.data.result)
         }
     )
 }
 //筛选栏
+function getFiltrateByBrandId(brandId){
+    productApi.getProListByKindId(brandId).then(
+        response=>{
+            //console.log(response)
+            filtrate.value = reactive(response.data.result)
+        }
+    )
+}
+function getFiltrateByKindId(kindId){
+    productApi.getProListByKindId(kindId).then(
+        response=>{
+            console.log(response)
+            filtrate.value = reactive(response.data.result)
+        }
+    )
+}
+</script>
 
-
+<script>
 
 </script>
 
@@ -324,13 +284,13 @@ function getProListByKindId(kindId){
     background: url("../svg/like-img.svg");
 }
 
-.pinpai .pinpai-like .like-text {
+/* .pinpai .pinpai-like .like-text {
     font-size: 13px;
     line-height: 20px;
     float: left;
     color: #f32b80;
 
-}
+} */
 
 .pinpai .pinpai-like .like-num {
     font-size: 13px;
@@ -345,9 +305,9 @@ function getProListByKindId(kindId){
     cursor: pointer;
 }
 
-.pinpai .pinpai-like:hover .like-text {
+/* .pinpai .pinpai-like:hover .like-text {
     color: white;
-}
+} */
 
 .pinpai .pinpai-like:hover .like-num {
     color: white;
@@ -747,7 +707,7 @@ function getProListByKindId(kindId){
 
 .pro-show-page .pro-ul .pro-li .li-li .pro-price-item {
     width: 210px;
-    height: 20px;
+    height: 40px;
     /* border: 1px solid; */
     margin: auto;
     color: #333333;

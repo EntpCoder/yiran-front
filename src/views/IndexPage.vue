@@ -28,7 +28,7 @@
       <!--广告区-->
       <div class="adver">
         <div class="abver-a">
-          <router-link to="/productList?kindId=107">
+          <router-link to="/productList?kindId=108">
             <img src="/images/temp/广告1.jpg" alt="" />
           </router-link>
         </div>

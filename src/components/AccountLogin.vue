@@ -90,7 +90,7 @@
     height: 20px;
     /* border: 1px solid; */
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 11px;
     float: left;
 
@@ -148,7 +148,7 @@
     height: 20px;
     /* border: 1px solid; */
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 11px;
     float: left;
 
