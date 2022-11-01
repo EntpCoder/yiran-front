@@ -4,12 +4,12 @@
         <div class="error"></div>
         <div class="login-user">
             <i class="user-img"><img src="/svg/login-user.svg" alt=""></i>
-            <input type="text" class="user" placeholder="手机号/用户名/绑定邮箱">
+            <input type="text" class="user" placeholder="手机号/用户名/绑定邮箱" v-model="user.username">
         </div>
         <div class="user-none"></div>
         <div class="login-pwd">
             <i class="pwd-img"><img src="/svg/login-pwd.svg" alt=""></i>
-            <input type="password" class="pwd" placeholder="密码">
+            <input type="password" class="pwd" placeholder="密码" v-model="user.password">
         </div>
         <div class="pwd-none"></div>
 
@@ -26,7 +26,7 @@
             <a href="">《唯品支付用户服务协议》</a>
         </div>
         <div class="no-agree"></div>
-        <a href="../index.html" class="denglu" onclick="getLoginValue();">登录</a>
+        <a href="javascript:;" class="denglu" @click="login">登录</a>
         <div class="fooder">
             <div class="wechat">
                 <i class="i1"></i>
@@ -38,7 +38,25 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { reactive } from 'vue'
+import userApi from '@/api/user.js'
+import cookie from "js-cookie"
+let user = reactive({ username: '', password: '' })
+// 登录 如果成功存储cookie
+function login() {
+    userApi.accountLogin(user)
+        .then(response => {
+            if (response.code === 200) {
+                cookie.set('user_token', response.data.token, { domain: 'localhost' })
+                window.location.href = "/";
+            }else{
+                user.username = ''
+                user.password =  ''
+                alert("用户名或密码错误")
+            }
+        })
+}
 </script>
 <style scoped>
 /* ==============登录表单============== */
