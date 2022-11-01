@@ -17,9 +17,9 @@
                     <!-- 优惠券list -->
                     <div class="layui-tab layui-tab-card">
                         <ul class="layui-tab-title">
-                          <li class="layui-this">未使用</li>
-                          <li>已使用</li>
-                          <li>已过期</li>
+                          <li><router-link to="">未使用</router-link></li>
+                          <li><router-link to="">已使用</router-link></li>
+                          <li><router-link to="">已过期</router-link></li>
                         </ul>
                         <div class="layui-tab-content">
                           <div class="layui-tab-item layui-show">

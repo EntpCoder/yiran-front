@@ -34,54 +34,13 @@
                 <div class="m-detail-modules">
                     <h3 class="u-modules-title"><span>订单跟踪</span></h3>
                     <!-- 步骤条 -->
-                    <div class="step layui-row">
-                        <ol class="ui-step ui-step-blue ui-step-3">
-                            <li class="ui-step-start ui-step-done">
-                                <div class="ui-step-line">-</div>
-                                <div class="ui-step-icon">
-                                    <embed class="iconfont" width="25px" height="25px"
-                                        src="../static/svg/step-ok.svg"/>
-                                    <!-- <i class="ui-step-number">1</i> -->
-                                    <a class="ui-step-text">提交订单</a>
-                                </div>
-                            </li>
-                            <li class="ui-step-active">
-                                <div class="ui-step-line">-</div>
-                                <div class="ui-step-icon">
-                                    <embed class="iconfont" width="25px" height="25px"
-                                        src="../static/svg/step-ok.svg"/>
-                                    <!-- <i class="ui-step-number">2</i> -->
-                                    <a class="ui-step-text">支付成功</a>
-                                </div>
-                            </li>
-                            <li class="ui-step-active">
-                                <div class="ui-step-line">-</div>
-                                <div class="ui-step-icon">
-                                    <embed class="iconfont" width="25px" height="25px"
-                                        src="../static/svg/step-ok.svg"/>
-                                    <!-- <i class="ui-step-number">2</i> -->
-                                    <a class="ui-step-text">已审核</a>
-                                </div>
-                            </li>
-                            <li class="ui-step-active">
-                                <div class="ui-step-line">-</div>
-                                <div class="ui-step-icon">
-                                    <embed class="iconfont" width="25px" height="25px"
-                                        src="../static/svg/step-ok.svg"/>
-                                    <!-- <i class="ui-step-number">2</i> -->
-                                    <a class="ui-step-text">已发货</a>
-                                </div>
-                            </li>
-                            <li class="ui-step-end">
-                                <div class="ui-step-line">-</div>
-                                <div class="ui-step-icon">
-                                    <embed class="iconfont" width="25px" height="25px"
-                                        src="../static/svg/step-ok.svg"/>
-                                    <a class="ui-step-text">已完成</a>
-                                </div>
-                            </li>
-                        </ol>
-                    </div>
+                    <el-steps :active="2" align-center>
+                        <el-step title="" description="Some description" />
+                        <el-step title="" description="Some description" />
+                        <el-step title="" description="Some description" />
+                        <el-step title="" description="Some description" />
+                        <el-step title="" description="Some description" />
+                    </el-steps>
                     <div class="b"></div>
                 </div>
                 <div class="m-detail-modules clearfix" id="goodList">
@@ -239,7 +198,6 @@ b {
 }
 .vipFont {
     font-family: vipFont;
-    speak: none;
     font-style: normal;
     font-weight: 400;
     font-variant: normal;
