@@ -184,7 +184,7 @@ data.sumPrice = computed({
 })
 // 请求购物车数据
 function getCart() {
-    cartApi.getCart(101).then(
+    cartApi.getCart().then(
         response => {
             cartList.value = reactive(response.data.cartList)
             data.isLoad = false

@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 export default {
-  getCart(userId) {
+  getCart() {
     return request({
-      url: `/cart/userCart/${userId}`,
+      url: `/cart/userCart`,
       method: 'get'
     })
   },
