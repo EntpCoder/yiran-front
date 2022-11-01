@@ -11,6 +11,7 @@
       <div class="layui-col-md5">
         <!-- 大图片 -->
         <img
+          class="mainImg"
           src="/images/temp/pro-detail-image1.jpg"
           height="100%"
           width="100%"
@@ -61,7 +62,7 @@
         </div>
         <!-- 商品编码 & 商品收藏 -->
         <div class="proId-and-collect">
-          <span>商品编码：123131</span>
+          <span>商品编码：{{data.product.proNum}}</span>
           <div class="pro-collect">
             <img src="/svg/collect-start.svg" alt="" />
             <span>收藏商品</span>
@@ -1179,5 +1180,10 @@ function getProById() {
 .detail-container .maodian-box .maodian-ul ul a:hover {
   border-bottom: 3px solid #f10180;
   color: #f10180;
+}
+/* ==============图片============== */
+.mainImg{
+  height: 100%;
+  width: 100%;
 }
 </style>
