@@ -5,5 +5,11 @@ export default{
             url: `/product/getByProId/${productId}`,
             method: 'get'
         })
+    },
+    getCart(userId){
+        return request({
+            url:`/cart/test/userCart/${userId}`,
+            method:'get'
+        })
     }
 }

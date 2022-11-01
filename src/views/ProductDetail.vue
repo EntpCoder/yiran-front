@@ -10,12 +10,7 @@
       <!-- 左边 -->
       <div class="layui-col-md5">
         <!-- 大图片 -->
-        <img
-          class="mainImg"
-          src="/images/temp/pro-detail-image1.jpg"
-          height="100%"
-          width="100%"
-        />
+        <img class="mainImg" src="/images/temp/pro-detail-image1.jpg"/>
         <!-- 小图片 -->
         <div class="layui-row layui-col-space5">
           <div class="layui-col-md1">
@@ -79,34 +74,34 @@
           <div class="layui-col-md11">
             <!-- 品牌和标题 -->
             <div class="brand-and-title">
-              <a href="#">太平鸟</a>
+              <a href="#">{{data.product.brandName}}</a>
               <div class="weipin-ziying">
                 <span>唯品自营</span>
               </div>
-              <span>男装2022秋季新品 Seiji Matsumoto联名宽松男式夹克</span>
+              <span>{{data.product.describe}}{{data.product.proName}}</span>
             </div>
             <!-- 打折券 -->
             <div class="discount-coupon">
-              <img src="/images/discount-bgm.png" height="100%" width="100%" />
+              <img src="/images/discount-bgm.png" class="discount-bgm-png"/>
               <div class="left">
                 <div id="up-part">
                   <div id="box500">
                     <span>￥</span>
-                    <span>500</span>
+                    <span>{{data.product.sellingPrice}}</span>
                   </div>
                   <div id="temaijia-box">
                     <img src="/images/三角内心圆.png" id="sanjiao-yuan" />
                     <div id="tamaijia-box-2">
                       <span>特卖价</span>
                       <span>￥</span>
-                      <span>470</span>
+                      <span>{{data.product.proPrice}}</span>
                     </div>
                     <img src="/svg/attention.svg" id="attention" />
                   </div>
                 </div>
                 <div id="down-part">
-                  <del>￥1180</del>
-                  <span>4折</span>
+                  <del>￥{{data.product.sellingPrice}}</del>
+                  <span>{{data.product.discount}}折</span>
                 </div>
               </div>
               <div class="right">
@@ -150,8 +145,7 @@
                 <div class="grid-demo grid-demo-bg1">
                   <span>运费</span>
                   <span id="yunfei"
-                    >新会员专享首单满38元免邮（限唯品自营商品，部分商品不可用）</span
-                  >
+                    >新会员专享首单满38元免邮（限唯品自营商品，部分商品不可用）</span>
                 </div>
               </div>
               <div class="layui-col-md1">
@@ -219,8 +213,8 @@
                 <div class="grid-demo shuliang">
                   <span>数量</span>
                   <div class="pro-num"><span class="sub">-</span></div>
-                  <input type="text" value="1" />
-                  <div class="pro-num"><span>+</span></div>
+                  <input type="text"  />
+                  <div class="pro-num"><span @click="increase(date.product)">+</span></div>
                 </div>
               </div>
               <div class="layui-col-md1">
@@ -228,10 +222,10 @@
                   <!-- 价格按钮 -->
                   <div class="pay-for-it-box">
                     <span>特卖价&nbsp;抢&nbsp;></span>
-                    <span>470</span>
+                    <span>{{data.product.proPrice}}</span>
                     <span>￥</span>
                     <div class="lightpink-box">
-                      <del>￥1180</del>
+                      <del>￥{{data.product.sellingPrice}}</del>
                     </div>
                   </div>
                 </div>
@@ -246,9 +240,7 @@
     <div class="maodian-box">
       <div class="maodian-ul">
         <ul>
-          <router-link to="/productDetail/explainSize/123"
-            >规格参数</router-link
-          >
+          <router-link to="/productDetail/explainSize/123">规格参数</router-link>
           <router-link to="/productDetail/show">商品展示</router-link>
           <router-link to="/productDetail/comment">全部评价</router-link>
           <router-link to="/productDetail/consultation">商品咨询</router-link>
@@ -267,14 +259,14 @@ import RightNavigation from '@/components/RightNavigation.vue'
 import prodetailApi from "@/api/product-detail.js";
 import {  ref,onBeforeMount,reactive } from 'vue'
 import { useRoute } from 'vue-router'
+
 const route = useRoute()
 const proId = ref()
 // 获取路由中的商品id
 proId.value = route.params.id
+// 自定义变量
 const data = reactive({});
-// 获取路由中的商品id
-proId.value = route.params.id;
-// 根据商品id获取商品编码
+// 1.根据商品id获取商品信息
 onBeforeMount(() => {
     getProById();
 });
@@ -284,6 +276,11 @@ function getProById() {
     data.product = response.data.result;
   });
 }
+function increase(pronum){
+    pronum.value++;
+}
+
+
 </script>
 
 <style scoped>
@@ -319,6 +316,7 @@ function getProById() {
   background-color: rgb(111, 111, 111);
   opacity: 0.5;
   height: 69px;
+  cursor: pointer;
 }
 
 .product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1 img {
@@ -831,8 +829,8 @@ function getProById() {
   float: left;
   margin: 0 auto;
   border: 2px solid #f03867;
+  cursor: pointer;
 }
-
 .product-container
   .layui-row
   .layui-col-md7
@@ -926,6 +924,7 @@ function getProById() {
   width: 21px;
   background-color: #fff;
   border: 1px solid #999;
+  cursor: pointer;
 }
 
 .product-container
@@ -1007,6 +1006,7 @@ function getProById() {
   margin-top: 20px;
   margin-left: 45px;
   position: relative;
+  cursor: pointer;
 }
 
 .product-container
@@ -1181,9 +1181,15 @@ function getProById() {
   border-bottom: 3px solid #f10180;
   color: #f10180;
 }
-/* ==============图片============== */
+/* ==================================================二次调整=========== */
+/* ==============大图片============== */
 .mainImg{
   height: 100%;
   width: 100%;
+}
+/* 打折券背景图 */
+.discount-bgm-png{
+    height: 100%;
+    width: 100%;
 }
 </style>
