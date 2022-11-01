@@ -22,22 +22,29 @@
         </div> -->
     </div>
     <!-- =======================大筛选=========================== -->
-    <div class="shaixuan shaixuan1" >
+    <div class="shaixuan shaixuan1">
         <span class="leibie pinlei">品牌</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="b in brandList" :key="b.brandId"><span>{{b.brandName}}</span></li>
+            
+            <li class="group-li" v-for="b in brandList" :key="b.brandId" @click="pinPaiCheck(b)">
+                <span v-if="!brandIsMoreChecked" :class="b.spanClass">{{ b.brandName }}
+                </span>
+                <span v-if="brandIsMoreChecked">
+                    <input type="checkbox"/>{{ b.brandName }}
+                </span>
+            </li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
             <button class="more more1">更多</button>
-            <button class="duoxuan duoxiuan1">多选</button>
+            <button class="duoxuan duoxiuan1" @click="brandIsMoreChecked = !brandIsMoreChecked">多选</button>
         </span>
         <div class="clean"></div>
     </div>
     <div class="shaixuan shaixuan2">
         <span class="leibie chima">品类</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="k in kindList" :key="k.menuId"><span>{{k.title}}</span></li>
+            <li class="group-li" v-for="k in kindList" :key="k.menuId"><span>{{ k.title }}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -49,7 +56,7 @@
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">尺码</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="s in sizeList" :key="s.sizeId"><span>{{s.sizeType}}</span></li>
+            <li class="group-li" v-for="s in sizeList" :key="s.sizeId"><span>{{ s.sizeType }}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -61,7 +68,7 @@
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">颜色</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="c in colorList" :key="c.colorId"><span>{{c.colorName}}</span></li>
+            <li class="group-li" v-for="c in colorList" :key="c.colorId"><span>{{ c.colorName }}</span></li>
         </ul>
         <span class="other-item">
             <button class="clean-all">清空已选</button>
@@ -99,7 +106,7 @@
         </div>
         <div class="pro-page">
             <span class="page-total">
-                <span class="page-num">{{productList[0].proCount}}</span>
+                <span class="page-num">{{ productList[0].proCount }}</span>
                 件商品
             </span>
         </div>
@@ -107,8 +114,8 @@
     <!-- =============商品============== -->
     <div class="pro-show-page page-1">
         <ul class="pro-ul" v-for="p in productList" :key="p.proId">
-            <li class="pro-li" >
-                <router-link :to="{ path: '/productDetail/explainSize/101' }" class="li-li">
+            <li class="pro-li">
+                <router-link :to="{ path: `/productDetail/explainSize/${p.proId}` }" class="li-li">
                     <div class="product-img">
                         <img width="216px" height="218px" :src="p.proMainImageAddress">
                     </div>
@@ -117,14 +124,14 @@
                         <span class="temai">特卖价</span>
                         <span class="pro-pri">
                             <span class="pro-pri-img">￥</span>
-                            <span class="pro-pri-num">{{p.sellingPrice}}</span>
+                            <span class="pro-pri-num">{{ p.sellingPrice }}</span>
                         </span>
-                        <span class="pre-price">￥{{p.proPrice}}</span>
-                        <span class="pro-noe-zhekou">{{p.discount}}折</span>
+                        <span class="pre-price">￥{{ p.proPrice }}</span>
+                        <span class="pro-noe-zhekou">{{ p.discount }}折</span>
                     </div>
                     <!-- ======近60天内最低价=== -->
                     <div class="lower_price_60">近60天内最低价</div>
-                    <span class="pro-name-text">{{p.proName}}</span>
+                    <span class="pro-name-text">{{ p.proName }}</span>
                 </router-link>
             </li>
         </ul>
@@ -136,9 +143,11 @@ import YiRanHeader from '@/components/YiRanHeader.vue'
 import SecondHeader from '@/components/SecondHeader.vue'
 import ShopNavigation from '@/components/ShopNavigation.vue'
 import RightNavigation from '@/components/RightNavigation.vue'
-import {reactive,ref,onMounted} from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import productApi from '@/api/product.js'
+
+const brandIsMoreChecked = ref(false)
 
 
 //商品数据对象
@@ -151,25 +160,25 @@ let sizeList = ref([])
 const route = useRoute()
 let brandId = route.query.brandId
 let kindId = route.query.kindId
-console.log("brandId:",brandId)
-console.log("kindId:",kindId)
+console.log("brandId:", brandId)
+console.log("kindId:", kindId)
 // 请求商品列表数据
 onMounted(() => {
 
-    if(brandId){
+    if (brandId) {
         getProListByBrandId(brandId)
         getFiltrateByBrandId(brandId)
-        
+
     }
-    if(kindId){
+    if (kindId) {
         getProListByKindId(kindId)
         getFiltrateByKindId(kindId)
     }
 })
 //根据品牌查商品
-function getProListByBrandId(brandId){
+function getProListByBrandId(brandId) {
     productApi.getProListByBrandId(brandId).then(
-        response=>{
+        response => {
             //console.log(response)
             productList.value = reactive(response.data.result)
         }
@@ -177,18 +186,18 @@ function getProListByBrandId(brandId){
 
 }
 //根据品类查商品
-function getProListByKindId(kindId){
+function getProListByKindId(kindId) {
     productApi.getProListByKindId(kindId).then(
-        response=>{
+        response => {
             //console.log(response)
             productList.value = reactive(response.data.result)
         }
     )
 }
 //筛选栏
-function getFiltrateByBrandId(brandId){
+function getFiltrateByBrandId(brandId) {
     productApi.getFiltrateByBrandId(brandId).then(
-        response=>{
+        response => {
             console.log(response.data.result)
             brandList.value = reactive(response.data.result.brandList)
             kindList.value = reactive(response.data.result.kindList)
@@ -197,9 +206,9 @@ function getFiltrateByBrandId(brandId){
         }
     )
 }
-function getFiltrateByKindId(kindId){
+function getFiltrateByKindId(kindId) {
     productApi.getFiltrateByKindId(kindId).then(
-        response=>{
+        response => {
             console.log(response)
             brandList.value = reactive(response.data.result.brandList)
             kindList.value = reactive(response.data.result.kindList)
@@ -207,6 +216,13 @@ function getFiltrateByKindId(kindId){
             colorList.value = reactive(response.data.result.colorList)
         }
     )
+}
+// 品牌是否被选中
+function pinPaiCheck(b){
+    brandList.value.forEach(brand => {
+        brand.spanClass = {'checked':false}
+    });
+    b.spanClass = {'checked':true}
 }
 //多条件筛选
 
@@ -641,7 +657,8 @@ function getFiltrateByKindId(kindId){
     margin: 20px 8px;
     border: 1px solid white;
 }
-.pro-show-page .pro-ul .pro-li .product-img img{
+
+.pro-show-page .pro-ul .pro-li .product-img img {
     width: 216px;
     height: 218px;
 }
@@ -777,7 +794,7 @@ function getFiltrateByKindId(kindId){
     height: 10px;
     /* border: 1px solid; */
     margin-top: 6px;
-    margin-left:5px;
+    margin-left: 5px;
 }
 
 /* =========近60天内最低价============ */
@@ -800,5 +817,9 @@ function getFiltrateByKindId(kindId){
     color: #666;
     line-height: 18px;
     margin-top: 8px;
+}
+
+.checked {
+    color: blue;
 }
 </style>

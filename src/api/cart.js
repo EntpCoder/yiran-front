@@ -18,5 +18,12 @@ export default {
       method: 'post',
       data:{cartId:cart.cartId,nums:cart.nums}
     })
+  },
+  addCart(proInfoId,nums){
+    return request({
+      url: `/cart/save`,
+      method: 'post',
+      data:{proAttributeInfoId:proInfoId,nums:nums}
+    })
   }
 }

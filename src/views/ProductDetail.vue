@@ -10,46 +10,26 @@
       <!-- 左边 -->
       <div class="layui-col-md5">
         <!-- 大图片 -->
-        <img class="mainImg" src="/images/temp/pro-detail-image1.jpg"/>
+        <img class="mainImg" src="/images/temp/pro-detail-image1.jpg" />
         <!-- 小图片 -->
         <div class="layui-row layui-col-space5">
           <div class="layui-col-md1">
             <span><img src="/svg/箭头 -左.svg" /></span>
           </div>
           <div class="layui-col-md2">
-            <img
-              src="/images/temp/pro-detail-image1.jpg"
-              height="100%"
-              width="100%"
-            />
+            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
           </div>
           <div class="layui-col-md2">
-            <img
-              src="/images/temp/pro-detail-image1.jpg"
-              height="100%"
-              width="100%"
-            />
+            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
           </div>
           <div class="layui-col-md2">
-            <img
-              src="/images/temp/pro-detail-image1.jpg"
-              height="100%"
-              width="100%"
-            />
+            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
           </div>
           <div class="layui-col-md2">
-            <img
-              src="/images/temp/pro-detail-image1.jpg"
-              height="100%"
-              width="100%"
-            />
+            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
           </div>
           <div class="layui-col-md2">
-            <img
-              src="/images/temp/pro-detail-image1.jpg"
-              height="100%"
-              width="100%"
-            />
+            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
           </div>
           <div class="layui-col-md1">
             <span><img src="/svg/箭头 -右.svg" /></span>
@@ -57,7 +37,7 @@
         </div>
         <!-- 商品编码 & 商品收藏 -->
         <div class="proId-and-collect">
-          <span>商品编码：{{data.product.proNum}}</span>
+          <span>商品编码：{{ data.product.proNum }}</span>
           <div class="pro-collect">
             <img src="/svg/collect-start.svg" alt="" />
             <span>收藏商品</span>
@@ -74,43 +54,39 @@
           <div class="layui-col-md11">
             <!-- 品牌和标题 -->
             <div class="brand-and-title">
-              <a href="#">{{data.product.brandName}}</a>
+              <a href="#">{{ data.product.brandName }}</a>
               <div class="weipin-ziying">
                 <span>唯品自营</span>
               </div>
-              <span>{{data.product.describe}}{{data.product.proName}}</span>
+              <span>{{ data.product.describe }}{{ data.product.proName }}</span>
             </div>
             <!-- 打折券 -->
             <div class="discount-coupon">
-              <img src="/images/discount-bgm.png" class="discount-bgm-png"/>
+              <img src="/images/discount-bgm.png" class="discount-bgm-png" />
               <div class="left">
                 <div id="up-part">
                   <div id="box500">
                     <span>￥</span>
-                    <span>{{data.product.sellingPrice}}</span>
+                    <span>{{ data.product.sellingPrice }}</span>
                   </div>
                   <div id="temaijia-box">
                     <img src="/images/三角内心圆.png" id="sanjiao-yuan" />
                     <div id="tamaijia-box-2">
                       <span>特卖价</span>
                       <span>￥</span>
-                      <span>{{data.product.proPrice}}</span>
+                      <span>{{ data.product.proPrice }}</span>
                     </div>
                     <img src="/svg/attention.svg" id="attention" />
                   </div>
                 </div>
                 <div id="down-part">
-                  <del>￥{{data.product.sellingPrice}}</del>
-                  <span>{{data.product.discount}}折</span>
+                  <del>￥{{ data.product.sellingPrice }}</del>
+                  <span>{{ data.product.discount }}折</span>
                 </div>
               </div>
               <div class="right">
                 <div class="super-brand-image">
-                  <img
-                    src="/images/超级大牌日.png"
-                    height="100%"
-                    width="100%"
-                  />
+                  <img src="/images/超级大牌日.png" height="100%" width="100%" />
                 </div>
                 <div id="clock-box">
                   <span id="clock-day">3</span>
@@ -144,34 +120,16 @@
               <div class="layui-col-md1">
                 <div class="grid-demo grid-demo-bg1">
                   <span>运费</span>
-                  <span id="yunfei"
-                    >新会员专享首单满38元免邮（限唯品自营商品，部分商品不可用）</span>
+                  <span id="yunfei">新会员专享首单满38元免邮（限唯品自营商品，部分商品不可用）</span>
                 </div>
               </div>
               <div class="layui-col-md1">
                 <div class="grid-demo">
                   <span>颜色</span>
                   <ul>
-                    <li>
-                      <div class="box">
-                        <img
-                          src="/images/temp/pro-detail-image1.jpg"
-                          width="25%"
-                          height="100%"
-                        />
-                        <span>黑色</span>
-                        <span>(大阔)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="box">
-                        <img
-                          src="/images/temp/pro-detail-image1.jpg"
-                          width="25%"
-                          height="100%"
-                        />
-                        <span>棕色</span>
-                        <span>(大阔)</span>
+                    <li v-for="c in data.product.colorList" :key="c.colorListId">
+                      <div class="box" @click="checkColor(c)">
+                        <span>{{c.colorName}}</span>
                       </div>
                     </li>
                   </ul>
@@ -181,29 +139,9 @@
                 <div class="grid-demo grid-demo-bg1 chima">
                   <span>尺码</span>
                   <ul>
-                    <li>
-                      <div class="box">
-                        <span>S</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="box">
-                        <span>M</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="box">
-                        <span>L</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="box">
-                        <span>XL</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="box">
-                        <span>XXL</span>
+                    <li v-for="s in data.product.sizeList" :key="s.sizeId">
+                      <div class="box" @click="checkSize(s)">
+                        <span>{{s.sizeType}}</span>
                       </div>
                     </li>
                   </ul>
@@ -212,20 +150,20 @@
               <div class="layui-col-md1">
                 <div class="grid-demo shuliang">
                   <span>数量</span>
-                  <div class="pro-num"><span class="sub">-</span></div>
-                  <input type="text"  />
-                  <div class="pro-num"><span @click="increase(date.product)">+</span></div>
+                  <div class="pro-num"><span class="sub" @click="num--">-</span></div>
+                  <input type="text" v-model="num"/>
+                  <div class="pro-num"><span @click="num++">+</span></div>
                 </div>
               </div>
               <div class="layui-col-md1">
                 <div class="grid-demo grid-demo-bg1 lastbox">
                   <!-- 价格按钮 -->
-                  <div class="pay-for-it-box">
+                  <div class="pay-for-it-box" @click="addCartBtn">
                     <span>特卖价&nbsp;抢&nbsp;></span>
-                    <span>{{data.product.proPrice}}</span>
+                    <span>{{ data.product.proPrice }}</span>
                     <span>￥</span>
                     <div class="lightpink-box">
-                      <del>￥{{data.product.sellingPrice}}</del>
+                      <del>￥{{ data.product.sellingPrice }}</del>
                     </div>
                   </div>
                 </div>
@@ -257,18 +195,28 @@ import SecondHeader from '@/components/SecondHeader.vue'
 import ShopNavigation from '@/components/ShopNavigation.vue'
 import RightNavigation from '@/components/RightNavigation.vue'
 import prodetailApi from "@/api/product-detail.js";
-import {  ref,onBeforeMount,reactive } from 'vue'
+import cartApi from "@/api/cart.js";
+import productApi from "@/api/product.js";
+import { ref, onBeforeMount, reactive } from 'vue'
 import { useRoute } from 'vue-router'
-
 const route = useRoute()
 const proId = ref()
+// 商品数量
+const num = ref(1)
+// 商品属性id
+const proInfoId = ref()
+// 颜色和尺寸id
+const param = []
 // 获取路由中的商品id
 proId.value = route.params.id
 // 自定义变量
-const data = reactive({});
+const data = reactive(
+  {
+    product: {}
+  });
 // 1.根据商品id获取商品信息
 onBeforeMount(() => {
-    getProById();
+  getProById();
 });
 function getProById() {
   prodetailApi.getproductencode(proId.value).then((response) => {
@@ -276,10 +224,33 @@ function getProById() {
     data.product = response.data.result;
   });
 }
-function increase(pronum){
-    pronum.value++;
+// 添加购物车方法
+function addCartBtn(){
+  cartApi.addCart(proInfoId.value,num.value)
+    .then(response=>{
+      console.log(response)
+    })
 }
-
+// 选择尺寸
+function checkSize(size){
+  param[1] = size.sizeId
+  getProInfoId()
+}
+// 选择颜色
+function checkColor(color){
+  param[0] = color.colorId
+  getProInfoId()
+}
+// 根据颜色尺码 获取商品属性id
+function getProInfoId(){
+  // 当尺寸和颜色都选择时调用 查询商品属性id
+  if(param[0] && param[1]){
+    productApi.getProductInfoId(proId.value,param[0],param[1])
+      .then(response=>{
+        proInfoId.value = response.data.proInfoId
+      })
+  }
+}
 
 </script>
 
@@ -345,12 +316,7 @@ function increase(pronum){
   margin-left: 25px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md5
-  .proId-and-collect
-  .pro-collect
-  img {
+.product-container .layui-row .layui-col-md5 .proId-and-collect .pro-collect img {
   float: left;
 }
 
@@ -362,13 +328,7 @@ function increase(pronum){
 }
 
 /* 品牌和标题 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .brand-and-title
-  a {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .brand-and-title a {
   color: #007cff;
   font-size: 16px;
   line-height: 22px;
@@ -379,13 +339,7 @@ function increase(pronum){
 }
 
 /* 唯品自营框 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .brand-and-title
-  .weipin-ziying {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .brand-and-title .weipin-ziying {
   height: 21px;
   width: 60px;
   background-color: #f03867;
@@ -394,14 +348,7 @@ function increase(pronum){
   margin-top: 7px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .brand-and-title
-  .weipin-ziying
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .brand-and-title .weipin-ziying span {
   font-size: 12px;
   color: whitesmoke;
   display: block;
@@ -411,13 +358,7 @@ function increase(pronum){
 }
 
 /* 标题 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .brand-and-title
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .brand-and-title span {
   float: left;
   font-size: 16px;
   color: #333;
@@ -431,12 +372,7 @@ function increase(pronum){
 }
 
 /* 打折券 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon {
   height: 94px;
   /* width: 100%; */
   float: top;
@@ -447,13 +383,7 @@ function increase(pronum){
 }
 
 /* 左部分 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left {
   height: 94px;
   width: 300px;
   /* background-color: rgb(214, 244, 254); */
@@ -461,29 +391,14 @@ function increase(pronum){
   margin-top: -94px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part {
   height: 65%;
   width: 100%;
   /* background-color: rgb(255, 210, 49); */
 }
 
 /* 原价盒子 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #box500 {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #box500 {
   height: 70%;
   width: 32%;
   /* background-color: rgb(255, 232, 149); */
@@ -492,16 +407,7 @@ function increase(pronum){
   margin-left: 10px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #box500
-  :nth-child(1) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #box500 :nth-child(1) {
   color: white;
   font-size: 24px;
   line-height: 55px;
@@ -509,31 +415,14 @@ function increase(pronum){
   float: left;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #box500
-  :nth-child(2) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #box500 :nth-child(2) {
   color: white;
   font-size: 38px;
   font-weight: 700;
 }
 
 /* 特卖价盒子 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #temaijia-box {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box {
   height: 70%;
   width: 60%;
   /* background-color: rgb(77, 216, 255); */
@@ -541,30 +430,12 @@ function increase(pronum){
   margin-top: 18px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #temaijia-box
-  #sanjiao-yuan {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box #sanjiao-yuan {
   margin-top: 6px;
   float: left;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #temaijia-box
-  #tamaijia-box-2 {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box #tamaijia-box-2 {
   height: 30px;
   width: 120px;
   background-color: #fff;
@@ -573,17 +444,7 @@ function increase(pronum){
   float: left;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #temaijia-box
-  #tamaijia-box-2
-  :nth-child(1) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box #tamaijia-box-2 :nth-child(1) {
   font-size: 16px;
   line-height: 30px;
   font-weight: 700;
@@ -591,17 +452,7 @@ function increase(pronum){
   color: #f03867;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #temaijia-box
-  #tamaijia-box-2
-  :nth-child(2) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box #tamaijia-box-2 :nth-child(2) {
   display: block;
   float: left;
   font-size: 20px;
@@ -610,17 +461,7 @@ function increase(pronum){
   margin-left: 5px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #temaijia-box
-  #tamaijia-box-2
-  :nth-child(3) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box #tamaijia-box-2 :nth-child(3) {
   display: block;
   float: left;
   font-size: 26px;
@@ -628,16 +469,7 @@ function increase(pronum){
   font-weight: 700;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #up-part
-  #temaijia-box
-  #attention {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box #attention {
   float: left;
   width: 22px;
   height: 22px;
@@ -646,28 +478,13 @@ function increase(pronum){
 }
 
 /* 中间删除线 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #down-part {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #down-part {
   height: 35%;
   width: 100%;
   /* background-color: rgb(255, 118, 49); */
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #down-part
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #down-part span {
   color: white;
   display: block;
   float: left;
@@ -675,15 +492,7 @@ function increase(pronum){
   font-size: 16px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .left
-  #down-part
-  del {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #down-part del {
   color: white;
   display: block;
   float: left;
@@ -693,13 +502,7 @@ function increase(pronum){
 }
 
 /* 右部分 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .right {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .right {
   height: 94px;
   width: 150px;
   /* background-color: rgb(243, 183, 234); */
@@ -708,14 +511,7 @@ function increase(pronum){
   margin-left: 385px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .right
-  .super-brand-image {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .right .super-brand-image {
   height: 24px;
   width: 100px;
   /* background-color: rgb(199, 112, 112); */
@@ -724,14 +520,7 @@ function increase(pronum){
   margin-right: 20px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .discount-coupon
-  .right
-  #clock-box {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .right #clock-box {
   height: 24px;
   width: 110px;
   /* background-color: #fff; */
@@ -743,12 +532,7 @@ function increase(pronum){
 }
 
 /* ********************************待补充*********************** */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-col-md1 {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-col-md1 {
   font-size: 12px;
   color: #999999;
   display: block;
@@ -758,71 +542,28 @@ function increase(pronum){
 }
 
 /* 配送 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .grid-demo
-  :first-child {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo :first-child {
   margin-right: 20px;
   float: left;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .grid-demo
-  select {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo select {
   border: 1px #999999 solid;
   height: 32px;
   width: 350px;
 }
 
 /* 运费 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .grid-demo
-  #yunfei {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo #yunfei {
   color: #333;
 }
 
 /* 颜色 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .grid-demo
-  ul
-  li {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li {
   font-style: none;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .grid-demo
-  ul
-  li
-  .box {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box {
   height: 32px;
   width: 129px;
   /* background-color: rgb(251, 201, 201); */
@@ -831,33 +572,12 @@ function increase(pronum){
   border: 2px solid #f03867;
   cursor: pointer;
 }
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .grid-demo
-  ul
-  li
-  .box
-  img {
+
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box img {
   margin: 0 auto;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .grid-demo
-  ul
-  li
-  .box
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box span {
   color: #333;
   display: block;
   float: left;
@@ -866,40 +586,15 @@ function increase(pronum){
 }
 
 /* 尺码 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .chima-box {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .chima-box {
   height: 60px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .chima
-  ul
-  :first-child {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .chima ul :first-child {
   margin: 0;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .chima
-  ul
-  li
-  .box {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .chima ul li .box {
   height: 28px;
   width: 32px;
   border: 1px solid #999999;
@@ -910,15 +605,7 @@ function increase(pronum){
 }
 
 /* 数量 */
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .shuliang
-  .pro-num {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .shuliang .pro-num {
   float: left;
   height: 28px;
   width: 21px;
@@ -927,58 +614,23 @@ function increase(pronum){
   cursor: pointer;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .shuliang
-  .pro-num
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .shuliang .pro-num span {
   display: block;
   font-size: 30px;
   margin: 0;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .shuliang
-  .pro-num
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .shuliang .pro-num span {
   margin-top: -6px;
   margin-left: 2px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .shuliang
-  .pro-num
-  .sub {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .shuliang .pro-num .sub {
   margin-left: 5px;
   margin-top: -8px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .shuliang
-  input {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .shuliang input {
   float: left;
   height: 28px;
   width: 31px;
@@ -990,14 +642,7 @@ function increase(pronum){
   text-align: center;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .pay-for-it-box {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .pay-for-it-box {
   height: 46px;
   width: 252px;
   /* background-color: rgb(238, 203, 203); */
@@ -1009,44 +654,19 @@ function increase(pronum){
   cursor: pointer;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox {
   height: 110px;
   width: 535px;
   /* background-color: rgb(232, 19, 19); */
   border-bottom: 1px rgb(210, 210, 210) dashed;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox
-  .pay-for-it-box
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox .pay-for-it-box span {
   display: block;
   float: right;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox
-  .pay-for-it-box
-  .lightpink-box {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox .pay-for-it-box .lightpink-box {
   height: 100%;
   width: 50%;
   /* background-color:#f03867; */
@@ -1055,17 +675,7 @@ function increase(pronum){
   border-radius: 2px 0px 0px 2px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox
-  .pay-for-it-box
-  .lightpink-box
-  del {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox .pay-for-it-box .lightpink-box del {
   display: block;
   font-size: 20px;
   color: white;
@@ -1074,62 +684,26 @@ function increase(pronum){
   margin-left: 25px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox
-  .pay-for-it-box
-  span {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox .pay-for-it-box span {
   display: block;
   color: white;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox
-  .pay-for-it-box
-  :nth-child(1) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox .pay-for-it-box :nth-child(1) {
   font-size: 14px;
   position: absolute;
   margin-left: 150px;
   margin-top: 15px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox
-  .pay-for-it-box
-  :nth-child(2) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox .pay-for-it-box :nth-child(2) {
   font-size: 20px;
   position: absolute;
   margin-left: 171px;
   margin-top: -5px;
 }
 
-.product-container
-  .layui-row
-  .layui-col-md7
-  .grid-demo
-  .layui-col-md11
-  .layui-row
-  .layui-col-md1
-  .lastbox
-  .pay-for-it-box
-  :nth-child(3) {
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .lastbox .pay-for-it-box :nth-child(3) {
   font-size: 20px;
   position: absolute;
   margin-left: 154px;
@@ -1181,15 +755,17 @@ function increase(pronum){
   border-bottom: 3px solid #f10180;
   color: #f10180;
 }
+
 /* ==================================================二次调整=========== */
 /* ==============大图片============== */
-.mainImg{
+.mainImg {
   height: 100%;
   width: 100%;
 }
+
 /* 打折券背景图 */
-.discount-bgm-png{
-    height: 100%;
-    width: 100%;
+.discount-bgm-png {
+  height: 100%;
+  width: 100%;
 }
 </style>

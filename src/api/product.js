@@ -28,5 +28,11 @@ export default {
       return request({
         url: `/product/getByBrandKindSizeColor?brandId=${brandId}&kindIdArr=${kindIdArr}&sizeIdArr=${sizeIdArr}&colorIdArr=${colorIdArr}`
       })
+    },
+    getProductInfoId(proId,colorId,sizeId){
+      return request({
+        url: `/product/getProInfoId/${proId}/${colorId}/${sizeId}`,
+        method: 'get'
+      })
     }
 }
