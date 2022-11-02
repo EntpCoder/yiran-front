@@ -181,42 +181,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="goods-item">
+                        <tr class="goods-item" v-for="c in cartIdSList" :key="c.cartIdSList">
                             <td class="product-item">
                                 <div class="product-img">
-                                    <img width="70px" height="70px" src="/images/temp/测试数据1.jpg">
+                                    <img width="70px" height="70px" :src="c.proMainImageAddress">
                                 </div>
                                 <div class="product-info">
-                                    <div class="title">粗跟仙女风单鞋低跟浅口通勤平底女鞋 安妮208003</div>
+                                    <div class="title">{{c.proName}}</div>
                                 </div>
                             </td>
                             <td>
-                                <span class="product-size">M</span>
+                                <span class="product-size">{{c.sizeType}}</span>
                             </td>
                             <td>
-                                <span class="product-price">￥72</span>
+                                <span class="product-price">￥{{c.sellingPrice}}</span>
                             </td>
                             <td>
-                                <span class="product-num">2</span>
-                            </td>
-                        </tr>
-                        <tr class="goods-item">
-                            <td class="product-item">
-                                <div class="product-img">
-                                    <img width="70px" height="70px" src="/images/temp/商品2.jpg">
-                                </div>
-                                <div class="product-info">
-                                    <div class="title">2022春季新款圆领短袖韩版宽松显瘦纯色简约T恤女</div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="product-size">S</span>
-                            </td>
-                            <td>
-                                <span class="product-price">￥129</span>
-                            </td>
-                            <td>
-                                <span class="product-num">2</span>
+                                <span class="product-num">{{c.nums}}</span>
                             </td>
                         </tr>
                     </tbody>
@@ -229,7 +210,7 @@
                                     <span class="freight-price">免运费</span>
                                 </span>
                                 <span class="this-grop-price-text">本组商品金额:
-                                    <span class="this-grop-price">￥12354565</span>
+                                    <span class="this-grop-price">￥{{data.sumPrice}}</span>
                                 </span>
                             </td>
                         </tr>
@@ -272,12 +253,6 @@
             </div>
             <div class="outer-div">
                 <div>
-                    <span class="dis-text layui-inline">唯品币:</span>
-                    <span class="layui-inline">￥0</span>
-                </div>
-            </div>
-            <div class="outer-div">
-                <div>
                     <span class="dis-text layui-inline">运费:</span>
                     <span class="layui-inline">￥0</span>
                 </div>
@@ -285,14 +260,7 @@
             <div class="outer-div">
                 <div>
                     <span class="dis-text pay-price-text layui-inline">待支付:</span>
-                    <span class="pay-price layui-inline">￥2333</span>
-                </div>
-            </div>
-            <div class="delivery outer-div">
-                <div>
-                    <span class="dis-text layui-inline">送货至：
-                        <span class="delivery-info layui-inline">苏州工业园区 东方文荟苑3区，洋，152*****014</span>
-                    </span>
+                    <span class="pay-price layui-inline">￥{{data.sumPrice}}</span>
                 </div>
             </div>
             <!-- 结算 -->
@@ -309,7 +277,7 @@
 </template>
 
 <script setup>
-import { reactive , ref,onBeforeMount} from 'vue'
+import { reactive , ref,onBeforeMount,computed} from 'vue'
 import receiveAddressApi from '@/api/receiveAddress.js'
 import { useRoute } from 'vue-router'
 import qs from 'qs'
@@ -317,6 +285,7 @@ const route = useRoute()
 const cartIds = route.query.cartIds
 let addressList = ref([])
 let cartIdSList = ref([])
+let data = reactive({ sumPrice: 0.0 })
 // 页面挂载 -钩子函数
 onBeforeMount(()=>{
     getreceiveAddress()
@@ -342,12 +311,27 @@ function getaddressCart(){
     let params = qs.stringify({cartIds},{arrayFormat:'repeat'})
     receiveAddressApi.getaddressCart(params).then(
         response =>{
-            // cartIdSList.value = reactive(response.data)
-            console.log(response);
+            console.log(response)
+            cartIdSList.value = reactive(response.data.cartList)
+            console.log(cartIdSList)
         }           
     )
 }
-//换是否为默认地址
+//计算商品的价格
+data.sumPrice = computed({
+    get(){
+        let sum = 0.0
+        cartIdSList.value.forEach((cartIds) =>{
+            sum += cartIds.sellingPrice * cartIds.nums
+        })
+        console.log(sum)
+        return sum.toFixed(2)
+    },
+    set(){
+
+    }
+})
+//换是否为默认地址(小对号)
 function addressisChecked(address){
     addressList.value.forEach(a =>{
        if(address === a){
