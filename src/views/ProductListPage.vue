@@ -25,18 +25,19 @@
     <div class="shaixuan shaixuan1">
         <span class="leibie pinlei">品牌</span>
         <ul class="ul-item">
-            
-            <li class="group-li" v-for="b in brandList" :key="b.brandId" >
+
+            <li class="group-li" v-for="b in brandList" :key="b.brandId">
                 <span @click="pinPaiCheck(b)" v-if="!brandIsMoreChecked" :class="b.spanClass">{{ b.brandName }}
                 </span>
                 <span v-if="brandIsMoreChecked">
-                    <input :id="b.brandId" type="checkbox" v-model="b.spanClass.checked" :class="b.spanClass"/><label :for="b.brandId">{{ b.brandName }}</label>
+                    <input :id="b.brandId" type="checkbox" v-model="b.spanClass.checked" :class="b.spanClass" /><label
+                        :for="b.brandId">{{ b.brandName }}</label>
                 </span>
             </li>
         </ul>
         <span class="other-item">
             <button class="clean-all" @click="brandclearAllClick()">清空已选</button>
-        
+
             <button class="duoxuan duoxiuan1" @click="brandIsMoreChecked = !brandIsMoreChecked">
                 <span v-if="!brandIsMoreChecked">多选</span>
                 <span v-if="brandIsMoreChecked">单选</span>
@@ -51,13 +52,14 @@
                 <span @click="kindCheck(k)" v-if="!kindIsMoreChecked" :class="k.spanClass">{{ k.title }}
                 </span>
                 <span v-if="kindIsMoreChecked">
-                    <input :id="k.menuId" type="checkbox" v-model="k.spanClass.checked" :class="k.spanClass"/><label :for="k.menuId">{{k.title }}</label>
+                    <input :id="k.menuId" type="checkbox" v-model="k.spanClass.checked" :class="k.spanClass" /><label
+                        :for="k.menuId">{{ k.title }}</label>
                 </span>
             </li>
         </ul>
         <span class="other-item">
             <button class="clean-all" @click="kindclearAllClick()">清空已选</button>
-          
+
             <button class="duoxuan duoxiuan1" @click="kindIsMoreChecked = !kindIsMoreChecked">
                 <span v-if="!kindIsMoreChecked">多选</span>
                 <span v-if="kindIsMoreChecked">单选</span>
@@ -68,17 +70,18 @@
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">尺码</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="s in sizeList" :key="s.sizeId" >
+            <li class="group-li" v-for="s in sizeList" :key="s.sizeId">
                 <span @click="sizeCheck(s)" v-if="!sizeIsMoreChecked" :class="s.spanClass">{{ s.sizeType }}
                 </span>
                 <span v-if="sizeIsMoreChecked">
-                    <input :id="s.sizeId" type="checkbox" v-model="s.spanClass.checked" :class="s.spanClass"/><label :for="s.sizeId">{{s.sizeType }}</label>
+                    <input :id="s.sizeId" type="checkbox" v-model="s.spanClass.checked" :class="s.spanClass" /><label
+                        :for="s.sizeId">{{ s.sizeType }}</label>
                 </span>
             </li>
         </ul>
         <span class="other-item">
             <button class="clean-all" @click="sizeClearAllClick()">清空已选</button>
-            
+
             <button class="duoxuan duoxiuan1" @click="sizeIsMoreChecked = !sizeIsMoreChecked">
                 <span v-if="!sizeIsMoreChecked">多选</span>
                 <span v-if="sizeIsMoreChecked">单选</span>
@@ -89,16 +92,17 @@
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">颜色</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="c in colorList" :key="c.colorId" >
-                <span @click="colorCheck(c)" v-if="!colorIsMoreChecked"  :class="c.spanClass">{{ c.colorName }}
+            <li class="group-li" v-for="c in colorList" :key="c.colorId">
+                <span @click="colorCheck(c)" v-if="!colorIsMoreChecked" :class="c.spanClass">{{ c.colorName }}
                 </span>
                 <span v-if="colorIsMoreChecked">
-                    <input :id="c.colorId" type="checkbox" v-model="c.spanClass.checked" :class="c.spanClass"/><label :for="c.colorId">{{c.colorName }}</label>
+                    <input :id="c.colorId" type="checkbox" v-model="c.spanClass.checked" :class="c.spanClass" /><label
+                        :for="c.colorId">{{ c.colorName }}</label>
                 </span>
             </li>
         </ul>
         <span class="other-item">
-            <button class="clean-all"  @click="colorClearAllClick()" >清空已选</button>
+            <button class="clean-all" @click="colorClearAllClick()">清空已选</button>
             <button class="duoxuan duoxiuan1" @click="colorIsMoreChecked = !colorIsMoreChecked">
                 <span v-if="!colorIsMoreChecked">多选</span>
                 <span v-if="colorIsMoreChecked">单选</span>
@@ -173,8 +177,8 @@ import YiRanHeader from '@/components/YiRanHeader.vue'
 import SecondHeader from '@/components/SecondHeader.vue'
 import ShopNavigation from '@/components/ShopNavigation.vue'
 import RightNavigation from '@/components/RightNavigation.vue'
-import { reactive, ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { reactive, ref, onMounted  } from 'vue'
+import { useRoute,onBeforeRouteUpdate } from 'vue-router';
 import productApi from '@/api/product.js'
 
 const brandIsMoreChecked = ref(false)
@@ -197,13 +201,21 @@ let sizeList = ref([])
 const param = []
 
 const route = useRoute()
+// 当路由变化时重新加载数据
+onBeforeRouteUpdate(() => {
+    brandId = route.query.brandId
+    kindId = route.query.kindId
+    loadData()
+ });
 let brandId = route.query.brandId
 let kindId = route.query.kindId
 console.log("brandId:", brandId)
 console.log("kindId:", kindId)
 // 请求商品列表数据
 onMounted(() => {
-
+    loadData()
+})
+function loadData() {
     if (brandId) {
         getProListByBrandId(brandId)
         getFiltrateByBrandId(brandId)
@@ -213,7 +225,7 @@ onMounted(() => {
         getProListByKindId(kindId)
         getFiltrateByKindId(kindId)
     }
-})
+}
 //根据品牌查商品
 function getProListByBrandId(brandId) {
     productApi.getProListByBrandId(brandId).then(
@@ -243,8 +255,8 @@ function getFiltrateByBrandId(brandId) {
         response => {
             console.log(response)
             brandList.value = reactive(response.data.result.brandList)
-            brandList.value.forEach((brand)=>{
-                brand.spanClass = {checked:false}
+            brandList.value.forEach((brand) => {
+                brand.spanClass = { checked: false }
             })
             kindList.value = reactive(response.data.result.kindList)
             sizeList.value = reactive(response.data.result.sizeList)
@@ -268,110 +280,110 @@ function getFiltrateByKindId(kindId) {
     )
 }
 // 品牌是否被选中
-function pinPaiCheck(b){
+function pinPaiCheck(b) {
     brandList.value.forEach(brand => {
-        brand.spanClass = {'checked':false}
-        if(brand === b){
+        brand.spanClass = { 'checked': false }
+        if (brand === b) {
             brand.spanClass.checked = !brand.spanClass.checked
-        }else{
+        } else {
             brand.spanClass.checked = false
         }
     })
-    b.spanClass = {'checked':true}
+    b.spanClass = { 'checked': true }
     param[0] = b.brandId
     //调用筛选方法
-    productApi.getByBrandKindSizeColor(param[0],param[1],param[2],param[3]).then(
+    productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
             console.log(response)
-            if(response.code === 200)
-            productList.value = reactive(response.data.result)
+            if (response.code === 200)
+                productList.value = reactive(response.data.result)
             else
-            productList.value = []
+                productList.value = []
         }
     )
-}   
+}
 //清空已选
-function brandclearAllClick(){
+function brandclearAllClick() {
     brandList.value.forEach(brand => {
         brand.spanClass.checked = false
     });
 }
-function colorClearAllClick(){
+function colorClearAllClick() {
     colorList.value.forEach(color => {
         color.spanClass.checked = false
     });
 }
 // 品类是否被选中
-function kindCheck(k){
+function kindCheck(k) {
     kindList.value.forEach(kind => {
-        kind.spanClass = {'checked':false}
-        if(kind === k){
+        kind.spanClass = { 'checked': false }
+        if (kind === k) {
             kind.spanClass.checked = !kind.spanClass.checked
-        }else{
+        } else {
             kind.spanClass.checked = false
         }
     });
-    k.spanClass = {'checked':true}
+    k.spanClass = { 'checked': true }
     param[1] = k.menuId
     console.log(param)
     //调用筛选方法
-    productApi.getByBrandKindSizeColor(param[0],param[1],param[2],param[3]).then(
+    productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
             console.log(response)
-            if(response.code === 200)
-            productList.value = reactive(response.data.result)
+            if (response.code === 200)
+                productList.value = reactive(response.data.result)
             else
-            productList.value = []
+                productList.value = []
         }
     )
-    
+
 }
 //尺码是否被选中
-function sizeCheck(s){
+function sizeCheck(s) {
     sizeList.value.forEach(size => {
-        size.spanClass = {'checked':false}
-        if(size === s){
+        size.spanClass = { 'checked': false }
+        if (size === s) {
             size.spanClass.checked = !size.spanClass.checked
-        }else{
+        } else {
             size.spanClass.checked = false
         }
     });
-    s.spanClass = {'checked':true}
+    s.spanClass = { 'checked': true }
     param[2] = s.sizeId
     console.log(param)
     //调用筛选方法
-    productApi.getByBrandKindSizeColor(param[0],param[1],param[2],param[3]).then(
+    productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
             console.log(response)
-            if(response.code === 200)
-            productList.value = reactive(response.data.result)
+            if (response.code === 200)
+                productList.value = reactive(response.data.result)
             else
-            productList.value = []
+                productList.value = []
         }
-    )    
-    
+    )
+
 }
 //颜色是否被选中
-function colorCheck(c){
+function colorCheck(c) {
     colorList.value.forEach(color => {
-        color.spanClass = {'checked':false}
-        if(color === c){
+        color.spanClass = { 'checked': false }
+        if (color === c) {
             color.spanClass.checked = !color.spanClass.checked
-        }else{
+        } else {
             color.spanClass.checked = false
         }
     });
-    c.spanClass = {'checked':true}
+    c.spanClass = { 'checked': true }
     param[3] = c.colorId
     console.log(param)
     //调用筛选方法
-    productApi.getByBrandKindSizeColor(param[0],param[1],param[2],param[3]).then(
+    productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
             console.log(response)
-            if(response.code === 200)
-            productList.value = reactive(response.data.result)
+            if (response.code === 200)
+                productList.value = reactive(response.data.result)
             else
-            productList.value = []
+                productList.value = []
         }
     )
 }
