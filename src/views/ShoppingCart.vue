@@ -96,7 +96,7 @@
                     <td class="product-item">
                         <!-- 选框 -->
                         <div class="m-checkbox">
-                            <input type="checkbox" />
+                            <input type="checkbox" v-model="c.isChecked" />
                         </div>
                         <div class="product-img">
                             <img width="70px" height="70px" :src="c.proMainImageAddress">
@@ -155,7 +155,8 @@
                     <i id="st-tips" class="layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a href="/orderConfirm" class="settlement-button layui-btn layui-col-md4">立即结算</a>
+                <a href="javascript:;" class="settlement-button layui-btn layui-col-md4" @click="goConfirmOrder">立即结算
+                </a>
             </div>
         </div>
     </div>
@@ -163,10 +164,15 @@
 
 <script setup>
 import { reactive, ref, onBeforeMount, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import cartApi from '@/api/cart.js'
 // 购物车数据对象
 let cartList = ref([])
 let data = reactive({ isLoad: true, sumPrice: 0.0 })
+// 勾选的购物车id
+let cartCheckedIds = []
+// router
+const router = useRouter()
 // 页面挂挂载完毕执行
 onBeforeMount(() => {
     getCart()
@@ -191,6 +197,7 @@ function getCart() {
         }
     )
 }
+// 数量加减按钮
 function decrease(cart) {
     cart.nums--
     cartApi.updataNums(cart)
@@ -208,6 +215,14 @@ function deleteByCartId(cartId) {
             }
         })
 }
+function goConfirmOrder(){
+    cartList.value.filter(c => c.isChecked).map(c => {
+        cartCheckedIds.push(c.cartId)
+    })
+    console.log(cartCheckedIds)
+    router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds}})
+}
+
 </script>
 
 <style scoped>
