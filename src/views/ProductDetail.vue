@@ -546,7 +546,6 @@ function getProInfoId(){
   margin-right: 20px;
   float: left;
 }
-
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo select {
   border: 1px #999999 solid;
   height: 32px;
@@ -562,7 +561,9 @@ function getProInfoId(){
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li {
   font-style: none;
 }
-
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li:first-child{
+  margin-right: auto;
+}
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box {
   height: 32px;
   width: 129px;
@@ -571,6 +572,7 @@ function getProInfoId(){
   margin: 0 auto;
   border: 2px solid #f03867;
   cursor: pointer;
+  margin-right: 20px;
 }
 
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box img {
