@@ -233,6 +233,10 @@ function getFiltrateByBrandId(brandId) {
     )
 }
 function getFiltrateByKindId(kindId) {
+    param[0] = []
+    param[1] = kindId
+    param[2] = []
+    param[3] = []
     productApi.getFiltrateByKindId(kindId).then(
         response => {
             console.log(response)
