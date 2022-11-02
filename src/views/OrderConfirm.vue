@@ -334,7 +334,26 @@
     </div>
 </template>
 
-<script steup>
+<script setup>
+import { reactive , ref,onBeforeMount} from 'vue'
+import receiveAddressApi from '@/api/receiveAddress.js'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const cartIds = route.query.cartIds
+let reactiveList = ref([])
+// 页面挂载 -钩子函数
+onBeforeMount(()=>{
+    getreceiveAddress()
+    console.log(cartIds)
+})
+//请求用户默认地址
+function getreceiveAddress(){
+    receiveAddressApi.getreceiveAddress().then(
+        response =>{
+            console.log(response)
+        }
+    )
+}
 </script>
 <style scoped>
 /* head css */

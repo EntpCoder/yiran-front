@@ -219,7 +219,6 @@ function goConfirmOrder(){
     cartList.value.filter(c => c.isChecked).map(c => {
         cartCheckedIds.push(c.cartId)
     })
-    console.log(cartCheckedIds)
     router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds}})
 }
 
