@@ -35,8 +35,8 @@
             </li>
         </ul>
         <span class="other-item">
-            <button class="clean-all" @click="clearAllClick()">清空已选</button>
-            <button class="more more1">更多</button>
+            <button class="clean-all" @click="brandclearAllClick()">清空已选</button>
+        
             <button class="duoxuan duoxiuan1" @click="brandIsMoreChecked = !brandIsMoreChecked">
                 <span v-if="!brandIsMoreChecked">多选</span>
                 <span v-if="brandIsMoreChecked">单选</span>
@@ -47,45 +47,62 @@
     <div class="shaixuan shaixuan2">
         <span class="leibie chima">品类</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="k in kindList" :key="k.menuId" @click="kindCheck(k)">
-                <span :class="k.spanClass">{{ k.title }}
+            <li class="group-li" v-for="k in kindList" :key="k.menuId">
+                <span @click="kindCheck(k)" v-if="!kindIsMoreChecked" :class="k.spanClass">{{ k.title }}
+                </span>
+                <span v-if="kindIsMoreChecked">
+                    <input :id="k.menuId" type="checkbox" v-model="k.spanClass.checked" :class="k.spanClass"/><label :for="k.menuId">{{k.title }}</label>
                 </span>
             </li>
         </ul>
         <span class="other-item">
-            <button class="clean-all">清空已选</button>
-            <button class="more more1">更多</button>
-            <button class="duoxuan duoxiuan1">多选</button>
+            <button class="clean-all" @click="kindclearAllClick()">清空已选</button>
+          
+            <button class="duoxuan duoxiuan1" @click="kindIsMoreChecked = !kindIsMoreChecked">
+                <span v-if="!kindIsMoreChecked">多选</span>
+                <span v-if="kindIsMoreChecked">单选</span>
+            </button>
         </span>
         <div class="clean"></div>
     </div>
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">尺码</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="s in sizeList" :key="s.sizeId" @click="sizeCheck(s)">
-                <span :class="s.spanClass">{{ s.sizeType }}
+            <li class="group-li" v-for="s in sizeList" :key="s.sizeId" >
+                <span @click="sizeCheck(s)" v-if="!sizeIsMoreChecked" :class="s.spanClass">{{ s.sizeType }}
+                </span>
+                <span v-if="sizeIsMoreChecked">
+                    <input :id="s.sizeId" type="checkbox" v-model="s.spanClass.checked" :class="s.spanClass"/><label :for="s.sizeId">{{k.title }}</label>
                 </span>
             </li>
         </ul>
         <span class="other-item">
-            <button class="clean-all">清空已选</button>
-            <button class="more more1">更多</button>
-            <button class="duoxuan duoxiuan1">多选</button>
+            <button class="clean-all" @click="sizeClearAllClick()">清空已选</button>
+            
+            <button class="duoxuan duoxiuan1" @click="sizeIsMoreChecked = !sizeIsMoreChecked">
+                <span v-if="!sizeIsMoreChecked">多选</span>
+                <span v-if="sizeIsMoreChecked">单选</span>
+            </button>
         </span>
         <div class="clean"></div>
     </div>
     <div class="shaixuan shaixuan3">
         <span class="leibie chima">颜色</span>
         <ul class="ul-item">
-            <li class="group-li" v-for="c in colorList" :key="c.colorId" @click="colorCheck(c)">
-                <span :class="c.spanClass">{{ c.colorName }}
+            <li class="group-li" v-for="c in colorList" :key="c.colorId" >
+                <span @click="colorCheck(c)" v-if="!colorIsMoreChecked"  :class="c.spanClass">{{ c.colorName }}
+                </span>
+                <span v-if="colorIsMoreChecked">
+                    <input :id="c.colorId" type="checkbox" v-model="c.spanClass.checked" :class="c.spanClass"/><label :for="c.colorId">{{c.colorName }}</label>
                 </span>
             </li>
         </ul>
         <span class="other-item">
-            <button class="clean-all">清空已选</button>
-            <button class="more more1">更多</button>
-            <button class="duoxuan duoxiuan1">多选</button>
+            <button class="clean-all"  @click="colorClearAllClick()" >清空已选</button>
+            <button class="duoxuan duoxiuan1" @click="colorIsMoreChecked = !colorIsMoreChecked">
+                <span v-if="!colorIsMoreChecked">多选</span>
+                <span v-if="colorIsMoreChecked">单选</span>
+            </button>
         </span>
         <div class="clean"></div>
     </div>
@@ -161,6 +178,9 @@ import { useRoute } from 'vue-router'
 import productApi from '@/api/product.js'
 
 const brandIsMoreChecked = ref(false)
+const kindIsMoreChecked = ref(false)
+const sizeIsMoreChecked = ref(false)
+const colorIsMoreChecked = ref(false)
 
 
 //商品数据对象
@@ -258,9 +278,20 @@ function pinPaiCheck(b){
         }
     })
     b.spanClass = {'checked':true}
-}
+    param[0] = b.brandId
+    //调用筛选方法
+    productApi.getByBrandKindSizeColor(param[0],param[1],param[2],param[3]).then(
+        response => {
+            console.log(response)
+            if(response.code === 200)
+            productList.value = reactive(response.data.result)
+            else
+            productList.value = []
+        }
+    )
+}   
 //清空已选
-function clearAllClick(){
+function brandclearAllClick(){
     brandList.value.forEach(brand => {
         brand.spanClass.checked = false
     });
@@ -269,6 +300,11 @@ function clearAllClick(){
 function kindCheck(k){
     kindList.value.forEach(kind => {
         kind.spanClass = {'checked':false}
+        if(kind === k){
+            kind.spanClass.checked = !kind.spanClass.checked
+        }else{
+            kind.spanClass.checked = false
+        }
     });
     k.spanClass = {'checked':true}
     param[1] = k.menuId
@@ -289,6 +325,11 @@ function kindCheck(k){
 function sizeCheck(s){
     sizeList.value.forEach(size => {
         size.spanClass = {'checked':false}
+        if(size === s){
+            size.spanClass.checked = !size.spanClass.checked
+        }else{
+            size.spanClass.checked = false
+        }
     });
     s.spanClass = {'checked':true}
     param[2] = s.sizeId
@@ -309,6 +350,11 @@ function sizeCheck(s){
 function colorCheck(c){
     colorList.value.forEach(color => {
         color.spanClass = {'checked':false}
+        if(color === c){
+            color.spanClass.checked = !color.spanClass.checked
+        }else{
+            color.spanClass.checked = false
+        }
     });
     c.spanClass = {'checked':true}
     param[3] = c.colorId
