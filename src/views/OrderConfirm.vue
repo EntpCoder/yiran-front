@@ -334,9 +334,8 @@
     </div>
 </template>
 
-<script>
+<script steup>
 </script>
-
 <style scoped>
 /* head css */
 *{
