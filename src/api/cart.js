@@ -8,7 +8,7 @@ export default {
   },
   deleleCartById(cartId) {
     return request({
-      url: `/cart/deleCart/${cartId}`,
+      url: `/cart/deleteCart/${cartId}`,
       method: 'delete'
     })
   },
