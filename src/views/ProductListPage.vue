@@ -250,13 +250,14 @@ function getFiltrateByKindId(kindId) {
 // 品牌是否被选中
 function pinPaiCheck(b){
     brandList.value.forEach(brand => {
+        brand.spanClass = {'checked':false}
         if(brand === b){
             brand.spanClass.checked = !brand.spanClass.checked
         }else{
             brand.spanClass.checked = false
         }
     })
-    param[0] = b.brandId
+    b.spanClass = {'checked':true}
 }
 //清空已选
 function clearAllClick(){

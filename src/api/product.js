@@ -24,9 +24,9 @@ export default {
         method: 'get'
       })
     },
-    getByBrandKindSizeColor(brandArr,kindIdArr,sizeIdArr,colorIdArr){
+    getByBrandKindSizeColor(brandArrId,kindIdArr,sizeIdArr,colorIdArr){
       return request({
-        url: `/product/getByBrandKindSizeColor?brandArr=${brandArr}&kindIdArr=${kindIdArr}&sizeIdArr=${sizeIdArr}&colorIdArr=${colorIdArr}`,
+        url: `/product/getByBrandKindSizeColor?brandIdArr=${brandArrId}&kindIdArr=${kindIdArr}&sizeIdArr=${sizeIdArr}&colorIdArr=${colorIdArr}`,
         method: 'get'
       })
     },
