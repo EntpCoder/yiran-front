@@ -5,5 +5,11 @@ export default {
         url: '/receiveAddress/getUserAddress',
         method: 'get'
     })
-  }
+},
+    getaddressCart(cartIds){
+    return request({
+        url: `/cart/userCart?${cartIds}`,
+        method: 'get'
+  })
+}
 }

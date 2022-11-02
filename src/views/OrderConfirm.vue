@@ -312,13 +312,16 @@
 import { reactive , ref,onBeforeMount} from 'vue'
 import receiveAddressApi from '@/api/receiveAddress.js'
 import { useRoute } from 'vue-router'
+import qs from 'qs'
 const route = useRoute()
 const cartIds = route.query.cartIds
 let addressList = ref([])
+let cartIdSList = ref([])
 // 页面挂载 -钩子函数
 onBeforeMount(()=>{
     getreceiveAddress()
     console.log(cartIds)
+    getaddressCart()
 })
 //请求用户默认地址
 function getreceiveAddress(){
@@ -331,6 +334,17 @@ function getreceiveAddress(){
                 else  address.isChecked = true
             });
         }
+    )
+}
+//根据购物车id批量获取购物车中的数据
+function getaddressCart(){   
+    // 格式化数组参数
+    let params = qs.stringify({cartIds},{arrayFormat:'repeat'})
+    receiveAddressApi.getaddressCart(params).then(
+        response =>{
+            // cartIdSList.value = reactive(response.data)
+            console.log(response);
+        }           
     )
 }
 //换是否为默认地址
