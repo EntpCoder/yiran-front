@@ -99,7 +99,7 @@
             </div>
             <!-- 配送、运费、颜色、尺码、数量。。 -->
             <div class="layui-row">
-              <div class="layui-col-md1">
+              <!-- <div class="layui-col-md1">
                 <div class="grid-demo grid-demo-bg1">
                   <span>配送</span>
                   <span>至&nbsp;</span>
@@ -110,13 +110,13 @@
                     <option value="">4</option>
                   </select>
                 </div>
-              </div>
-              <div class="layui-col-md1">
+              </div> -->
+              <!-- <div class="layui-col-md1">
                 <div class="grid-demo">
                   <span>&emsp;&emsp;</span>
                   <span>现在付款，最快8月28日发货，8月29日送达</span>
                 </div>
-              </div>
+              </div> -->
               <div class="layui-col-md1">
                 <div class="grid-demo grid-demo-bg1">
                   <span>运费</span>
@@ -128,8 +128,8 @@
                   <span>颜色</span>
                   <ul>
                     <li v-for="c in data.product.colorList" :key="c.colorListId">
-                      <div class="box" @click="checkColor(c)">
-                        <span>{{c.colorName}}</span>
+                      <div class="box" @click="checkColor(c)" :class="c.spanClass">
+                        <span>{{c.colorName}} </span>
                       </div>
                     </li>
                   </ul>
@@ -140,7 +140,7 @@
                   <span>尺码</span>
                   <ul>
                     <li v-for="s in data.product.sizeList" :key="s.sizeId">
-                      <div class="box" @click="checkSize(s)">
+                      <div class="box" @click="checkSize(s)" :class="s.spanClass">
                         <span>{{s.sizeType}}</span>
                       </div>
                     </li>
@@ -197,18 +197,25 @@ import RightNavigation from '@/components/RightNavigation.vue'
 import prodetailApi from "@/api/product-detail.js";
 import cartApi from "@/api/cart.js";
 import productApi from "@/api/product.js";
+
 import { ref, onBeforeMount, reactive } from 'vue'
 import { useRoute } from 'vue-router'
+// 定义颜色列表
+let colorList=ref([])
+// 定义尺码列表
+let sizeList=ref([])
+
 const route = useRoute()
 const proId = ref()
+// 获取路由中的商品id
+proId.value = route.params.id
+
 // 商品数量
 const num = ref(1)
 // 商品属性id
 const proInfoId = ref()
 // 颜色和尺寸id
 const param = []
-// 获取路由中的商品id
-proId.value = route.params.id
 // 自定义变量
 const data = reactive(
   {
@@ -219,10 +226,21 @@ onBeforeMount(() => {
   getProById();
 });
 function getProById() {
-  prodetailApi.getproductencode(proId.value).then((response) => {
+  prodetailApi.getproductencode(proId.value)
+  .then(response => {
     console.log(response);
     data.product = response.data.result;
-  });
+    // 定义colorList对象
+    colorList.value=response.data.result.colorList
+    // 初始状态：把color绑定的样式都定义为false
+    colorList.value.forEach(color=>{
+      color.spanClass={checked:false}
+    })
+    sizeList.value=response.data.result.sizeList
+    sizeList.value.forEach(size=>{
+      size.spanClass={checked:false}
+    })
+  })
 }
 // 添加购物车方法
 function addCartBtn(){
@@ -234,11 +252,14 @@ function addCartBtn(){
 // 选择尺寸
 function checkSize(size){
   param[1] = size.sizeId
+  changeColorsize(size)
   getProInfoId()
+  
 }
 // 选择颜色
 function checkColor(color){
   param[0] = color.colorId
+  changeColor(color)
   getProInfoId()
 }
 // 根据颜色尺码 获取商品属性id
@@ -250,6 +271,31 @@ function getProInfoId(){
         proInfoId.value = response.data.proInfoId
       })
   }
+}
+// 改变颜色盒子的样式
+function changeColor(c){
+  colorList.value.forEach(color=>{
+    if(color===c){
+      // 点击的盒子的样式取反
+      // color.spanClass={checked:true}
+      color.spanClass.checked=!color.spanClass.checked
+    }else{
+      // 其他没有点击的盒子，样式为关
+      color.spanClass={checked:false}
+      // color.spanClass.checked=false
+    }
+  })
+}
+// 改变尺寸盒子的样式
+function changeColorsize(s){
+  sizeList.value.forEach(size=>{
+    if(size===s){
+      // size.spanClass={checked:true}
+      size.spanClass.checked=!size.spanClass.checked
+    }else{
+      size.spanClass={checked:false}
+    }
+  })
 }
 
 </script>
@@ -570,7 +616,7 @@ function getProInfoId(){
   /* background-color: rgb(251, 201, 201); */
   float: left;
   margin: 0 auto;
-  border: 2px solid #f03867;
+  border: 1px solid #999999;
   cursor: pointer;
   margin-right: 20px;
 }
@@ -580,7 +626,7 @@ function getProInfoId(){
 }
 
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box span {
-  color: #333;
+  /* color: #333; */
   display: block;
   float: left;
   line-height: 34px;
@@ -769,5 +815,10 @@ function getProInfoId(){
 .discount-bgm-png {
   height: 100%;
   width: 100%;
+}
+
+.checked{
+  background-color: #f03867;
+  color: #fff;
 }
 </style>
