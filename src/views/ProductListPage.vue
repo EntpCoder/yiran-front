@@ -177,8 +177,8 @@ import YiRanHeader from '@/components/YiRanHeader.vue'
 import SecondHeader from '@/components/SecondHeader.vue'
 import ShopNavigation from '@/components/ShopNavigation.vue'
 import RightNavigation from '@/components/RightNavigation.vue'
-import { reactive, ref, onMounted  } from 'vue'
-import { useRoute,onBeforeRouteUpdate } from 'vue-router';
+import { reactive, ref, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
 import productApi from '@/api/product.js'
 
 const brandIsMoreChecked = ref(false)
@@ -201,14 +201,17 @@ let sizeList = ref([])
 const param = []
 
 const route = useRoute()
+const router = useRouter()
+let brandId = route.query.brandId
+let kindId = route.query.kindId
+console.log(router)
 // 当路由变化时重新加载数据
-onBeforeRouteUpdate(() => {
+watch(() => router.currentRoute.value.fullPath, () => {
     brandId = route.query.brandId
     kindId = route.query.kindId
     loadData()
- });
-let brandId = route.query.brandId
-let kindId = route.query.kindId
+}, { immediate: true }
+)
 console.log("brandId:", brandId)
 console.log("kindId:", kindId)
 // 请求商品列表数据
