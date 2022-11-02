@@ -2,7 +2,7 @@ import request from '@/utils/request'
 export default {
     getreceiveAddress(){
     return request({
-        URL: '/receiveAddress/getUserAddress',
+        url: '/receiveAddress/getUserAddress',
         method: 'get'
     })
   }

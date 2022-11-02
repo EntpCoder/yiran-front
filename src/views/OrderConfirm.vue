@@ -106,65 +106,39 @@
             <div class="box-bd">
                 <div class="m-address layui-row layui-col-space10">
                     <ul class="address-ul">
-                        <li class="layui-col-md4">
+                        <li class="layui-col-md4" v-for="a in addressList" :key="a.receiveId" @click="addressisChecked(a)">
                             <!-- 地址卡片 -->
-                            <div class="address-inner" onclick="checkAddress(this)">
+                            <div class="address-inner">
                                 <!-- 装饰上线条 -->
                                 <div class="stripe-top"></div>
                                 <div class="name-row layui-row">
                                     <div class="layui-col-md2 layui-col-md-offset1">
-                                        <p class="member-text member-name">洋</p>
+                                        <p class="member-text member-name">{{a.name}}</p>
                                     </div>
                                     <div class="layui-col-md2 layui-col-md-offset4">
                                         <a class="update-address-text">修改</a>
                                     </div>
                                     <div class="layui-col-md3">
-                                        <span class="default-address-text">默认地址</span>
+                                        <span class="default-address-text" v-if="a.default == true">默认地址</span>
+                                        <span class="default-address-text" v-if="a.default == false">其他地址</span>
                                     </div>
                                 </div>
                                 <div class="layui-row">
                                     <div class="layui-col-md2 layui-col-md-offset1">
-                                        <span class="member-text">152****1014</span>
+                                        <span class="member-text">{{a.phone}}</span>
                                     </div>
                                     <div class="layui-col-md6 layui-col-md-offset3">
-                                        <span class="member-text">周一至周日均可收货</span>
+                                        <span class="member-text" v-if="a.type == 0">周一至周日均可收货</span>
+                                        <span class="member-text" v-if="a.type == 1">周一至周五可收货</span>
+                                        <span class="member-text" v-if="a.type == 2">周六日、节假日可收货</span>
+                                    
                                     </div>
                                 </div>
                                 <div class="layui-row">
                                     <div class="member-text layui-col-md11 layui-col-md-offset1">
-                                        <i class="layui-icon-location" style="font-size: 15px; color: #626262;" />
-                                        <strong>江苏省苏州市</strong>
-                                        苏州工业园区东方文慧苑3区
-                                        <embed class="tick" width="50px" height="50px"
-                                            src="/svg/address-tick.svg" />
-                                    </div>
-                                </div>
-                                <!-- 装饰下线条 -->
-                                <div class="stripe-bottom"></div>
-                            </div>
-                        </li>
-                        <li class="layui-col-md4">
-                            <div class="address-inner" onclick="checkAddress(this)">
-                                <!-- 装饰上线条 -->
-                                <div class="stripe-top"></div>
-                                <div class="name-row layui-row">
-                                    <div class="layui-col-md2 layui-col-md-offset1">
-                                        <p class="member-text member-name">洋</p>
-                                    </div>
-                                </div>
-                                <div class="layui-row">
-                                    <div class="layui-col-md2 layui-col-md-offset1">
-                                        <span class="member-text">152****1014</span>
-                                    </div>
-                                    <div class="layui-col-md6 layui-col-md-offset3">
-                                        <span class="member-text">周一至周日均可收货</span>
-                                    </div>
-                                </div>
-                                <div class="layui-row">
-                                    <div class="member-text layui-col-md11 layui-col-md-offset1">
-                                        <i class="layui-icon-location" style="font-size: 15px; color: #626262;" />
-                                        <strong>江苏省苏州市</strong>
-                                        苏州工业园区苏州职业外包技术学院
+                                        <i class="layui-icon-location" style="font-size: 15px; color: #626262;"/>
+                                        <strong>{{a.province}}</strong>{{a.stree}}
+                                        <embed class="tick" width="50px" height="50px" src="/svg/address-tick.svg"  v-if="a.isChecked"/>
                                     </div>
                                 </div>
                                 <!-- 装饰下线条 -->
@@ -340,7 +314,7 @@ import receiveAddressApi from '@/api/receiveAddress.js'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const cartIds = route.query.cartIds
-let reactiveList = ref([])
+let addressList = ref([])
 // 页面挂载 -钩子函数
 onBeforeMount(()=>{
     getreceiveAddress()
@@ -350,10 +324,26 @@ onBeforeMount(()=>{
 function getreceiveAddress(){
     receiveAddressApi.getreceiveAddress().then(
         response =>{
-            console.log(response)
+            addressList.value = reactive(response.data.userAddressList)
+            // 给每个地址信息添加是否选中属性
+            addressList.value.forEach(address => {
+                if(!address.default) address.isChecked = false
+                else  address.isChecked = true
+            });
         }
     )
 }
+//换是否为默认地址
+function addressisChecked(address){
+    addressList.value.forEach(a =>{
+       if(address === a){
+            a.isChecked = true
+       }else{
+            a.isChecked = false
+       }
+    });
+}
+//返回数据
 </script>
 <style scoped>
 /* head css */
