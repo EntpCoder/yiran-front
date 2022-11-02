@@ -72,7 +72,7 @@
                 <span @click="sizeCheck(s)" v-if="!sizeIsMoreChecked" :class="s.spanClass">{{ s.sizeType }}
                 </span>
                 <span v-if="sizeIsMoreChecked">
-                    <input :id="s.sizeId" type="checkbox" v-model="s.spanClass.checked" :class="s.spanClass"/><label :for="s.sizeId">{{k.title }}</label>
+                    <input :id="s.sizeId" type="checkbox" v-model="s.spanClass.checked" :class="s.spanClass"/><label :for="s.sizeId">{{s.sizeType }}</label>
                 </span>
             </li>
         </ul>
@@ -294,6 +294,11 @@ function pinPaiCheck(b){
 function brandclearAllClick(){
     brandList.value.forEach(brand => {
         brand.spanClass.checked = false
+    });
+}
+function colorClearAllClick(){
+    colorList.value.forEach(color => {
+        color.spanClass.checked = false
     });
 }
 // 品类是否被选中
