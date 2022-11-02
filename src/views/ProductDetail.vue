@@ -385,7 +385,7 @@ function getProInfoId(){
 /* 左部分 */
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left {
   height: 94px;
-  width: 300px;
+  /* width: 300px; */
   /* background-color: rgb(214, 244, 254); */
   position: absolute;
   margin-top: -94px;
@@ -400,7 +400,7 @@ function getProInfoId(){
 /* 原价盒子 */
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #box500 {
   height: 70%;
-  width: 32%;
+  /* width: 32%; */
   /* background-color: rgb(255, 232, 149); */
   float: left;
   margin-top: 18px;
@@ -424,7 +424,7 @@ function getProInfoId(){
 /* 特卖价盒子 */
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box {
   height: 70%;
-  width: 60%;
+  /* width: 60%; */
   /* background-color: rgb(77, 216, 255); */
   float: left;
   margin-top: 18px;
@@ -437,7 +437,7 @@ function getProInfoId(){
 
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon .left #up-part #temaijia-box #tamaijia-box-2 {
   height: 30px;
-  width: 120px;
+  /* width: 120px; */
   background-color: #fff;
   margin-top: 6px;
   /* margin-left: 14px; */
