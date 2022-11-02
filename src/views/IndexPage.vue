@@ -9,7 +9,7 @@
       <div class="banner-box">
         <el-carousel height="460px" indicator-position="outside">
           <el-carousel-item v-for="item in tupian" :key="item.src">
-            <img :src="item" />
+            <img class="banner" :src="item" />
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -123,7 +123,7 @@ import YiRanHeader from "@/components/YiRanHeader.vue";
 import SecondHeader from "@/components/SecondHeader.vue";
 import ShopNavigation from "@/components/ShopNavigation.vue";
 import RightNavigation from "@/components/RightNavigation.vue";
-let tupian = ["https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.jpg","https://b.appsimg.com/upload/momin/2022/10/27/60/1666855175963.jpg","https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.jpg"]
+let tupian = ["https://img0.baidu.com/it/u=3315921660,2451197639&fm=253&fmt=auto&app=138&f=JPEG?w=1280&h=367", "https://b.appsimg.com/upload/momin/2022/10/27/60/1666855175963.jpg", "https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.jpg"]
 
 </script>
 <style scoped>
@@ -141,12 +141,14 @@ let tupian = ["https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.j
   width: 100%;
   height: 460px;
 }
+
 .banner-box {
   position: relative;
   margin-top: 50px;
   width: 100%;
   height: 460px;
 }
+
 .el-carousel__item h3 {
   display: flex;
   color: #475669;
@@ -154,6 +156,7 @@ let tupian = ["https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.j
   line-height: 300px;
   margin: 0;
 }
+
 /* 轮播图结束  */
 /* 主体开始 */
 .content {
@@ -323,5 +326,9 @@ let tupian = ["https://b.appsimg.com/upload/momin/2022/10/20/121/1666254648786.j
   font-weight: bold;
   float: left;
   margin: 6px 0px 0px 0px;
+}
+
+.banner {
+  width: 100%;
 }
 </style>

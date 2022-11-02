@@ -60,13 +60,13 @@
                     <div class="ui-step-icon">
                         <embed class="iconfont" width="25px" height="25px" src="/svg/step-ok.svg" />
                         <!-- <i class="ui-step-number">1</i> -->
-                        <a href="car.html" class="ui-step-text">查看购物袋</a>
+                        <router-link to="/cart" class="ui-step-text">查看购物袋</router-link>
                     </div>
                 </li>
-                <li class="ui-step-active">
+                <li class="ui-step-active ui-step-done">
                     <div class="ui-step-line">-</div>
                     <div class="ui-step-icon">
-                        <embed class="iconfont" width="25px" height="25px" src="/svg/steping-2.svg" />
+                        <embed class="iconfont" width="25px" height="25px" src="/svg/step-ok.svg" />
                         <!-- <i class="ui-step-number">2</i> -->
                         <a class="ui-step-text">第二步</a>
                     </div>
@@ -74,7 +74,7 @@
                 <li class="ui-step-end">
                     <div class="ui-step-line">-</div>
                     <div class="ui-step-icon">
-                        <embed class="iconfont" width="25px" height="25px" src="/svg/step-3.svg" />
+                        <embed class="iconfont" width="25px" height="25px" src="/svg/steping-3.svg" />
                         <a class="ui-step-text">第三步</a>
                     </div>
                 </li>
@@ -92,76 +92,17 @@
                     <span class="countdown-num countdown-num-min">11</span>分
                     <span class="countdown-num countdown-num-sec">29</span>秒
                 </span>
-                内提交订单，下单后你另有 30 分钟的支付时间。
+                内支付
                 <i class="st-tips layui-icon"
                     style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
             </div>
         </div>
         <!-- 信息盒子 -->
         <div class="m-box layui-row">
-            <!-- 收货信息 -->
-            <div class="box-hd layui-col-md12">
-                <span class="box-hd-title">收货信息</span>
-            </div>
-            <div class="box-bd">
-                <div class="m-address layui-row layui-col-space10">
-                    <ul class="address-ul">
-                        <li class="layui-col-md4" v-for="a in addressList" :key="a.receiveId" @click="addressisChecked(a)">
-                            <!-- 地址卡片 -->
-                            <div class="address-inner">
-                                <!-- 装饰上线条 -->
-                                <div class="stripe-top"></div>
-                                <div class="name-row layui-row">
-                                    <div class="layui-col-md2 layui-col-md-offset1">
-                                        <p class="member-text member-name">{{a.name}}</p>
-                                    </div>
-                                    <div class="layui-col-md2 layui-col-md-offset4">
-                                        <a class="update-address-text">修改</a>
-                                    </div>
-                                    <div class="layui-col-md3">
-                                        <span class="default-address-text" v-if="a.default == true">默认地址</span>
-                                        <span class="default-address-text" v-if="a.default == false">其他地址</span>
-                                    </div>
-                                </div>
-                                <div class="layui-row">
-                                    <div class="layui-col-md2 layui-col-md-offset1">
-                                        <span class="member-text">{{a.phone}}</span>
-                                    </div>
-                                    <div class="layui-col-md6 layui-col-md-offset3">
-                                        <span class="member-text" v-if="a.type == 0">周一至周日均可收货</span>
-                                        <span class="member-text" v-if="a.type == 1">周一至周五可收货</span>
-                                        <span class="member-text" v-if="a.type == 2">周六日、节假日可收货</span>
-                                    
-                                    </div>
-                                </div>
-                                <div class="layui-row">
-                                    <div class="member-text layui-col-md11 layui-col-md-offset1">
-                                        <i class="layui-icon-location" style="font-size: 15px; color: #626262;"/>
-                                        <strong>{{a.province}}</strong>{{a.stree}}
-                                        <embed class="tick" width="50px" height="50px" src="/svg/address-tick.svg"  v-if="a.isChecked"/>
-                                    </div>
-                                </div>
-                                <!-- 装饰下线条 -->
-                                <div class="stripe-bottom"></div>
-                            </div>
-                        </li>
-                        <li class="layui-col-md4">
-                            <!--添加地址模块 -->
-                            <div class="address-add-row address-inner">
-                                <div class="add-address layui-col-md12">
-                                    <div class="layui-icon-add-circle-fine" style="font-size: 50px; color: #626262;" />
-                                    <div>添加地址</div>
-                                </div>
-
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <!-- 商品清单 -->
             <div class="box-hd layui-col-md12">
                 <span class="box-hd-title">商品清单
-                    <a href="car.html" class="go-car layui-inline">返回购物袋修改商品</a>
+                    <!-- <a href="car.html" class="go-car layui-inline">返回购物袋修改商品</a> -->
                 </span>
             </div>
             <div class="box-bd">
@@ -174,30 +115,49 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th><strong>唯品会 发货清单</strong></th>
+                            <th><strong>依然-- 发货清单</strong></th>
                             <th>尺码</th>
                             <th>单价</th>
                             <th>数量</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="goods-item" v-for="c in cartIdSList" :key="c.cartIdSList">
+                        <tr class="goods-item">
                             <td class="product-item">
                                 <div class="product-img">
-                                    <img width="70px" height="70px" :src="c.proMainImageAddress">
+                                    <img width="70px" height="70px" src="/images/temp/测试数据1.jpg">
                                 </div>
                                 <div class="product-info">
-                                    <div class="title">{{c.proName}}</div>
+                                    <div class="title">粗跟仙女风单鞋低跟浅口通勤平底女鞋 安妮208003</div>
                                 </div>
                             </td>
                             <td>
-                                <span class="product-size">{{c.sizeType}}</span>
+                                <span class="product-size">M</span>
                             </td>
                             <td>
-                                <span class="product-price">￥{{c.sellingPrice}}</span>
+                                <span class="product-price">￥72</span>
                             </td>
                             <td>
-                                <span class="product-num">{{c.nums}}</span>
+                                <span class="product-num">2</span>
+                            </td>
+                        </tr>
+                        <tr class="goods-item">
+                            <td class="product-item">
+                                <div class="product-img">
+                                    <img width="70px" height="70px" src="/images/temp/商品2.jpg">
+                                </div>
+                                <div class="product-info">
+                                    <div class="title">2022春季新款圆领短袖韩版宽松显瘦纯色简约T恤女</div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="product-size">S</span>
+                            </td>
+                            <td>
+                                <span class="product-price">￥129</span>
+                            </td>
+                            <td>
+                                <span class="product-num">2</span>
                             </td>
                         </tr>
                     </tbody>
@@ -210,138 +170,45 @@
                                     <span class="freight-price">免运费</span>
                                 </span>
                                 <span class="this-grop-price-text">本组商品金额:
-                                    <span class="this-grop-price">￥{{data.sumPrice}}</span>
+                                    <span class="this-grop-price">￥12354565</span>
                                 </span>
                             </td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
-            <!-- 支付 -->
-            <div class="box-hd layui-col-md12">
-                <span class="box-hd-title">支付信息信息</span>
-            </div>
-            <div class="pay layui-form box-bd">
-                <div class="pay-type-text">
-                    支付方式
-                </div>
-                <div class="pay-type layui-form-item">
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <embed class="pay-svg" width="50px" height="50px" src="/svg/ali-pay.svg" />
-                            <input type="radio" name="pay" value="alipay" title="支付宝支付" checked />
-                            <embed class="pay-svg" width="50px" height="50px" src="/svg/wx-pay.svg" />
-                            <input type="radio" name="pay" value="wxpay" title="微信支付" />
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- 订单 -->
         <div class="orders-total">
             <div class="outer-div">
                 <div>
-                    <span class="dis-text layui-inline">商品金额:</span>
-                    <span class="product-price layui-inline">￥233</span>
-                </div>
-            </div>
-            <div class="outer-div">
-                <div>
-                    <span class="dis-text layui-inline">优惠券:</span>
-                    <span class="layui-inline">￥0</span>
-                </div>
-            </div>
-            <div class="outer-div">
-                <div>
-                    <span class="dis-text layui-inline">运费:</span>
-                    <span class="layui-inline">￥0</span>
-                </div>
-            </div>
-            <div class="outer-div">
-                <div>
                     <span class="dis-text pay-price-text layui-inline">待支付:</span>
-                    <span class="pay-price layui-inline">￥{{data.sumPrice}}</span>
+                    <span class="pay-price layui-inline">￥2333</span>
+                </div>
+            </div>
+            <div class="delivery outer-div">
+                <div>
+                    <span class="dis-text layui-inline">送货至：
+                        <span class="delivery-info layui-inline">苏州工业园区 东方文荟苑3区，洋，152*****014</span>
+                    </span>
                 </div>
             </div>
             <!-- 结算 -->
             <div class="orders-settlement layui-row">
                 <div class="orders-tips layui-col-md8">
-                    <span id="st-tips-text">请在倒计时结束前提交订单</span>
+                    <span id="st-tips-text">请在倒计时结束前支付</span>
                     <i class="st-tips layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a href="./confirm-order.html" class="settlement-button layui-btn layui-col-md4">提交订单</a>
+                <a href="./confirm-order.html" class="settlement-button layui-btn layui-col-md4">支付</a>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { reactive , ref,onBeforeMount,computed} from 'vue'
-import receiveAddressApi from '@/api/receiveAddress.js'
-import { useRoute } from 'vue-router'
-import qs from 'qs'
-const route = useRoute()
-const cartIds = route.query.cartIds
-let addressList = ref([])
-let cartIdSList = ref([])
-let data = reactive({ sumPrice: 0.0 })
-// 页面挂载 -钩子函数
-onBeforeMount(()=>{
-    getreceiveAddress()
-    console.log(cartIds)
-    getaddressCart()
-})
-//请求用户默认地址
-function getreceiveAddress(){
-    receiveAddressApi.getreceiveAddress().then(
-        response =>{
-            addressList.value = reactive(response.data.userAddressList)
-            // 给每个地址信息添加是否选中属性
-            addressList.value.forEach(address => {
-                if(!address.default) address.isChecked = false
-                else  address.isChecked = true
-            });
-        }
-    )
-}
-//根据购物车id批量获取购物车中的数据
-function getaddressCart(){   
-    // 格式化数组参数
-    let params = qs.stringify({cartIds},{arrayFormat:'repeat'})
-    receiveAddressApi.getaddressCart(params).then(
-        response =>{
-            console.log(response)
-            cartIdSList.value = reactive(response.data.cartList)
-            console.log(cartIdSList)
-        }           
-    )
-}
-//计算商品的价格
-data.sumPrice = computed({
-    get(){
-        let sum = 0.0
-        cartIdSList.value.forEach((cartIds) =>{
-            sum += cartIds.sellingPrice * cartIds.nums
-        })
-        console.log(sum)
-        return sum.toFixed(2)
-    },
-    set(){
 
-    }
-})
-//换是否为默认地址(小对号)
-function addressisChecked(address){
-    addressList.value.forEach(a =>{
-       if(address === a){
-            a.isChecked = true
-       }else{
-            a.isChecked = false
-       }
-    });
-}
-//返回数据
+
 </script>
 <style scoped>
 /* head css */

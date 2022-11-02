@@ -6,6 +6,7 @@ import ProductDetail from '@/views/ProductDetail.vue'
 import MemberInfoPage from '@/views/MemberInfoPage.vue'
 import ShoppingCart from '@/views/ShoppingCart.vue'
 import OrderConfirm from '@/views/OrderConfirm.vue'
+import GoPayPage from '@/views/GoPayPage.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -111,6 +112,11 @@ const router = createRouter({
       path:'/orderConfirm',
       component:OrderConfirm,
       meta:{title:'订单确认'},
+    },
+    {
+      path:'/goPay',
+      component:GoPayPage,
+      meta:{title:'订单支付'}
     }
   ]
 })
