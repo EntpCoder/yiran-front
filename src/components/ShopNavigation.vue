@@ -6,185 +6,18 @@
         <span class="fenlei">商品分类</span>
         <div class="slide">
           <ul>
-            <li>
-              <a class="a-li">各家热卖</a>
+            <li v-for="m in menu" :key="m.menuId">
+              <a class="a-li">{{ m.title }}</a>
               <div class="slide-list">
                 <div class="slide-box">
-                  <dl class="box-dl">
+                  <dl class="box-dl" v-for="secound in m.children" :key="secound.menuId">
                     <dt class="box-dt">
-                      <span>热卖小番茄:</span>
+                      <span>{{ secound.title }}></span>
                     </dt>
                     <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                    <dt class="box-dt">
-                      <span>热卖小番茄:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                    <dt class="box-dt">
-                      <span>热卖小番茄:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <a class="a-li">女鞋/男鞋/箱包</a>
-              <div class="slide-list">
-                <div class="slide-box">
-                  <dl class="box-dl">
-                    <dt class="box-dt">
-                      <span>制裁庆瑞瑞:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </li>
-            <li>
-              <a class="a-li">护肤/彩妆/个护</a>
-              <div class="slide-list">
-                <div class="slide-box">
-                  <dl class="box-dl">
-                    <dt class="box-dt">
-                      <span>制裁庆瑞瑞:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <a class="a-li">运动户外</a>
-              <div class="slide-list">
-                <div class="slide-box">
-                  <dl class="box-dl">
-                    <dt class="box-dt">
-                      <span>制裁庆瑞瑞:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </li>
-            <li>
-              <a class="a-li">家电数码</a>
-              <div class="slide-list">
-                <div class="slide-box">
-                  <dl class="box-dl">
-                    <dt class="box-dt">
-                      <span>制裁庆瑞瑞:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <a class="a-li">母婴童装</a>
-              <div class="slide-list">
-                <div class="slide-box">
-                  <dl class="box-dl">
-                    <dt class="box-dt">
-                      <span>制裁庆瑞瑞:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <a class="a-li">手表配饰</a>
-              <div class="slide-list">
-                <div class="slide-box">
-                  <dl class="box-dl">
-                    <dt class="box-dt">
-                      <span>制裁庆瑞瑞:</span>
-                    </dt>
-                    <dd class="box-dd">
-                      <a href="#" class="box-dd-a">22222</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
-                      <a href="#" class="box-dd-a">wangbanda</a>
+                      <router-link v-for="three in secound.children" :key="three.menuId" :to="`/productList?kindId=${three.menuId}`" class="box-dd-a">
+                        {{ three.title }}
+                      </router-link>
                     </dd>
                   </dl>
                 </div>
@@ -210,6 +43,17 @@
 </template>
 
 <script setup>
+import { ref, onBeforeMount } from 'vue'
+import menuApi from '@/api/menu.js'
+const menu = ref([])
+onBeforeMount(() => {
+  getMenu()
+})
+function getMenu() {
+  menuApi.getMenu().then(response => {
+    menu.value = response.data.multiMenus
+  })
+}
 </script>
 
 <style scoped>
@@ -219,12 +63,14 @@
   height: 43px;
   border-bottom: 2px solid rgb(200, 198, 198);
 }
+
 .nav .nav-center {
   width: 1170px;
   height: 43px;
   margin: 0 auto;
   /* border: 1px solid; */
 }
+
 .nav .nav-center .caidan {
   background-color: #f10180;
   width: 156px;
@@ -234,11 +80,13 @@
   float: left;
   color: rgb(253, 253, 253);
 }
+
 .nav .nav-center .caidan .caidan-a {
   text-decoration: none;
   font-size: 16px;
   color: rgb(255, 253, 253);
 }
+
 .nav .nav-center .caidan .fenlei {
   display: block;
   width: 70px;
@@ -261,10 +109,12 @@
   font-size: 10px;
   left: 11.5%;
 }
+
 .nav .nav-center .caidan:hover .slide {
   display: block;
 }
-.slide > ul > li {
+
+.slide>ul>li {
   height: 42px;
   line-height: 50px;
   /* padding-left: 30px; */
@@ -272,14 +122,17 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
 }
-.slide > ul > li > a {
+
+.slide>ul>li>a {
   font-size: 14px;
 }
+
 .slide i {
   float: right;
   color: #f10180;
   font-size: 14px;
 }
+
 .slide-list {
   z-index: 750;
   display: none;
@@ -295,9 +148,11 @@
   box-shadow: 0 8px 16px #e0e0e0(0, 0, 0, 0.18);
   padding-top: 2px;
 }
-.slide li:hover > .slide-list {
+
+.slide li:hover>.slide-list {
   display: block;
 }
+
 /* 筛选框开始 */
 .slide-list .slide-box {
   /* background-color: aqua; */
@@ -305,6 +160,7 @@
   height: 95%;
   margin: auto;
 }
+
 .box-dl {
   /* background-color: burlywood; */
   width: 100%;
@@ -315,6 +171,7 @@
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
+
 .box-dt {
   /* background-color: chartreuse; */
   width: 20%;
@@ -327,24 +184,29 @@
   font-weight: bold;
   overflow: hidden;
 }
-.box-dt > span {
+
+.box-dt>span {
   margin: auto;
 }
+
 .box-dd {
   /* background-color: #9F9F9F; */
   width: 90%;
   height: 30px;
   float: left;
 }
+
 .box-dd-a {
   display: block;
   text-align: left;
   float: left;
   margin: -12px 0px 5px 10px;
 }
+
 .box-dd-a:hover {
   color: #f10180;
 }
+
 /* 筛选框结束 */
 /* ============导航推荐，三者疯抢 唯品快抢======================= */
 .nav .nav-center .nav-b {
