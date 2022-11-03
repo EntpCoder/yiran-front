@@ -47,9 +47,9 @@
                     <span class="qiandao-name">签到有礼</span>
                 </a>
                 <router-link to="/memberInfo" class="order">我的订单</router-link>
-                <a href="./pages/collection.html" class="TeMai">
+                <router-link to="/collection" class="TeMai">
                     <span class="temai">我的收藏</span>
-                </a>
+                </router-link>
                 <a href="" class="club">会员俱乐部</a>
                 <a href="" class="kefu">客户服务</a>
             </div>
