@@ -27,9 +27,9 @@
         <div class="proId-and-collect">
           <span>商品编码：{{ data.product.proNum }}</span>
           <div class="pro-collect">
-            <img v-if="iscollect" src="/svg/collect-start.svg" alt="" />
+            <img v-if="iscollect" src="/svg/collect-start.svg"/>
             <img v-else src="/svg/start2.svg" class="collectedstart">
-            <span @click="iscollected" :class="collect" class="collected">收藏商品</span>
+            <span @click="iscollected(iscollect)" :class="iscollect" class="collected">收藏商品</span>
           </div>
         </div>
       </div>
@@ -290,8 +290,15 @@ function changeColorsize(s){
   })
 }
 // 收藏星星
-let iscollect=0
-
+let iscollect=true
+// function collected(iscollect){
+//   if(iscollect){
+//     iscollect.checked=!iscollect.checked
+//     iscollect=!iscollect
+//   }else{
+//     iscollect=fa
+//   }
+// }
 </script>
 
 <style scoped>
@@ -418,7 +425,7 @@ let iscollect=0
 
 /* 打折券 */
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .discount-coupon {
-  height: 94px;
+  /* height: 94px; */
   /* width: 100%; */
   float: top;
   /* background-color: rgb(209, 62, 62); */
