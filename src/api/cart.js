@@ -14,7 +14,7 @@ export default {
   },
   updataNums(cart){
     return request({
-      url: `/cart/updataNums`,
+      url: `/cart/updateNums`,
       method: 'post',
       data:{cartId:cart.cartId,nums:cart.nums}
     })
