@@ -8,28 +8,16 @@
     <!-- ----------------------------图片展示和商品参数 -->
     <div class="layui-row">
       <!-- 左边 -->
-      <div class="layui-col-md5">
+      <div class="layui-col-md5" >
         <!-- 大图片 -->
-        <img class="mainImg" src="/images/temp/pro-detail-image1.jpg" />
+        <img class="mainImg" :src="data.product.proMainImageAddress" />
         <!-- 小图片 -->
         <div class="layui-row layui-col-space5">
           <div class="layui-col-md1">
             <span><img src="/svg/箭头 -左.svg" /></span>
           </div>
-          <div class="layui-col-md2">
-            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
-          </div>
-          <div class="layui-col-md2">
-            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
-          </div>
-          <div class="layui-col-md2">
-            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
-          </div>
-          <div class="layui-col-md2">
-            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
-          </div>
-          <div class="layui-col-md2">
-            <img src="/images/temp/pro-detail-image1.jpg" height="100%" width="100%" />
+          <div class="layui-col-md2" v-for="p in data.product.proImageList" :key="p">
+            <img class="smallImg" :src="p" @click="checkPicture(p)" :class="p.clickThePicture"/>
           </div>
           <div class="layui-col-md1">
             <span><img src="/svg/箭头 -右.svg" /></span>
@@ -39,8 +27,9 @@
         <div class="proId-and-collect">
           <span>商品编码：{{ data.product.proNum }}</span>
           <div class="pro-collect">
-            <img src="/svg/collect-start.svg" alt="" />
-            <span>收藏商品</span>
+            <img v-if="iscollect" src="/svg/collect-start.svg" alt="" />
+            <img v-else src="/svg/start2.svg" class="collectedstart">
+            <span @click="iscollected" :class="collect" class="collected">收藏商品</span>
           </div>
         </div>
       </div>
@@ -204,6 +193,8 @@ import { useRoute } from 'vue-router'
 let colorList=ref([])
 // 定义尺码列表
 let sizeList=ref([])
+// 定义图片列表
+let proImageList=ref([])
 
 const route = useRoute()
 const proId = ref()
@@ -240,6 +231,7 @@ function getProById() {
     sizeList.value.forEach(size=>{
       size.spanClass={checked:false}
     })
+    proImageList.value=response.data.result.proImageList
   })
 }
 // 添加购物车方法
@@ -297,6 +289,8 @@ function changeColorsize(s){
     }
   })
 }
+// 收藏星星
+let iscollect=0
 
 </script>
 
@@ -334,8 +328,12 @@ function changeColorsize(s){
   opacity: 0.5;
   height: 69px;
   cursor: pointer;
-}
 
+}
+.product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1:last-child{
+  position: absolute;
+  margin-left: 93%;
+}
 .product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1 img {
   margin-top: 17px;
 }
@@ -354,6 +352,7 @@ function changeColorsize(s){
   font-size: x-small;
   display: block;
   float: left;
+
 }
 
 .product-container .layui-row .layui-col-md5 .proId-and-collect .pro-collect {
@@ -820,5 +819,17 @@ function changeColorsize(s){
 .checked{
   background-color: #f03867;
   color: #fff;
+}
+.smallImg{
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.collectedstart{
+  height: 16px;
+  width: 16px;
+}
+.collected{
+  cursor: pointer;
 }
 </style>

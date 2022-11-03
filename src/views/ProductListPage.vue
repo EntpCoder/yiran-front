@@ -40,7 +40,7 @@
 
             <button class="duoxuan duoxiuan1" @click="brandIsMoreChecked = !brandIsMoreChecked">
                 <span v-if="!brandIsMoreChecked">多选</span>
-                <span v-if="brandIsMoreChecked">单选</span>
+                <span v-if="brandIsMoreChecked">确定</span>
             </button>
         </span>
         <div class="clean"></div>
@@ -62,7 +62,7 @@
 
             <button class="duoxuan duoxiuan1" @click="kindIsMoreChecked = !kindIsMoreChecked">
                 <span v-if="!kindIsMoreChecked">多选</span>
-                <span v-if="kindIsMoreChecked">单选</span>
+                <span v-if="kindIsMoreChecked">确定</span>
             </button>
         </span>
         <div class="clean"></div>
@@ -84,7 +84,7 @@
 
             <button class="duoxuan duoxiuan1" @click="sizeIsMoreChecked = !sizeIsMoreChecked">
                 <span v-if="!sizeIsMoreChecked">多选</span>
-                <span v-if="sizeIsMoreChecked">单选</span>
+                <span v-if="sizeIsMoreChecked">确定</span>
             </button>
         </span>
         <div class="clean"></div>
@@ -105,7 +105,7 @@
             <button class="clean-all" @click="colorClearAllClick()">清空已选</button>
             <button class="duoxuan duoxiuan1" @click="colorIsMoreChecked = !colorIsMoreChecked">
                 <span v-if="!colorIsMoreChecked">多选</span>
-                <span v-if="colorIsMoreChecked">单选</span>
+                <span v-if="colorIsMoreChecked">确定</span>
             </button>
         </span>
         <div class="clean"></div>
@@ -256,14 +256,22 @@ function getFiltrateByBrandId(brandId) {
     param[3] = []
     productApi.getFiltrateByBrandId(brandId).then(
         response => {
-            console.log(response)
             brandList.value = reactive(response.data.result.brandList)
             brandList.value.forEach((brand) => {
                 brand.spanClass = { checked: false }
             })
             kindList.value = reactive(response.data.result.kindList)
+            kindList.value.forEach((kind) => {
+                kind.spanClass = { checked: false }
+            })
             sizeList.value = reactive(response.data.result.sizeList)
+            sizeList.value.forEach((size) => {
+                size.spanClass = { checked: false }
+            })
             colorList.value = reactive(response.data.result.colorList)
+            colorList.value.forEach((color) => {
+                color.spanClass = { checked: false }
+            })
         }
     )
 }
@@ -274,11 +282,22 @@ function getFiltrateByKindId(kindId) {
     param[3] = []
     productApi.getFiltrateByKindId(kindId).then(
         response => {
-            console.log(response)
             brandList.value = reactive(response.data.result.brandList)
+            brandList.value.forEach((brand) => {
+                brand.spanClass = { checked: false }
+            })
             kindList.value = reactive(response.data.result.kindList)
+            kindList.value.forEach((kind) => {
+                kind.spanClass = { checked: false }
+            })
             sizeList.value = reactive(response.data.result.sizeList)
+            sizeList.value.forEach((size) => {
+                size.spanClass = { checked: false }
+            })
             colorList.value = reactive(response.data.result.colorList)
+            colorList.value.forEach((color) => {
+                color.spanClass = { checked: false }
+            })
         }
     )
 }
