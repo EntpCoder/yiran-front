@@ -22,7 +22,7 @@ export default {
     },
     chaxun(proId){
         return request({
-            url: `/collections/chaxun/?proId=${proId}`,
+            url: `/collections/chaxun?proId=${proId}`,
             method: 'get'
         })
     }

@@ -225,7 +225,7 @@ onBeforeMount(() => {
 //检查用户是否登录，登录用户是否收藏商品
 function chaxun() {
   if (cookie.get('user_token')) {
-    collectionApi.chaxun()
+    collectionApi.chaxun(proId.value)
       .then(response => {
         console.log(response.data)
         if (response.data.iscollect) {
