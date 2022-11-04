@@ -26,10 +26,11 @@
         <!-- 商品编码 & 商品收藏 -->
         <div class="proId-and-collect">
           <span>商品编码：{{ data.product.proNum }}</span>
-          <div class="pro-collect">
-            <img v-if="iscollect" src="/svg/collect-start.svg"/>
-            <img v-else src="/svg/start2.svg" class="collectedstart">
-            <span @click="iscollected(iscollect)" :class="iscollect" class="collected">收藏商品</span>
+          <div class="pro-collect" @click="iscollected">
+            <img v-if="!iscollect" src="/svg/collect-start.svg"/>
+            <img  v-if="iscollect" src="/svg/start2.svg" class="collectedstart">
+            <span v-if="iscollect" class="collected">已收藏</span>
+            <span v-if="!iscollect"  class="collected">收藏商品</span>
           </div>
         </div>
       </div>
@@ -186,6 +187,8 @@ import RightNavigation from '@/components/RightNavigation.vue'
 import prodetailApi from "@/api/product-detail.js";
 import cartApi from "@/api/cart.js";
 import productApi from "@/api/product.js";
+import cookie from "js-cookie"
+import collectionApi from '@/api/collections.js'
 
 import { ref, onBeforeMount, reactive } from 'vue'
 import { useRoute } from 'vue-router'
@@ -195,6 +198,8 @@ let colorList=ref([])
 let sizeList=ref([])
 // 定义图片列表
 let proImageList=ref([])
+//收藏初始为false
+let iscollect= ref(false) 
 
 const route = useRoute()
 const proId = ref()
@@ -215,7 +220,22 @@ const data = reactive(
 // 1.根据商品id获取商品信息
 onBeforeMount(() => {
   getProById();
+  chaxun();
 });
+//检查
+function chaxun(){
+  if (cookie.get('user_token')){
+    collectionApi.chaxun()
+      .then(response=>{
+        if(response.data.iscollect === true){
+          iscollect.value = true
+        }
+        else{
+          iscollect.value = false
+        }
+      })
+  }
+}
 function getProById() {
   prodetailApi.getproductencode(proId.value)
   .then(response => {
@@ -289,16 +309,19 @@ function changeColorsize(s){
     }
   })
 }
-// 收藏星星
-let iscollect=true
-// function collected(iscollect){
-//   if(iscollect){
-//     iscollect.checked=!iscollect.checked
-//     iscollect=!iscollect
-//   }else{
-//     iscollect=fa
-//   }
-// }
+ //点击收藏
+  function iscollected(){
+  iscollect.value = !iscollect.value
+  if(iscollect.value){
+    collectionApi.addCollection(proId.value).then(response=>{
+      console.log(response)
+    })
+  }else{
+    collectionApi.unAddCollection(proId.value).then(response=>{
+      console.log(response)
+    })
+  }
+}
 </script>
 
 <style scoped>
