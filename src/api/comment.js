@@ -1,13 +1,13 @@
 import request from '@/utils/request'
 export default{
     getCommentByUserId(userId){
-        request({
+        return request({
             url:`/comments/selectByUserId/${userId}`,
             method:'get'
         })
     },
     getCommentByproId(proId){
-        request({
+        return request({
             url:`/comments/selectbyproId/${proId}`,
             method:'get'
         })
