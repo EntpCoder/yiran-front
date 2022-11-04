@@ -250,7 +250,7 @@
             <div class="outer-div">
                 <div>
                     <span class="dis-text layui-inline">优惠券:</span>
-                    <span class="layui-inline">￥{{couponDiscountAmount}}</span>
+                    <span class="layui-inline">￥{{ couponDiscountAmount }}</span>
                 </div>
             </div>
             <div class="outer-div">
@@ -272,8 +272,10 @@
                     <i class="st-tips layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a href="javascript:;" class="settlement-button layui-btn layui-col-md4"
-                    @click="getsubmitOrder">提交订单</a>
+                <a href="javascript:;" class="settlement-button layui-btn layui-col-md4" @click.once="getsubmitOrder">
+                    <span v-if="!isLoad">提交订单</span>
+                    <span v-if="isLoad">加载中...</span>
+                </a>
             </div>
         </div>
     </div>
@@ -284,11 +286,14 @@ import { reactive, ref, onBeforeMount, computed } from 'vue'
 import receiveAddressApi from '@/api/receiveAddress.js'
 import couponApi from '@/api/coupon.js'
 import orderApi from '@/api/order.js'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import qs from 'qs'
 const route = useRoute()
+const router = useRouter()
 const cartIds = route.query.cartIds
+// 地址集合
 let addressList = ref([])
+// 购物车id
 let cartIdSList = ref([])
 // 被选中的地址id
 let checkAddressId
@@ -296,7 +301,9 @@ let checkAddressId
 let receiveCouponId = "1576928055602536450"
 // 优惠券优惠金额
 let couponDiscountAmount = ref(0)
-let data = reactive({ sumPrice: 0.0,payPrice:0.0 })
+// 提交订单时是否在加载
+let isLoad = ref(false)
+let data = reactive({ sumPrice: 0.0, payPrice: 0.0 })
 // 页面挂载 -钩子函数
 onBeforeMount(() => {
     // 加载地用户址
@@ -304,7 +311,7 @@ onBeforeMount(() => {
     // 获取购物车中的商品
     getaddressCart()
     // 获取用户使用的优惠券
-    if(receiveCouponId){
+    if (receiveCouponId) {
         getCoupon()
     }
 })
@@ -335,9 +342,9 @@ function getaddressCart() {
     )
 }
 // 获取优惠金额
-function getCoupon(){
+function getCoupon() {
     couponApi.getCouponDiscountAmount(receiveCouponId)
-        .then(response =>{
+        .then(response => {
             couponDiscountAmount.value = response.data.discountAmount
         })
 }
@@ -356,10 +363,10 @@ data.sumPrice = computed({
 })
 // 支付金额
 data.payPrice = computed({
-    get(){
-        return (data.sumPrice-couponDiscountAmount.value).toFixed(2)
+    get() {
+        return (data.sumPrice - couponDiscountAmount.value).toFixed(2)
     },
-    set(){
+    set() {
 
     }
 })
@@ -378,16 +385,18 @@ function addressisChecked(address) {
 function getsubmitOrder() {
     // 格式化数组参数
     let params = qs.stringify({ cartIds }, { arrayFormat: 'repeat' })
-    if(receiveCouponId){
-        orderApi.createOrderWithCoupon(checkAddressId,receiveCouponId,params)
-        .then(response=>{
-            console.log(response)
-        })
-    }else{
-        orderApi.createOrder(checkAddressId,params)
-        .then(response=>{
-            console.log(response)
-        })
+    if (receiveCouponId) {
+        isLoad.value = true
+        orderApi.createOrderWithCoupon(checkAddressId, receiveCouponId, params)
+            .then(response => {
+                router.push({ path: '/goPay', query: { orderId: response.data.orderId } })
+            })
+    } else {
+        isLoad.value = true
+        orderApi.createOrder(checkAddressId, params)
+            .then(response => {
+                router.push({ path: '/goPay', query: { orderId: response.data.orderId } })
+            })
     }
 
 }
