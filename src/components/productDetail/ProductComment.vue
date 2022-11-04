@@ -121,9 +121,31 @@
   </div>
 </template>
   
-<script>
-export default {
+<script setup>
+import commentApi from "@/api/comment.js";
+import { ref,onMounted,reactive } from 'vue'
+import { useRoute } from 'vue-router'
+// 钩子函数，进入页面就要执行的方法，里面的方法事需要执行的
+onMounted(() => {
+  getCommentByproId()
+})
 
+// 评论对象
+let comments =ref([])
+// 获取路由中的商品id
+const route = useRoute()
+const proId = ref()
+proId.value = route.query.proId
+// 测试是否拿到商品id
+// alert(proId.value)
+// 根据商品id获取所有评论的方法
+function getCommentByproId(){
+  commentApi.getCommentByproId(proId.value).then(
+    response=>{
+      console.log(response)
+      comments.value=reactive(response.data.ok)
+    }
+  )
 }
 </script>
   

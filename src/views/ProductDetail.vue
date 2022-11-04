@@ -8,7 +8,7 @@
     <!-- ----------------------------图片展示和商品参数 -->
     <div class="layui-row">
       <!-- 左边 -->
-      <div class="layui-col-md5" >
+      <div class="layui-col-md5">
         <!-- 大图片 -->
         <img class="mainImg" :src="data.product.proMainImageAddress" />
         <!-- 小图片 -->
@@ -17,7 +17,7 @@
             <span><img src="/svg/箭头 -左.svg" /></span>
           </div>
           <div class="layui-col-md2" v-for="p in data.product.proImageList" :key="p">
-            <img class="smallImg" :src="p" @click="checkPicture(p)" :class="p.clickThePicture"/>
+            <img class="smallImg" :src="p" @click="checkPicture(p)" :class="p.clickThePicture" />
           </div>
           <div class="layui-col-md1">
             <span><img src="/svg/箭头 -右.svg" /></span>
@@ -27,10 +27,10 @@
         <div class="proId-and-collect">
           <span>商品编码：{{ data.product.proNum }}</span>
           <div class="pro-collect" @click="iscollected">
-            <img v-if="!iscollect" src="/svg/collect-start.svg"/>
-            <img  v-if="iscollect" src="/svg/start2.svg" class="collectedstart">
+            <img v-if="!iscollect" src="/svg/collect-start.svg" />
+            <img v-if="iscollect" src="/svg/start2.svg" class="collectedstart">
             <span v-if="iscollect" class="collected">已收藏</span>
-            <span v-if="!iscollect"  class="collected">收藏商品</span>
+            <span v-if="!iscollect" class="collected">收藏商品</span>
           </div>
         </div>
       </div>
@@ -119,7 +119,7 @@
                   <ul>
                     <li v-for="c in data.product.colorList" :key="c.colorListId">
                       <div class="box" @click="checkColor(c)" :class="c.spanClass">
-                        <span>{{c.colorName}} </span>
+                        <span>{{ c.colorName }} </span>
                       </div>
                     </li>
                   </ul>
@@ -131,7 +131,7 @@
                   <ul>
                     <li v-for="s in data.product.sizeList" :key="s.sizeId">
                       <div class="box" @click="checkSize(s)" :class="s.spanClass">
-                        <span>{{s.sizeType}}</span>
+                        <span>{{ s.sizeType }}</span>
                       </div>
                     </li>
                   </ul>
@@ -141,7 +141,7 @@
                 <div class="grid-demo shuliang">
                   <span>数量</span>
                   <div class="pro-num"><span class="sub" @click="num--">-</span></div>
-                  <input type="text" v-model="num"/>
+                  <input type="text" v-model="num" />
                   <div class="pro-num"><span @click="num++">+</span></div>
                 </div>
               </div>
@@ -170,7 +170,7 @@
         <ul>
           <router-link to="/productDetail/explainSize/123">规格参数</router-link>
           <router-link to="/productDetail/show">商品展示</router-link>
-          <router-link to="/productDetail/comment">全部评价</router-link>
+          <router-link :to="{ path: '/productDetail/comment', query: { proId: proId } }">全部评价</router-link>
           <router-link to="/productDetail/consultation">商品咨询</router-link>
         </ul>
       </div>
@@ -190,16 +190,16 @@ import productApi from "@/api/product.js";
 import cookie from "js-cookie"
 import collectionApi from '@/api/collections.js'
 
-import { ref, onBeforeMount, reactive} from 'vue'
+import { ref, onBeforeMount, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 // 定义颜色列表
-let colorList=ref([])
+let colorList = ref([])
 // 定义尺码列表
-let sizeList=ref([])
+let sizeList = ref([])
 // 定义图片列表
-let proImageList=ref([])
+let proImageList = ref([])
 //收藏初始为false
-let iscollect= ref(false) 
+let iscollect = ref(false)
 
 const route = useRoute()
 const proId = ref()
@@ -223,14 +223,14 @@ onBeforeMount(() => {
   chaxun()
 })
 //检查用户是否登录，登录用户是否收藏商品
-function chaxun(){
-  if (cookie.get('user_token')){
+function chaxun() {
+  if (cookie.get('user_token')) {
     collectionApi.chaxun()
-      .then(response=>{
-        if(response.data.iscollect == true){
+      .then(response => {
+        if (response.data.iscollect == true) {
           iscollect.value = false
         }
-        else{
+        else {
           iscollect.value = true
         }
       })
@@ -238,89 +238,76 @@ function chaxun(){
 }
 function getProById() {
   prodetailApi.getproductencode(proId.value)
-  .then(response => {
-    console.log(response);
-    data.product = response.data.result;
-    // 定义colorList对象
-    colorList.value=response.data.result.colorList
-    // 初始状态：把color绑定的样式都定义为false
-    colorList.value.forEach(color=>{
-      color.spanClass={checked:false}
+    .then(response => {
+      console.log(response);
+      data.product = response.data.result;
+      // 定义colorList对象
+      colorList.value = response.data.result.colorList
+      // 初始状态：把color绑定的样式都定义为false
+      colorList.value.forEach(color => {
+        color.spanClass = { checked: false }
+      })
+      sizeList.value = response.data.result.sizeList
+      sizeList.value.forEach(size => {
+        size.spanClass = { checked: false }
+      })
+      proImageList.value = response.data.result.proImageList
     })
-    sizeList.value=response.data.result.sizeList
-    sizeList.value.forEach(size=>{
-      size.spanClass={checked:false}
-    })
-    proImageList.value=response.data.result.proImageList
-  })
 }
 // 添加购物车方法
-function addCartBtn(){
-  cartApi.addCart(proInfoId.value,num.value)
-    .then(response=>{
+function addCartBtn() {
+  cartApi.addCart(proInfoId.value, num.value)
+    .then(response => {
       console.log(response)
     })
 }
 // 选择尺寸
-function checkSize(size){
+function checkSize(size) {
   param[1] = size.sizeId
   changeColorsize(size)
   getProInfoId()
-  
+
 }
 // 选择颜色
-function checkColor(color){
+function checkColor(color) {
   param[0] = color.colorId
   changeColor(color)
   getProInfoId()
 }
 // 根据颜色尺码 获取商品属性id
-function getProInfoId(){
+function getProInfoId() {
   // 当尺寸和颜色都选择时调用 查询商品属性id
-  if(param[0] && param[1]){
-    productApi.getProductInfoId(proId.value,param[0],param[1])
-      .then(response=>{
+  if (param[0] && param[1]) {
+    productApi.getProductInfoId(proId.value, param[0], param[1])
+      .then(response => {
         proInfoId.value = response.data.proInfoId
       })
   }
 }
 // 改变颜色盒子的样式
-function changeColor(c){
-  colorList.value.forEach(color=>{
-    if(color===c){
+function changeColor(c) {
+  colorList.value.forEach(color => {
+    if (color === c) {
       // 点击的盒子的样式取反
       // color.spanClass={checked:true}
-      color.spanClass.checked=!color.spanClass.checked
-    }else{
+      color.spanClass.checked = !color.spanClass.checked
+    } else {
       // 其他没有点击的盒子，样式为关
-      color.spanClass={checked:false}
+      color.spanClass = { checked: false }
       // color.spanClass.checked=false
     }
   })
 }
 // 改变尺寸盒子的样式
-function changeColorsize(s){
-  sizeList.value.forEach(size=>{
-    if(size===s){
+function changeColorsize(s) {
+  sizeList.value.forEach(size => {
+    if (size === s) {
       // size.spanClass={checked:true}
-      size.spanClass.checked=!size.spanClass.checked
-    }else{
-      size.spanClass={checked:false}
+      size.spanClass.checked = !size.spanClass.checked
+    } else {
+      size.spanClass = { checked: false }
     }
   })
-}
- //点击收藏
-  function iscollected(){
-  iscollect.value = !iscollect.value
-  if(iscollect.value){
-    collectionApi.addCollection(proId.value).then(response=>{
-      console.log(response)
-    })
-  }else{
-    collectionApi.unAddCollection(proId.value).then(response=>{
-      console.log(response)
-    })
-  }
 }
 </script>
 
@@ -360,10 +347,12 @@ function changeColorsize(s){
   cursor: pointer;
 
 }
-.product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1:last-child{
+
+.product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1:last-child {
   position: absolute;
   margin-left: 93%;
 }
+
 .product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1 img {
   margin-top: 17px;
 }
@@ -621,6 +610,7 @@ function changeColorsize(s){
   margin-right: 20px;
   float: left;
 }
+
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo select {
   border: 1px #999999 solid;
   height: 32px;
@@ -636,9 +626,11 @@ function changeColorsize(s){
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li {
   font-style: none;
 }
-.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li:first-child{
+
+.product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li:first-child {
   margin-right: auto;
 }
+
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box {
   height: 32px;
   width: 129px;
@@ -846,20 +838,23 @@ function changeColorsize(s){
   width: 100%;
 }
 
-.checked{
+.checked {
   background-color: #f03867;
   color: #fff;
 }
-.smallImg{
+
+.smallImg {
   width: 100%;
   height: 100%;
   cursor: pointer;
 }
-.collectedstart{
+
+.collectedstart {
   height: 16px;
   width: 16px;
 }
-.collected{
+
+.collected {
   cursor: pointer;
 }
 </style>
