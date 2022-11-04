@@ -169,7 +169,7 @@
         <ul>
           <router-link to="/productDetail/explainSize/123">规格参数</router-link>
           <router-link to="/productDetail/show">商品展示</router-link>
-          <router-link to="/productDetail/comment">全部评价</router-link>
+          <router-link :to="{path:'/productDetail/comment',query:{proId:proId}}">全部评价</router-link>
           <router-link to="/productDetail/consultation">商品咨询</router-link>
         </ul>
       </div>
@@ -291,14 +291,7 @@ function changeColorsize(s){
 }
 // 收藏星星
 let iscollect=true
-// function collected(iscollect){
-//   if(iscollect){
-//     iscollect.checked=!iscollect.checked
-//     iscollect=!iscollect
-//   }else{
-//     iscollect=fa
-//   }
-// }
+
 </script>
 
 <style scoped>
