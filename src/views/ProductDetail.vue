@@ -150,10 +150,10 @@
                   <!-- 价格按钮 -->
                   <div class="pay-for-it-box" @click="addCartBtn">
                     <span>特卖价&nbsp;抢&nbsp;></span>
-                    <span>{{ data.product.proPrice }}</span>
+                    <span>{{ data.product.sellingPrice }}</span>
                     <span>￥</span>
                     <div class="lightpink-box">
-                      <del>￥{{ data.product.sellingPrice }}</del>
+                      <del>￥{{ data.product.proPrice }}</del>
                     </div>
                   </div>
                 </div>
