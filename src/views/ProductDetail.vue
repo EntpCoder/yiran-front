@@ -190,7 +190,7 @@ import productApi from "@/api/product.js";
 import cookie from "js-cookie"
 import collectionApi from '@/api/collections.js'
 
-import { ref, onBeforeMount, reactive } from 'vue'
+import { ref, onBeforeMount, reactive} from 'vue'
 import { useRoute } from 'vue-router'
 // 定义颜色列表
 let colorList=ref([])
@@ -219,19 +219,19 @@ const data = reactive(
   });
 // 1.根据商品id获取商品信息
 onBeforeMount(() => {
-  getProById();
-  chaxun();
-});
-//检查
+  getProById()
+  chaxun()
+})
+//检查用户是否登录，登录用户是否收藏商品
 function chaxun(){
   if (cookie.get('user_token')){
     collectionApi.chaxun()
       .then(response=>{
-        if(response.data.iscollect === true){
-          iscollect.value = true
+        if(response.data.iscollect == true){
+          iscollect.value = false
         }
         else{
-          iscollect.value = false
+          iscollect.value = true
         }
       })
   }
