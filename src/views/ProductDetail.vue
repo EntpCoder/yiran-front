@@ -227,11 +227,12 @@ function chaxun() {
   if (cookie.get('user_token')) {
     collectionApi.chaxun()
       .then(response => {
-        if (response.data.iscollect == true) {
-          iscollect.value = false
+        console.log(response.data)
+        if (response.data.iscollect) {
+          iscollect.value = true
         }
         else {
-          iscollect.value = true
+          iscollect.value = false
         }
       })
   }
@@ -308,6 +309,19 @@ function changeColorsize(s) {
       size.spanClass = { checked: false }
     }
   })
+}
+ //点击收藏
+ function iscollected(){
+  iscollect.value = !iscollect.value
+  if(iscollect.value){
+    collectionApi.addCollection(proId.value).then(response=>{
+      console.log(response)
+    })
+  }else{
+    collectionApi.unAddCollection(proId.value).then(response=>{
+      console.log(response)
+    })
+  }
 }
 </script>
 
