@@ -11,5 +11,11 @@ export default {
             url: `/order/createOrder?receiveId=${addressId}&receiveCouponId=${receiveCouponId}&${cartIds}`,
             method: 'get',
         })
+    },
+    getOrderInfo(orderId){
+        return request({
+            url: `/order/getOrderAndDetail/${orderId}`,
+            method: 'get',
+        })
     }
 }
