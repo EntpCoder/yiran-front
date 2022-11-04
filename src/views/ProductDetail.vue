@@ -281,7 +281,7 @@ function getProInfoId() {
   if (param[0] && param[1]) {
     productApi.getProductInfoId(proId.value, param[0], param[1])
       .then(response => {
-        proInfoId.value = response.data.proInfoId
+        proInfoId.value = response.data.result.proAttributeInfoId
       })
   }
 }
