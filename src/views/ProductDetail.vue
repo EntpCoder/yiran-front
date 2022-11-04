@@ -57,14 +57,14 @@
                 <div id="up-part">
                   <div id="box500">
                     <span>￥</span>
-                    <span>{{ data.product.sellingPrice }}</span>
+                    <span>{{ data.product.proPrice }}</span>
                   </div>
                   <div id="temaijia-box">
                     <img src="/images/三角内心圆.png" id="sanjiao-yuan" />
                     <div id="tamaijia-box-2">
                       <span>特卖价</span>
                       <span>￥</span>
-                      <span>{{ data.product.proPrice }}</span>
+                      <span>{{ data.product.sellingPrice }}</span>
                     </div>
                     <img src="/svg/attention.svg" id="attention" />
                   </div>
