@@ -11,5 +11,11 @@ export default {
         url: `/cart/userCart?${cartIds}`,
         method: 'get'
   })
+},
+getsubmitOrder(userId,receiveId,receiveCouponId,cartIds){
+    return request({
+        uer: `/order/createOrder?userId=${userId}&receiveId=${receiveId}&receiveCouponId=${receiveCouponId}&cartIds=${cartIds}`,
+        method: 'get'
+    })
 }
 }

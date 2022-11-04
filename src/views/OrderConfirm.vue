@@ -270,7 +270,7 @@
                     <i class="st-tips layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a href="./confirm-order.html" class="settlement-button layui-btn layui-col-md4">提交订单</a>
+                <a href="./confirm-order.html" class="settlement-button layui-btn layui-col-md4" @click="cv(0)">提交订单</a>
             </div>
         </div>
     </div>
@@ -341,7 +341,10 @@ function addressisChecked(address){
        }
     });
 }
-//返回数据
+//提交订单
+// function getsubmitOrder(userId,receiveId,receiveCouponId,cartIds){
+    
+// }
 </script>
 <style scoped>
 /* head css */
