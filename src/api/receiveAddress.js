@@ -14,7 +14,7 @@ export default {
 },
 getsubmitOrder(userId,receiveId,receiveCouponId,cartIds){
     return request({
-        uer: `/order/createOrder?userId=${userId}&receiveId=${receiveId}&receiveCouponId=${receiveCouponId}&cartIds=${cartIds}`,
+        url: `/order/createOrder?userId=${userId}&receiveId=${receiveId}&receiveCouponId=${receiveCouponId}&cartIds=${cartIds}`,
         method: 'get'
     })
 }

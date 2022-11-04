@@ -106,14 +106,15 @@
             <div class="box-bd">
                 <div class="m-address layui-row layui-col-space10">
                     <ul class="address-ul">
-                        <li class="layui-col-md4" v-for="a in addressList" :key="a.receiveId" @click="addressisChecked(a)">
+                        <li class="layui-col-md4" v-for="a in addressList" :key="a.receiveId"
+                            @click="addressisChecked(a)">
                             <!-- 地址卡片 -->
                             <div class="address-inner">
                                 <!-- 装饰上线条 -->
                                 <div class="stripe-top"></div>
                                 <div class="name-row layui-row">
                                     <div class="layui-col-md2 layui-col-md-offset1">
-                                        <p class="member-text member-name">{{a.name}}</p>
+                                        <p class="member-text member-name">{{ a.name }}</p>
                                     </div>
                                     <div class="layui-col-md2 layui-col-md-offset4">
                                         <a class="update-address-text">修改</a>
@@ -125,20 +126,21 @@
                                 </div>
                                 <div class="layui-row">
                                     <div class="layui-col-md2 layui-col-md-offset1">
-                                        <span class="member-text">{{a.phone}}</span>
+                                        <span class="member-text">{{ a.phone }}</span>
                                     </div>
                                     <div class="layui-col-md6 layui-col-md-offset3">
                                         <span class="member-text" v-if="a.type == 0">周一至周日均可收货</span>
                                         <span class="member-text" v-if="a.type == 1">周一至周五可收货</span>
                                         <span class="member-text" v-if="a.type == 2">周六日、节假日可收货</span>
-                                    
+
                                     </div>
                                 </div>
                                 <div class="layui-row">
                                     <div class="member-text layui-col-md11 layui-col-md-offset1">
-                                        <i class="layui-icon-location" style="font-size: 15px; color: #626262;"/>
-                                        <strong>{{a.province}}</strong>{{a.stree}}
-                                        <embed class="tick" width="50px" height="50px" src="/svg/address-tick.svg"  v-if="a.isChecked"/>
+                                        <i class="layui-icon-location" style="font-size: 15px; color: #626262;" />
+                                        <strong>{{ a.province }}</strong>{{ a.stree }}
+                                        <embed class="tick" width="50px" height="50px" src="/svg/address-tick.svg"
+                                            v-if="a.isChecked" />
                                     </div>
                                 </div>
                                 <!-- 装饰下线条 -->
@@ -187,17 +189,17 @@
                                     <img width="70px" height="70px" :src="c.proMainImageAddress">
                                 </div>
                                 <div class="product-info">
-                                    <div class="title">{{c.proName}}</div>
+                                    <div class="title">{{ c.proName }}</div>
                                 </div>
                             </td>
                             <td>
-                                <span class="product-size">{{c.sizeType}}</span>
+                                <span class="product-size">{{ c.sizeType }}</span>
                             </td>
                             <td>
-                                <span class="product-price">￥{{c.sellingPrice}}</span>
+                                <span class="product-price">￥{{ c.sellingPrice }}</span>
                             </td>
                             <td>
-                                <span class="product-num">{{c.nums}}</span>
+                                <span class="product-num">{{ c.nums }}</span>
                             </td>
                         </tr>
                     </tbody>
@@ -210,7 +212,7 @@
                                     <span class="freight-price">免运费</span>
                                 </span>
                                 <span class="this-grop-price-text">本组商品金额:
-                                    <span class="this-grop-price">￥{{data.sumPrice}}</span>
+                                    <span class="this-grop-price">￥{{ data.sumPrice }}</span>
                                 </span>
                             </td>
                         </tr>
@@ -242,13 +244,13 @@
             <div class="outer-div">
                 <div>
                     <span class="dis-text layui-inline">商品金额:</span>
-                    <span class="product-price layui-inline">￥233</span>
+                    <span class="product-price layui-inline">￥{{ data.sumPrice }}</span>
                 </div>
             </div>
             <div class="outer-div">
                 <div>
                     <span class="dis-text layui-inline">优惠券:</span>
-                    <span class="layui-inline">￥0</span>
+                    <span class="layui-inline">￥{{couponDiscountAmount}}</span>
                 </div>
             </div>
             <div class="outer-div">
@@ -260,7 +262,7 @@
             <div class="outer-div">
                 <div>
                     <span class="dis-text pay-price-text layui-inline">待支付:</span>
-                    <span class="pay-price layui-inline">￥{{data.sumPrice}}</span>
+                    <span class="pay-price layui-inline">￥{{ data.payPrice }}</span>
                 </div>
             </div>
             <!-- 结算 -->
@@ -270,129 +272,184 @@
                     <i class="st-tips layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a href="./confirm-order.html" class="settlement-button layui-btn layui-col-md4" @click="cv(0)">提交订单</a>
+                <a href="javascript:;" class="settlement-button layui-btn layui-col-md4"
+                    @click="getsubmitOrder">提交订单</a>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { reactive , ref,onBeforeMount,computed} from 'vue'
+import { reactive, ref, onBeforeMount, computed } from 'vue'
 import receiveAddressApi from '@/api/receiveAddress.js'
+import couponApi from '@/api/coupon.js'
+import orderApi from '@/api/order.js'
 import { useRoute } from 'vue-router'
 import qs from 'qs'
 const route = useRoute()
 const cartIds = route.query.cartIds
 let addressList = ref([])
 let cartIdSList = ref([])
-let data = reactive({ sumPrice: 0.0 })
+// 被选中的地址id
+let checkAddressId
+// 用户使用的优惠券id
+let receiveCouponId = "1576928055602536450"
+// 优惠券优惠金额
+let couponDiscountAmount = ref(0)
+let data = reactive({ sumPrice: 0.0,payPrice:0.0 })
 // 页面挂载 -钩子函数
-onBeforeMount(()=>{
+onBeforeMount(() => {
+    // 加载地用户址
     getreceiveAddress()
-    console.log(cartIds)
+    // 获取购物车中的商品
     getaddressCart()
+    // 获取用户使用的优惠券
+    if(receiveCouponId){
+        getCoupon()
+    }
 })
 //请求用户默认地址
-function getreceiveAddress(){
+function getreceiveAddress() {
     receiveAddressApi.getreceiveAddress().then(
-        response =>{
+        response => {
             addressList.value = reactive(response.data.userAddressList)
             // 给每个地址信息添加是否选中属性
             addressList.value.forEach(address => {
-                if(!address.default) address.isChecked = false
-                else  address.isChecked = true
+                if (!address.default) { address.isChecked = false }
+                else {
+                    address.isChecked = true
+                    checkAddressId = address.receiveId
+                }
             });
         }
     )
 }
 //根据购物车id批量获取购物车中的数据
-function getaddressCart(){   
+function getaddressCart() {
     // 格式化数组参数
-    let params = qs.stringify({cartIds},{arrayFormat:'repeat'})
+    let params = qs.stringify({ cartIds }, { arrayFormat: 'repeat' })
     receiveAddressApi.getaddressCart(params).then(
-        response =>{
-            console.log(response)
+        response => {
             cartIdSList.value = reactive(response.data.cartList)
-            console.log(cartIdSList)
-        }           
+        }
     )
 }
-//计算商品的价格
+// 获取优惠金额
+function getCoupon(){
+    couponApi.getCouponDiscountAmount(receiveCouponId)
+        .then(response =>{
+            couponDiscountAmount.value = response.data.discountAmount
+        })
+}
+//计算商品的总价格
 data.sumPrice = computed({
-    get(){
+    get() {
         let sum = 0.0
-        cartIdSList.value.forEach((cartIds) =>{
+        cartIdSList.value.forEach((cartIds) => {
             sum += cartIds.sellingPrice * cartIds.nums
         })
-        console.log(sum)
         return sum.toFixed(2)
+    },
+    set() {
+
+    }
+})
+// 支付金额
+data.payPrice = computed({
+    get(){
+        return (data.sumPrice-couponDiscountAmount.value).toFixed(2)
     },
     set(){
 
     }
 })
 //换是否为默认地址(小对号)
-function addressisChecked(address){
-    addressList.value.forEach(a =>{
-       if(address === a){
+function addressisChecked(address) {
+    addressList.value.forEach(a => {
+        if (address === a) {
             a.isChecked = true
-       }else{
+            checkAddressId = a.receiveId
+        } else {
             a.isChecked = false
-       }
+        }
     });
 }
 //提交订单
-// function getsubmitOrder(userId,receiveId,receiveCouponId,cartIds){
-    
-// }
+function getsubmitOrder() {
+    // 格式化数组参数
+    let params = qs.stringify({ cartIds }, { arrayFormat: 'repeat' })
+    if(receiveCouponId){
+        orderApi.createOrderWithCoupon(checkAddressId,receiveCouponId,params)
+        .then(response=>{
+            console.log(response)
+        })
+    }else{
+        orderApi.createOrder(checkAddressId,params)
+        .then(response=>{
+            console.log(response)
+        })
+    }
+
+}
 </script>
 <style scoped>
 /* head css */
-*{
+* {
     margin: 0;
     padding: 0;
 }
-.toplogo{
+
+.toplogo {
     padding-top: 16px;
 }
-.layui-container{
+
+.layui-container {
     width: 70%;
     margin: 0 auto;
 }
-.top-item{
+
+.top-item {
     margin-top: 15px;
 }
-.top-item li{
+
+.top-item li {
     float: left;
     margin-right: 20px;
     color: rgb(144, 144, 144);
     font-size: smaller;
 }
-.promise-item{
+
+.promise-item {
     margin-top: 15px;
 }
-.promise-item li{
+
+.promise-item li {
     float: left;
     margin-right: 20px;
     color: rgb(22, 22, 22);
     font-size: smaller;
 }
-.member-actions-link{
+
+.member-actions-link {
     color: rgb(144, 144, 144);
     margin-left: 16px;
 }
-.border-pink{
-    background-color: rgb(250,42,131);
+
+.border-pink {
+    background-color: rgb(250, 42, 131);
     height: 2px;
     border: none;
 }
-.inline-block-item{
+
+.inline-block-item {
     display: inline;
 }
-.top-item li::after{
-    content:"|";
+
+.top-item li::after {
+    content: "|";
     margin-left: 10px;
 }
+
 /* step css */
 .ui-step {
     padding: 0 40px;
@@ -429,7 +486,7 @@ function addressisChecked(address){
     width: 150px;
     text-align: center;
     left: -25px;
-    font-family: tahoma;    
+    font-family: tahoma;
 }
 
 .ui-step-icon .iconfont {
@@ -437,7 +494,7 @@ function addressisChecked(address){
     margin: 0;
     color: #b7b7b7;
     color: rgba(0, 0, 0, 0.25);
-    *color: #b7b7b7;    
+    *color: #b7b7b7;
     line-height: 30px;
     background: #fff;
     padding: 0 10px;
@@ -448,8 +505,8 @@ function addressisChecked(address){
 }
 
 .ui-step-icon .ui-step-number {
-    line-height:14px;
-    font-style:normal;
+    line-height: 14px;
+    font-style: normal;
     position: absolute;
     top: 7px;
     left: 0;
@@ -459,7 +516,7 @@ function addressisChecked(address){
 }
 
 .ui-step .ui-step-active i.ui-step-number {
-    color:#FFF;
+    color: #FFF;
 }
 
 .ui-step-end .ui-step-number {
@@ -482,7 +539,8 @@ function addressisChecked(address){
     left: -50px;
     color: #707070;
 }
-.ui-step-icon .ui-step-text:hover{
+
+.ui-step-icon .ui-step-text:hover {
     color: #cdcdcd;
 }
 
@@ -501,7 +559,8 @@ function addressisChecked(address){
     right: -110px;
     width: 150px;
     zoom: 1;
-    _clear: both;   /* 修复ie6下最后一步莫名其妙显示不出来的问题 */
+    _clear: both;
+    /* 修复ie6下最后一步莫名其妙显示不出来的问题 */
 }
 
 .ui-step li.ui-step-end .ui-step-line {
@@ -531,15 +590,17 @@ function addressisChecked(address){
 .ui-step .ui-step-active {
     color: #f16f20;
 }
+
 .ui-step .ui-step-active .ui-step-icon .ui-step-text {
     color: #000000;
 }
+
 .ui-step .ui-step-active .iconfont {
-    color:#ff7001;
+    color: #ff7001;
 }
 
 .ui-step .ui-step-done .iconfont {
-    color:#ff9a00;
+    color: #ff9a00;
 }
 
 .ui-step .ui-step-done .ui-step-line {
@@ -549,15 +610,19 @@ function addressisChecked(address){
 .ui-step-blue .ui-step-active {
     color: #3b7cb8;
 }
+
 .ui-step-blue .ui-step-active .iconfont {
-    color:#1e6bb3;
+    color: #1e6bb3;
 }
+
 .ui-step-blue .ui-step-done .iconfont {
-    color:#428fd6;
+    color: #428fd6;
 }
+
 .ui-step-blue .ui-step-done .ui-step-line {
     background: #418cd6;
 }
+
 .step {
     width: 50%;
     margin: 0 auto;
@@ -836,7 +901,8 @@ function addressisChecked(address){
     background-color: rgb(241, 1, 128);
     line-height: 60px;
 }
-.product-img img{
+
+.product-img img {
     width: 70px;
     height: 70px;
 }
