@@ -17,203 +17,18 @@
             <div class="layui-tab-content">
                 <!-- 商品数据 -->
                 <div class="layui-tab-item layui-show layui-col-space24">
-                    <div class="layui-col-md3">
+                    <div class="layui-col-md3" v-for="c in collectionsVOList" :key="c.proId">
                         <div class="goods-item">
                             <div class="goods-item-inner">
-                                <img src="/images/temp/商品2.jpg" width="245px" height="245px" alt="">
+                                <img :src="c.proMainImageAddress" alt="">
                                 <div class="goods-item-price-row layui-row">
                                     <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
+                                    <div class="goods-item-sale-price layui-inline">￥{{c.proPrice}}</div>
+                                    <div class="goods-item-original-price layui-inline"><del>￥{{c.sellingPrice}}</del></div>
+                                    <div class="goods-item-discount layui-inline">{{c.discount}}折</div>
                                 </div>
                                 <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">Nike | 夏季新款 时尚百搭 中性运动双肩包</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/商品2.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">Nike | 夏季新款 时尚百搭 中性运动双肩包</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/商品2.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">Nike | 夏季新款 时尚百搭 中性运动双肩包</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/商品2.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">Nike | 夏季新款 时尚百搭 中性运动双肩包</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/商品2.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">Nike | 夏季新款 时尚百搭 中性运动双肩包</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-tab-item layui-col-space24">
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/测试数据1.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">甘特 | 甘特男士修身版扣领尖领长袖衬衫美式休闲男衬 303002</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/测试数据1.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">甘特 | 甘特男士修身版扣领尖领长袖衬衫美式休闲男衬 303002</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/测试数据1.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">甘特 | 甘特男士修身版扣领尖领长袖衬衫美式休闲男衬 303002</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/测试数据1.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">甘特 | 甘特男士修身版扣领尖领长袖衬衫美式休闲男衬 303002</div>
-                                </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-tab-item layui-col-space24">
-                    <div class="layui-col-md3">
-                        <div class="goods-item">
-                            <div class="goods-item-inner">
-                                <img src="/images/temp/排行榜3.jpg" width="245px" height="245px" alt="">
-                                <div class="goods-item-price-row layui-row">
-                                    <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥154</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥249</del></div>
-                                    <div class="goods-item-discount layui-inline">6.2折</div>
-                                </div>
-                                <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">甘特 | 甘特男士修身版扣领尖领长袖衬衫美式休闲男衬 303002</div>
+                                    <div class="goods-item-name">{{c.brandName}} | {{c.describe}}</div>
                                 </div>
                                 <button type="button" class="add-car layui-btn">
                                     <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
@@ -233,6 +48,22 @@ import YiRanHeader from "@/components/YiRanHeader.vue";
 import SecondHeader from "@/components/SecondHeader.vue";
 import ShopNavigation from "@/components/ShopNavigation.vue";
 import RightNavigation from "@/components/RightNavigation.vue";
+import collectionApi from '@/api/collections.js'
+import { reactive, ref,onBeforeMount} from 'vue'
+
+let collectionsVOList = ref([])
+// 页面挂挂载完毕执行
+onBeforeMount(() => {
+    viewMyCollections()
+})
+
+function viewMyCollections(){
+    collectionApi.viewMyCollections().then(
+        response => {
+            collectionsVOList.value = reactive(response.data.collectionsVOList)         
+        }
+    )
+}
 </script>
 
 <style scoped>
@@ -309,6 +140,10 @@ import RightNavigation from "@/components/RightNavigation.vue";
     height: 420px;
     border: 1px solid rgb(231, 231, 231);
     position: relative;
+}
+.goods-item .goods-item-inner img{
+    width:245px ;
+    height:245px;
 }
 
 .goods-item:hover .goods-item-inner {
