@@ -170,6 +170,11 @@
             </li>
         </ul>
     </div>
+    <el-pagination background layout="prev, pager, next" 
+    :total="200" 
+    :default-page-size="5" 
+    v-model:currentPage="currentPage"
+    @current-change="handleCurrentChange"/>
 </template>
 
 <script setup>
@@ -185,7 +190,7 @@ const brandIsMoreChecked = ref(false)
 const kindIsMoreChecked = ref(false)
 const sizeIsMoreChecked = ref(false)
 const colorIsMoreChecked = ref(false)
-
+const currentPage = ref(1)
 
 //商品数据对象
 let productList = ref([])
@@ -409,6 +414,9 @@ function colorCheck(c) {
         }
     )
 }
+function handleCurrentChange(num){
+        console.log(num)
+}
 </script>
 
 <script>
@@ -417,7 +425,9 @@ function colorCheck(c) {
 
 <style scoped>
 /* =================头部导航固定================ */
-
+.el-pagination {
+    justify-content: space-around;
+}
 .pinpai {
     width: 80%;
     height: 30px;

@@ -5,5 +5,17 @@ export default {
       url: `/coupon/getDiscountAmount/${receiveId}`,
       method: 'get'
     })
+  },
+  getCouponList(){
+    return request({
+      url: `/coupon/getCouponList/`,
+      method: 'get'
+    })
+  },
+  getReceiveCoupon(couponId){
+    return request({
+      url: `/coupon/getReceiveCoupon/?couponId=${couponId}`,
+      method: 'get'
+    })
   }
 }

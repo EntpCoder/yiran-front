@@ -4,12 +4,11 @@
                     &nbsp;>&nbsp;优惠券
                 </p>
                 <div class="m-coupons-modules">
-                    <p class="u-active-title">优惠券激活</p>
+                    <p class="u-active-title">领取优惠券</p>
                     <div class="m-active-area">
-                        <div id="code_inputBox" class="ui-form-item-group m-input-box">
-                            <input type="text" class="ui-input u-active-input" id="activeCodeValue" name="activeCodeValue" placeholder="请输入优惠券激活码">
+                        <div  class="m-active-area coupon" v-on:click="xuanze(c)" v-for="c in couponList" :key="c.couponId">
+                            <p>满{{c.discountAmount}}减{{c.fullMoney}}&nbsp; &nbsp;&nbsp;优惠类型{{c.subject}}</p>
                         </div>
-                        <a href="javascript:;" role="button" id="codeSend" mars_sead="233|2|1|4" class="ui-btn-medium ui-btn-primary u-active-btn">激活</a>
                     </div>
                 </div>
                 <div class="u-wavy-line"></div>
@@ -123,14 +122,41 @@
                 </div>
 </template>
 
-<script>
-export default {
-
+<script setup>
+import couponApi from '@/api/coupon.js'
+import { reactive, ref,onMounted } from 'vue'
+let couponList = ref([])
+let receiveCoupon =ref()
+onMounted(() => {
+    loadData()
+})
+function loadData(){
+    couponApi.getCouponList().then(
+        response => {
+            couponList.value = reactive(response.data.couponList)
+        }
+    )
+}
+function xuanze(c){
+    couponApi.getReceiveCoupon(c.couponId).then(
+        response => {
+            console.log(response)
+            receiveCoupon.value = reactive(response.data.receiveCoupon)
+        }
+    )
 }
 </script>
 
-<style scoped>
+<style scoped> 
 /* 右侧内容栏 */
+.coupon{
+   width: 350px;
+   height: 40px;
+   border: 1px solid #ee0591;
+   margin-bottom: 5px;
+   background: rgb(239, 210, 210);
+
+}
 #m-title {
     font-size: 12px;
 }
