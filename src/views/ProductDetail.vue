@@ -357,7 +357,7 @@ function changeColorsize(s) {
 .product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1 {
   background-color: rgb(111, 111, 111);
   opacity: 0.5;
-  /* height: 69px; */
+  height: 69px;
   cursor: pointer;
 
 }
@@ -647,7 +647,7 @@ function changeColorsize(s) {
 
 .product-container .layui-row .layui-col-md7 .grid-demo .layui-col-md11 .layui-row .layui-col-md1 .grid-demo ul li .box {
   height: 32px;
-  width: 129px;
+  width: 72px;
   /* background-color: rgb(251, 201, 201); */
   float: left;
   margin: 0 auto;
