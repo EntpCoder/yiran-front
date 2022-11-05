@@ -117,7 +117,7 @@
                 <div class="grid-demo">
                   <span>颜色</span>
                   <ul>
-                    <li v-for="c in data.product.colorList" :key="c.colorListId">
+                    <li v-for="c in data.product.colorList" :key="c.colorId">
                       <div class="box" @click="checkColor(c)" :class="c.spanClass">
                         <span>{{ c.colorName }} </span>
                       </div>

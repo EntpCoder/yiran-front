@@ -38,10 +38,10 @@
         </div>
       </div>
       <div class="comments-bob">
-        <div class="comment">
+        <div class="comment" v-for="c in data.comment.comments" :key="c.getCommentByproId">
           <div class="user-name-image">
             <img src="/images/user-touxiang.png" height="40px" width="40px">
-            <span>***先生</span>
+            <span>{{c.userName}}</span>
           </div>
           <div class="user-text">
             <div class="time">
@@ -122,6 +122,7 @@
 </template>
   
 <script setup>
+
 import commentApi from "@/api/comment.js";
 import { ref,onMounted,reactive } from 'vue'
 import { useRoute } from 'vue-router'
@@ -129,7 +130,9 @@ import { useRoute } from 'vue-router'
 onMounted(() => {
   getCommentByproId()
 })
-
+const data = reactive({
+  comment:{}
+});
 // 评论对象
 let comments =ref([])
 // 获取路由中的商品id
@@ -143,7 +146,10 @@ function getCommentByproId(){
   commentApi.getCommentByproId(proId.value).then(
     response=>{
       console.log(response)
-      comments.value=reactive(response.data.ok)
+      data.comment=response.data
+      comments.value=response.data.ok
+
+      
     }
   )
 }
