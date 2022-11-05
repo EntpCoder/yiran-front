@@ -168,10 +168,10 @@
     <div class="maodian-box">
       <div class="maodian-ul">
         <ul>
-          <router-link to="/productDetail/explainSize/123">规格参数</router-link>
-          <router-link to="/productDetail/show">商品展示</router-link>
+          <router-link :to="{path:'/productDetail/explainSize/123',query: { proId: proId}}">规格参数</router-link>
+          <router-link :to="{ path: '/productDetail/show',query: { proId: proId} }">商品展示</router-link>
           <router-link :to="{ path: '/productDetail/comment', query: { proId: proId } }">全部评价</router-link>
-          <router-link to="/productDetail/consultation">商品咨询</router-link>
+          <router-link :to="{path:'/productDetail/consultation',query:{proId:proId}}">商品咨询</router-link>
         </ul>
       </div>
     </div>
