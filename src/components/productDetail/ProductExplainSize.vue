@@ -90,11 +90,11 @@
                     </span>
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td colspan="6">
                     <span><a href="#">收起∧</a><a href="#">展开∨</a></span>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -179,11 +179,11 @@
               <th>商品编码：</th>
               <td>BWBCC360289</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td colspan="4">
                 <span><a href="#" id="close2">收起∧</a><a href="#" id="open1">展开∨</a></span>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
 
