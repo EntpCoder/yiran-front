@@ -8,8 +8,8 @@
         </div>
         <!-- 100%满意度 -->
         <div class="comprehensive-score">
+          <span>用户对商品的满意度</span>
           <span>100%</span>
-          <span>的用户对商品满意</span>
         </div>
         <!-- 评价分类 -->
         <div class="comment-selections">
@@ -32,80 +32,35 @@
             <span>回头客(3)</span>
           </div>
           <div class="product-comment-info">
-            <span>100%</span>
-            <span>的顾客满意</span>
+            <!-- <span>100%</span>
+            <span>顾客满意</span> -->
           </div>
         </div>
       </div>
       <div class="comments-bob">
-        <div class="comment" v-for="c in data.comment.comments" :key="c.getCommentByproId">
+        <div class="comment" v-for="c in comments" :key="c.userId">
           <div class="user-name-image">
-            <img src="/images/user-touxiang.png" height="40px" width="40px">
+            <img class="commentImage" :src="c.image">
             <span>{{c.userName}}</span>
           </div>
           <div class="user-text">
             <div class="time">
               <div class="time1">
-                <span>2022-03-04</span>
-                <span>13:05:11</span>
+                <span>评论时间：{{c.createTime}}</span>
+                <!-- <span>13:05:11</span> -->
               </div>
               <div class="time1">
-                <span>身材信息：163cm/62kg</span>
-              </div>
-              <div class="time1">
-                <span>颜色：黑色（大阔）</span>
-              </div>
-              <div class="time1">
-                <span>尺码：M</span>
+                <span>用户评分：{{c.satisfactionScore}}</span>
               </div>
             </div>
             <div class="main-text">
-              <span>【厚薄度】：秋冬</span>
-              <span>【版型风格】：合身</span>
-              <span>【搭配建议】：黑裤子白卫衣</span>
+              <span>{{c.text}}</span>
+              <!-- <span>【版型风格】：合身</span>
+              <span>【搭配建议】：黑裤子白卫衣</span> -->
             </div>
             <div class="main-text-image">
               <div class="text-imag">
-                <img src="/images/pro-1-img.jpg" width="100%" height="100%">
-              </div>
-            </div>
-            <div class="great">
-              <span>赞</span>
-              <div>
-                <img src="/svg/great-img.svg" height="14px" width="14px">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="user-name-image">
-            <img src="/images/user-touxiang.png" height="40px" width="40px">
-            <span>***先生</span>
-          </div>
-          <div class="user-text">
-            <div class="time">
-              <div class="time1">
-                <span>2022-03-04</span>
-                <span>13:05:11</span>
-              </div>
-              <div class="time1">
-                <span>身材信息：163cm/62kg</span>
-              </div>
-              <div class="time1">
-                <span>颜色：黑色（大阔）</span>
-              </div>
-              <div class="time1">
-                <span>尺码：M</span>
-              </div>
-            </div>
-            <div class="main-text">
-              <span>【厚薄度】：秋冬</span>
-              <span>【版型风格】：合身</span>
-              <span>【搭配建议】：黑裤子白卫衣</span>
-            </div>
-            <div class="main-text-image">
-              <div class="text-imag">
-                <img src="/images/pro-1-img.jpg" width="100%" height="100%">
+                <img id="usercomentimg" :src="c.img">
               </div>
             </div>
             <div class="great">
@@ -128,6 +83,7 @@ import { ref,onMounted,reactive } from 'vue'
 import { useRoute } from 'vue-router'
 // 钩子函数，进入页面就要执行的方法，里面的方法事需要执行的
 onMounted(() => {
+
   getCommentByproId()
 })
 const data = reactive({
@@ -139,17 +95,15 @@ let comments =ref([])
 const route = useRoute()
 const proId = ref()
 proId.value = route.query.proId
+console.log(proId)
 // 测试是否拿到商品id
 // alert(proId.value)
 // 根据商品id获取所有评论的方法
 function getCommentByproId(){
   commentApi.getCommentByproId(proId.value).then(
     response=>{
-      console.log(response)
       data.comment=response.data
       comments.value=response.data.ok
-
-      
     }
   )
 }
@@ -188,7 +142,7 @@ function getCommentByproId(){
   /* background-color: rgb(169, 64, 64); */
 }
 
-.detail-container .detail-box .pro-all-comment .comprehensive-coment-box .comprehensive-score :nth-child(1) {
+.detail-container .detail-box .pro-all-comment .comprehensive-coment-box .comprehensive-score :nth-child(2) {
   font-size: 50px;
   display: block;
   line-height: 40px;
@@ -198,7 +152,7 @@ function getCommentByproId(){
   height: 40px;
 }
 
-.detail-container .detail-box .pro-all-comment .comprehensive-coment-box .comprehensive-score :nth-child(2) {
+.detail-container .detail-box .pro-all-comment .comprehensive-coment-box .comprehensive-score :nth-child(1) {
   color: #333;
   margin-left: 10px;
 }
@@ -290,7 +244,7 @@ function getCommentByproId(){
 .detail-container .detail-box .pro-all-comment .comments-bob .comment .user-name-image {
   width: 210px;
   height: 40px;
-  padding: 30px;
+  padding: 0 20px 0 20px;
   background-color: #fff;
   float: left;
   margin-right: 10px;
@@ -298,7 +252,7 @@ function getCommentByproId(){
 
 .detail-container .detail-box .pro-all-comment .comments-bob .comment .user-text {
   width: 670px;
-  height: 300px;
+  /* height: 300px; */
   /* background-color: rgb(208, 249, 255); */
   float: left;
 }
@@ -310,7 +264,7 @@ function getCommentByproId(){
 
 .detail-container .detail-box .pro-all-comment .comments-bob .comment .user-text .time .time1 {
   float: left;
-  padding-right: 10px;
+  padding-right: 20px;
   color: #6f6f6f;
   font-size: 12px;
 }
@@ -364,5 +318,14 @@ function getCommentByproId(){
   color: #6f6f6f;
   float: right;
   cursor: pointer;
+}
+.commentImage{
+  width: 20%;
+  height: 100%;
+  margin-right: 10px;
+}
+#usercomentimg{
+  height: 100%;
+  width: 100%;
 }
 </style>

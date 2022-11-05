@@ -357,7 +357,7 @@ function changeColorsize(s) {
 .product-container .layui-row .layui-col-md5 .layui-row .layui-col-md1 {
   background-color: rgb(111, 111, 111);
   opacity: 0.5;
-  height: 69px;
+  /* height: 69px; */
   cursor: pointer;
 
 }
