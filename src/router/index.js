@@ -8,6 +8,7 @@ import ShoppingCart from '@/views/ShoppingCart.vue'
 import OrderConfirm from '@/views/OrderConfirm.vue'
 import GoPayPage from '@/views/GoPayPage.vue'
 import CollectionPage from '@/views/CollectionPage.vue'
+import SearchPage from '@/views/SearchPage.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -123,6 +124,11 @@ const router = createRouter({
       path:'/collection',
       component:CollectionPage,
       meta:{title:'我的收藏'}
+    },
+    {
+      path:'/search',
+      component:SearchPage,
+      meta:{title:'搜索'}
     }
   ]
 })

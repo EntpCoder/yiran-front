@@ -18,15 +18,18 @@
             </div>
             <div class="search">
                 <div class="sousuo">
-                    <input type="text">
+                    <input type="text" v-model="search">
                 </div>
-                <img src="/svg/sousuo.svg" alt="" class="sousuo-img">
+                <router-link :to="`/search?s=${search}`">
+                    <img src="/svg/sousuo.svg" alt="" class="sousuo-img" />
+                </router-link>
                 <div class="gouwuche">
                     <ul class="header-right">
                         <li class="cart">
                             <img src="/svg/gouwuche.svg" class="gouwu-img">
                             <router-link to="/cart">购物车
-                                <span>(0)</span></router-link>
+                                <span>(0)</span>
+                            </router-link>
                             <div class="cart-list">
                                 购物车中没有商品赶快去选购把！
                             </div>
@@ -50,7 +53,9 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+const search = ref('')
 </script>
 
 <style scoped>
