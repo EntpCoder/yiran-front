@@ -66,7 +66,7 @@
             <div class="great">
               <span>赞</span>
               <div>
-                <img src="/svg/great-img.svg" height="14px" width="14px">
+                <img id="satisfactionScore" src="/svg/great-img.svg">
               </div>
             </div>
           </div>
@@ -327,5 +327,9 @@ function getCommentByproId(){
 #usercomentimg{
   height: 100%;
   width: 100%;
+}
+#satisfactionScore{
+  height: 14px;
+  width: 14px;
 }
 </style>
