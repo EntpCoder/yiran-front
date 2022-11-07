@@ -5,8 +5,8 @@
     <RightNavigation></RightNavigation>
     <!-- =============商品============== -->
     <div class="pro-show-page page-1">
-        <h1 v-if="productList == undefined || productList.length <= 0">暂无商品</h1>
-        <ul class="pro-ul" v-for="p in productList" :key="p.proId">
+        <h1 v-if="product == undefined || product.length <= 0">暂无商品</h1>
+        <ul class="pro-ul" v-for="p in product" :key="p.product">
             <li class="pro-li">
                 <router-link :to="{ path: `/productDetail/explainSize/${p.proId}` }" class="li-li">
                     <div class="product-img">
@@ -19,12 +19,12 @@
                             <span class="pro-pri-img">￥</span>
                             <span class="pro-pri-num">{{ p.sellingPrice }}</span>
                         </span>
-                        <span class="pre-price">￥{{ p.proPrice }}</span>
-                        <span class="pro-noe-zhekou">{{ p.discount }}折</span>
+                        <span class="pre-price">￥{{}}</span>
+                        <span class="pro-noe-zhekou">{{}}折</span>
                     </div>
                     <!-- ======近60天内最低价=== -->
                     <div class="lower_price_60">近60天内最低价</div>
-                    <span class="pro-name-text">{{ p.proName }}</span>
+                    <span class="pro-name-text" v-html="p.proName"></span>
                 </router-link>
             </li>
         </ul>
@@ -32,10 +32,27 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
+import {onBeforeMount, ref} from 'vue'
+import { useRoute} from 'vue-router';
+import searchApi from '@/api/search.js'
 const route = useRoute()
 const s = route.query.s
+let product = ref([])
 console.log(s)
+
+// 页面挂载 -钩子函数
+onBeforeMount(() => {
+    getHighProduct()
+    // console.log(response)
+})
+function getHighProduct(){
+    searchApi.getProduct(s).then(
+        response =>{
+         product.value = response.data.highProduct
+         console.log(product.value)
+        }
+    )
+}
 </script>
 
 <style scoped>
