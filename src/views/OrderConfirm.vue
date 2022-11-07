@@ -86,16 +86,6 @@
                 配送至
                 <strong class="area-delivery-province">苏州工业园区 驰星教育</strong>
             </span>
-            <div class="shop-tips inline-block-item">
-                请在
-                <span class="countdown">
-                    <span class="countdown-num countdown-num-min">11</span>分
-                    <span class="countdown-num countdown-num-sec">29</span>秒
-                </span>
-                内提交订单，下单后你另有 30 分钟的支付时间。
-                <i class="st-tips layui-icon"
-                    style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
-            </div>
         </div>
         <!-- 信息盒子 -->
         <div class="m-box layui-row">

@@ -86,11 +86,15 @@
                 配送至
                 <strong class="area-delivery-province">苏州工业园区 驰星教育</strong>
             </span>
-            <div class="shop-tips inline-block-item">
+            <div class="shop-tips inline-block-item" v-if="data.minute < 0">
+                <span class="countdown-num countdown-num-min">订单已超时，请重新下单</span>
+            </div>
+            <!-- 订单倒计时 -->
+            <div class="shop-tips inline-block-item" v-if="data.minute >= 0">
                 请在
                 <span class="countdown">
-                    <span class="countdown-num countdown-num-min">11</span>分
-                    <span class="countdown-num countdown-num-sec">29</span>秒
+                    <span class="countdown-num countdown-num-min">{{data.minute}}</span>分
+                    <span class="countdown-num countdown-num-sec">{{data.second}}</span>秒
                 </span>
                 内支付
                 <i class="st-tips layui-icon"
@@ -187,33 +191,76 @@
                     <i class="st-tips layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a :href="`http://localhost:2177/pay/goAliPay/${orderId}`" class="settlement-button layui-btn layui-col-md4">支付</a>
+                <a :href="`http://localhost:2177/pay/goAliPay/${orderId}`"
+                    class="settlement-button layui-btn layui-col-md4" v-if="data.minute >= 0">支付</a>
+                <span class="timeout-button layui-btn layui-col-md4" v-if="data.minute < 0">已超时</span>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { reactive, onBeforeMount, computed } from 'vue'
+import { ref,reactive, onBeforeMount, computed, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import orderApi from '@/api/order.js'
 const route = useRoute()
+// 订单id
 const orderId = route.query.orderId
+// 订单结束时间和现在的时间差
+let timeDifference = ref(0)
 const data = reactive({
-    sumPrice: 0.0, payAmounts: 0.0, discountAmount: 0.0,
+    sumPrice: 0.0, payAmounts: 0.0, discountAmount: 0.0,minute:0,second:0,timmer:{},
     orderInfo: { discountAmount: 0.0, orderAmount: 0.0, orderDetails: [] }
 })
+// 剩余时间
 onBeforeMount(() => {
     // 加载订单信息
     loadOrderInfo()
+})
+onBeforeUnmount(()=>{
+    // 销毁定时器
+    clearInterval(data.timmer)
 })
 // 查询订单详情
 function loadOrderInfo() {
     orderApi.getOrderInfo(orderId)
         .then(response => {
             data.orderInfo = response.data.order
+            // 计算超时时间方法
+            orderTime(response.data.order.placeTime)
         })
 }
+// 计算剩余支付时间
+function orderTime(placeTime) {
+    let endDate = new Date(placeTime)
+    endDate.setMinutes(endDate.getMinutes() + 2)
+    let beginDate = new Date()
+    timeDifference.value = endDate.getTime() - beginDate.getTime()
+    data.timmer = setInterval(()=>{
+        if(timeDifference.value < 0){
+            clearInterval(data.timmer)
+        }
+        timeDifference.value = timeDifference.value - 1000
+    },1000)
+}
+// 计算分钟
+data.minute = computed({
+    get(){
+        return Math.floor(timeDifference.value / (1000 * 60))
+    },
+    set(){
+
+    }
+})
+// 计算秒
+data.second = computed({
+    get(){
+        return Math.floor(timeDifference.value / (1000)-(data.minute * 60))
+    },
+    set(){
+
+    }
+})
 // 计算商品总金额
 data.sumPrice = computed({
     get() {
@@ -245,6 +292,7 @@ data.discountAmount = computed({
 
     }
 })
+
 
 </script>
 <style scoped>
@@ -754,6 +802,11 @@ data.discountAmount = computed({
 .settlement-button {
     height: 100%;
     background-color: rgb(241, 1, 128);
+    line-height: 60px;
+}
+.timeout-button{
+    height: 100%;
+    background-color: rgb(159, 159, 159);
     line-height: 60px;
 }
 
