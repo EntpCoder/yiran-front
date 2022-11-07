@@ -32,24 +32,28 @@
 </template>
 
 <script setup>
-import {onBeforeMount, ref} from 'vue'
-import { useRoute} from 'vue-router';
+import {onBeforeMount, ref,watch} from 'vue'
+import { useRoute,useRouter} from 'vue-router';
 import searchApi from '@/api/search.js'
 const route = useRoute()
-const s = route.query.s
+const router = useRouter()
+const s = ref(route.query.s)
 let product = ref([])
-console.log(s)
 
 // 页面挂载 -钩子函数
 onBeforeMount(() => {
     getHighProduct()
-    // console.log(response)
 })
+// 当路由变化时重新加载数据
+watch(() => router.currentRoute.value.fullPath, () => {
+    s.value = route.query.s
+    getHighProduct()
+}, { immediate: true }
+)
 function getHighProduct(){
-    searchApi.getProduct(s).then(
+    searchApi.getProduct(s.value).then(
         response =>{
          product.value = response.data.highProduct
-         console.log(product.value)
         }
     )
 }

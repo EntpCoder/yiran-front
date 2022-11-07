@@ -20,7 +20,7 @@
                 <div class="sousuo">
                     <input type="text" v-model="search">
                 </div>
-                <router-link :to="`/search?s=${search}`">
+                <router-link :to="`/search?s=${search}`" @click="search = ''">
                     <img src="/svg/sousuo.svg" alt="" class="sousuo-img" />
                 </router-link>
                 <div class="gouwuche">
