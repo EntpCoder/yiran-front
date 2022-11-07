@@ -68,18 +68,18 @@ const router = createRouter({
     },
     {
       path:'/memberInfo',
-      redirect: '/memberInfo/orderManagement/allOrders',
+      redirect: '/memberInfo/orderManagement',
       component:MemberInfoPage,
       children:[
         {
           path:'orderManagement',
-          redirect: '/memberInfo/orderManagement/allOrders',
+          redirect: '/memberInfo/orderManagement/orderInfo',
           meta:{title:'订单管理'},
           component: () => import('@/components/memberInfo/OrderManagement.vue'),
           children:[
             {
-              path:'allOrders',
-              component: () => import('@/components/memberInfo/AllOrders.vue'),
+              path:'orderInfo',
+              component: () => import('@/components/memberInfo/OrderInfo.vue'),
             }
           ]
         },

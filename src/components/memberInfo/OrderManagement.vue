@@ -12,11 +12,11 @@
     </div>
     <div class="layui-tab">
         <ul class="layui-tab-title">
-            <li class="layui-this"><router-link to="/memberInfo/orderManagement/allOrders">全部订单</router-link></li>
-            <li><router-link to="/memberInfo/orderManagement/allOrders">待付款</router-link></li>
-            <li><router-link to="/memberInfo/orderManagement/allOrders">待发货</router-link></li>
-            <li><router-link to="/memberInfo/orderManagement/allOrders">待收货</router-link></li>
-            <li><router-link to="/memberInfo/orderManagement/allOrders">已完成</router-link></li>
+            <li class="layui-this"><router-link to="/memberInfo/orderManagement/orderInfo">全部订单</router-link></li>
+            <li><router-link to="/memberInfo/orderManagement/orderInfo?type=0">待付款</router-link></li>
+            <li><router-link to="/memberInfo/orderManagement/orderInfo?type=1">待发货</router-link></li>
+            <li><router-link to="/memberInfo/orderManagement/orderInfo?type=3">待收货</router-link></li>
+            <li><router-link to="/memberInfo/orderManagement/orderInfo?type=4">已完成</router-link></li>
         </ul>
         <div class="layui-tab-content">
             <RouterView></RouterView>

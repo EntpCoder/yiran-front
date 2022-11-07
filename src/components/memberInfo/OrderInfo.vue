@@ -85,7 +85,6 @@
                         </div>
                         <div class="order-price">
                             <strong>69.00</strong>
-                            <p>在线</p>
                         </div>
                         <div class="order-state">
                             <span class="gray">已签收</span>
@@ -106,9 +105,6 @@
 </template>
 
 <script>
-export default {
-
-}
 </script>
 
 <style scoped>
