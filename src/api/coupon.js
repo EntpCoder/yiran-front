@@ -17,5 +17,11 @@ export default {
       url: `/coupon/getReceiveCoupon/?couponId=${couponId}`,
       method: 'get'
     })
+  },
+  getUsableCoupon(){
+    return request({
+      url:`/coupon/getUsableCoupon`,
+      method:`get`
+    })
   }
 }

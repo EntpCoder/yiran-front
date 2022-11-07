@@ -132,10 +132,20 @@
             <!-- 订单面板 -->
             <div class="orders-panel layui-row">
                 <div class="price-panel-coupon layui-col-md2">
-                    <button class="layui-btn" id="demo1">
+                    <button class="layui-btn" id="demo1" @click="chooseCoupon">
                         使用优惠券
                         <i class="layui-icon layui-icon-down layui-font-12"></i>
                     </button>
+                    <div class="useCoupon" v-show="usec">
+                        <div class="coupon coupon-wave-left coupon-wave-right coupon-red-gradient" v-for="c in couponList" :key="c.receiveId">
+                            <div class="coupon-info coupon-info-right-dashed" @click="choosexiaogou(c)">
+                                <div class="coupon-store">{{c.subject}}</div>
+                                <div class="coupon-price">¥{{c.discountAmount}}<span>优惠券</span></div>
+                                <div class="coupon-description">订单满{{c.fullMoney}}元</div>
+                            </div>
+                            <embed class="tick" width="50px" height="50px" src="/svg/choose.svg" v-if="c.isChecked"/>
+                        </div>
+                    </div>
                 </div>
                 <div class="price-panel-item layui-col-md1">
                     共
@@ -166,9 +176,11 @@
 import { reactive, ref, onBeforeMount, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import cartApi from '@/api/cart.js'
+import couponApi from '@/api/coupon.js'
 // 购物车数据对象
 let cartList = ref([])
 let data = reactive({ isLoad: true, sumPrice: 0.0 })
+let couponList = ref([])
 // 勾选的购物车id
 let cartCheckedIds = []
 // router
@@ -177,6 +189,7 @@ const router = useRouter()
 onBeforeMount(() => {
     getCart()
 })
+const usec = ref(false)
 data.sumPrice = computed({
     get() {
         let sum = 0
@@ -188,6 +201,26 @@ data.sumPrice = computed({
     set() {
     }
 })
+//选择优惠券
+function chooseCoupon() {
+    usec.value = !usec.value
+    couponApi.getUsableCoupon().then(
+        response => {
+            couponList.value = reactive(response.data.couponList)
+            couponList.value.forEach(coupon => {
+                if (!coupon.default) { coupon.isChecked = false }
+            });
+        }
+    )
+}
+//优惠券小钩
+function choosexiaogou(coupon){
+    couponList.value.forEach(c =>{
+        if(coupon === c && c.isChecked == true){c.isChecked = false}
+        else if(coupon === c && c.isChecked == false){c.isChecked = true}
+        else {c.isChecked = false}
+    })
+}
 // 请求购物车数据
 function getCart() {
     cartApi.getCart().then(
@@ -629,5 +662,120 @@ function goConfirmOrder(){
 .product-img img {
     width: 70px;
     height: 70px;
+}
+.useCoupon{
+    width: auto;
+    height: auto;
+
+}
+.coupon{
+    width: auto;
+    height: auto;
+    background-color:rgb(248, 120, 188);
+
+}
+
+/* 左边框的波浪 */
+.coupon-wave-left::before, .coupon-wave-right::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 14px;
+    background-image: radial-gradient(white 0, white 4px, transparent 4px);
+    /** 如果只设置为半径的两倍(直径)，那么半圆之间没有类似堤岸的间隔 */
+    background-size: 14px 14px;
+    background-position: 0 2px;
+    background-repeat: repeat-y;
+    z-index: 1;
+}
+.coupon-wave-left::before {
+    left: -7px;
+}
+.coupon-wave-right::after {
+    right: -7px;
+}
+.coupon-info {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 5px;
+    padding-bottom: 1.5rem;
+    position: relative;
+    min-width: 15rem;
+}
+.coupon-info-right-dashed {
+    border-right: 2px dashed white;
+}
+.coupon-info-right-solid {
+    border-right: 2px solid white;
+}
+/* 使用两个边框为圆角的白色div制造半圆缺角，有个缺点是这个缺角必须与背景色相同（clip-path不好弄） */
+.coupon-hole::before, .coupon-hole::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    right: -.5rem;
+}
+.coupon-info::before {
+    top: -.5rem;
+}
+.coupon-info::after {
+    bottom: -.5rem;
+}
+.coupon-info>div {
+    margin-bottom: .2rem;
+}
+.coupon-price {
+    font-size: 250%;
+    font-weight: bold;
+}
+.coupon-price>span {
+    font-size: 40%;
+    margin-left: .5rem;
+    font-weight: normal;
+}
+.coupon-get {
+    padding: 1rem;
+    /** 这里使用flex是为了让文字居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 5rem;
+    position: relative;
+}
+.coupon-get>.coupon-desc {
+    font-size: 150%;
+    margin-bottom: .5rem;
+    font-weight: bold;
+}
+
+.coupon {
+    display: inline-flex;
+    color: white;
+    position: relative;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    margin: 1rem;
+    /** 这里不能用百分号，因为百分号是分别相对宽和高计算的，会导致弧度不同  */
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    overflow: hidden;
+}
+
+.coupon-red-gradient {
+    background-image: linear-gradient(150deg, #D24161 50%, #D24161D8 50%);
+    height: 100px;
+}
+.choose-coupon{
+    margin-top: 41px;
+    width: 18px;
+    height: 18px;
+}
+.tick{
+    margin-top: 20px;
 }
 </style>
