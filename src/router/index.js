@@ -91,7 +91,14 @@ const router = createRouter({
         {
           path:'couponsManagement',
           meta:{title:'优惠券管理'},
+          redirect:'/memberInfo/couponsManagement/couponInfo',
           component: () => import('@/components/memberInfo/CouponsManagement.vue'),
+          children:[
+            {
+              path:'couponInfo',
+              component: () => import('@/components/memberInfo/CouponInfo.vue'),
+            }
+          ]
         },
         {
           path:'infoManagement',
