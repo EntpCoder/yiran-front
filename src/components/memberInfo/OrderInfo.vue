@@ -49,8 +49,8 @@
                             <div class="order-state">
                                 <span class="red">未支付</span>
 
-                                <a href="order-detail.html" target="_blank"
-                                    mars_sead="account_order_detail_btn">订单详情</a>
+                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
                                 <p>
@@ -70,8 +70,8 @@
                             <div class="order-state">
                                 <span class="green">已支付</span>
 
-                                <a href="order-detail.html" target="_blank"
-                                    mars_sead="account_order_detail_btn">订单详情</a>
+                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
 
@@ -90,8 +90,8 @@
                             <div class="order-state">
                                 <span class="green">已取消</span>
 
-                                <a href="order-detail.html" target="_blank"
-                                    mars_sead="account_order_detail_btn">订单详情</a>
+                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
 
@@ -104,8 +104,8 @@
                             <div class="order-state">
                                 <span class="green">已发货</span>
 
-                                <a href="order-detail.html" target="_blank"
-                                    mars_sead="account_order_detail_btn">订单详情</a>
+                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
                                 <div class="confirmSign-content J-confirmSign-content">
@@ -120,8 +120,8 @@
                         <template v-if="o.orderState == 4">
                             <div class="order-state">
                                 <span class="gray">已签收</span>
-                                <a href="order-detail.html" target="_blank"
-                                    mars_sead="account_order_detail_btn">订单详情</a>
+                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
 
