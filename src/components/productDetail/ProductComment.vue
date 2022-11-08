@@ -63,10 +63,12 @@
                 <img id="usercomentimg" :src="c.img">
               </div>
             </div>
-            <div class="great">
-              <span>赞</span>
+            <div class="great" @click="isGreat()">
+              <span v-if="!Great">赞</span>
+              <span v-if="Great">取消赞</span>
               <div>
-                <img id="satisfactionScore" src="/svg/great-img.svg">
+                <img v-if="!Great" id="satisfactionScore" src="/svg/great-img.svg">
+                <img v-if="Great" id="satisfactied" src="/svg/已赞.svg">
               </div>
             </div>
           </div>
@@ -89,6 +91,8 @@ onMounted(() => {
 const data = reactive({
   comment:{}
 });
+// 点赞设为false
+let Great=ref(false)
 // 评论对象
 let comments =ref([])
 // 获取路由中的商品id
@@ -102,10 +106,17 @@ console.log(proId)
 function getCommentByproId(){
   commentApi.getCommentByproId(proId.value).then(
     response=>{
+      console.log(response)
       data.comment=response.data
       comments.value=response.data.ok
     }
   )
+}
+function isGreat(){
+  Great.value=!Great.value
+  // if(Great.value){
+    
+  // }
 }
 </script>
   
@@ -331,5 +342,9 @@ function getCommentByproId(){
 #satisfactionScore{
   height: 14px;
   width: 14px;
+}
+#satisfactied{
+  width: 19px;
+  height: 19px;
 }
 </style>
