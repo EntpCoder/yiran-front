@@ -184,7 +184,7 @@ let couponList = ref([])
 // 勾选的购物车id
 let cartCheckedIds = []
 // 选择优惠券id
-let couponCheckedId = []
+let couponCheckedId = ref()
 // router
 const router = useRouter()
 // 页面挂挂载完毕执行
@@ -220,11 +220,11 @@ function choosexiaogou(coupon){
     couponList.value.forEach(c =>{
         if(coupon === c && c.isChecked == true){
             c.isChecked = false
-            couponCheckedId = []
+            couponCheckedId.value = (function () { return; })(); 
         }
         else if(coupon === c && c.isChecked == false){
             c.isChecked = true
-            couponCheckedId = c.receiveId
+            couponCheckedId.value = c.receiveId
         }
         else {
             c.isChecked = false
@@ -263,7 +263,7 @@ function goConfirmOrder(){
     cartList.value.filter(c => c.isChecked).map(c => {
         cartCheckedIds.push(c.cartId)
     })
-    router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds,receiveCouponId:couponCheckedId}})
+    router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds,receiveCouponId:couponCheckedId.value}})
 }
 
 </script>

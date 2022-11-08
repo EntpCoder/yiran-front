@@ -124,6 +124,7 @@ const orderType = ref(route.query.type)
 // 当路由变化时重新加载数据
 watch(() => router.currentRoute.value.fullPath, () => {
     orderType.value = route.query.type
+    // 加载数据
 }, { immediate: true }
 )
 </script>
