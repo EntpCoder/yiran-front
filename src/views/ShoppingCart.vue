@@ -143,7 +143,7 @@
                                 <div class="coupon-price">¥{{c.discountAmount}}<span>优惠券</span></div>
                                 <div class="coupon-description">订单满{{c.fullMoney}}元</div>
                             </div>
-                            <embed class="tick" width="50px" height="50px" src="/svg/choose.svg" v-if="c.isChecked"/>
+                            <embed class="tick" width="50px" height="50px" src="/svg/choose.svg" v-if="c.isChecked" />
                         </div>
                     </div>
                 </div>
@@ -183,6 +183,8 @@ let data = reactive({ isLoad: true, sumPrice: 0.0 })
 let couponList = ref([])
 // 勾选的购物车id
 let cartCheckedIds = []
+// 选择优惠券id
+let couponCheckedId = ref()
 // router
 const router = useRouter()
 // 页面挂挂载完毕执行
@@ -206,7 +208,7 @@ function chooseCoupon() {
     usec.value = !usec.value
     couponApi.getUsableCoupon().then(
         response => {
-            couponList.value = reactive(response.data.couponList)
+            couponList.value = reactive(response.data.usableCouponList)
             couponList.value.forEach(coupon => {
                 if (!coupon.default) { coupon.isChecked = false }
             });
@@ -216,9 +218,18 @@ function chooseCoupon() {
 //优惠券小钩
 function choosexiaogou(coupon){
     couponList.value.forEach(c =>{
-        if(coupon === c && c.isChecked == true){c.isChecked = false}
-        else if(coupon === c && c.isChecked == false){c.isChecked = true}
-        else {c.isChecked = false}
+        if(coupon === c && c.isChecked == true){
+            c.isChecked = false
+            couponCheckedId.value = (function () { return; })(); 
+        }
+        else if(coupon === c && c.isChecked == false){
+            c.isChecked = true
+            couponCheckedId.value = c.receiveId
+        }
+        else {
+            c.isChecked = false
+            
+        }
     })
 }
 // 请求购物车数据
@@ -252,7 +263,7 @@ function goConfirmOrder(){
     cartList.value.filter(c => c.isChecked).map(c => {
         cartCheckedIds.push(c.cartId)
     })
-    router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds}})
+    router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds,receiveCouponId:couponCheckedId.value}})
 }
 
 </script>

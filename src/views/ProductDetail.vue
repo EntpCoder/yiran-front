@@ -191,7 +191,7 @@ import cookie from "js-cookie"
 import collectionApi from '@/api/collections.js'
 
 import { ref, onBeforeMount, reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 // 定义颜色列表
 let colorList = ref([])
 // 定义尺码列表
@@ -202,6 +202,7 @@ let proImageList = ref([])
 let iscollect = ref(false)
 
 const route = useRoute()
+const router = useRouter()
 const proId = ref()
 // 获取路由中的商品id
 proId.value = route.params.id
@@ -259,7 +260,15 @@ function getProById() {
 function addCartBtn() {
   cartApi.addCart(proInfoId.value, num.value)
     .then(response => {
-      console.log(response)
+      if(response.code === 200){
+        router.push({path:'/cart'})
+      }else{
+        alert("没有该颜色或者没库存啦~~换一个试试呢？")
+      }
+    },
+    error=>{
+      alert("没有该颜色或者没库存啦~~换一个试试呢？")
+      console.log(error)
     })
 }
 // 选择尺寸

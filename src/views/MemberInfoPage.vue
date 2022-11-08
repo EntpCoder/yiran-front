@@ -119,10 +119,9 @@ import SecondHeader from '@/components/SecondHeader.vue'
     margin-right: auto;
     padding-top: 24px;
     padding-bottom: 24px;
-    background: #f5f6f8 url(../images/myInfo-layout-bg.png) center 0 no-repeat;
-    min-height: 600px;
+    background: rgb(245,246,248) url(/images/myInfo-layout-bg.png) center 0 no-repeat;
+    height: 600px;
 }
-
 .m-content {
     margin-left: 250px;
 }

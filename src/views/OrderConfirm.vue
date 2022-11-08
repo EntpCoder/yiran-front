@@ -288,7 +288,7 @@ let cartIdSList = ref([])
 // 被选中的地址id
 let checkAddressId
 // 用户使用的优惠券id
-let receiveCouponId = "1576928213862010881"
+let receiveCouponId = route.query.receiveCouponId
 // 优惠券优惠金额
 let couponDiscountAmount = ref(0)
 // 提交订单时是否在加载
