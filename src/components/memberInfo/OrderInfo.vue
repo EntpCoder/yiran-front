@@ -3,113 +3,138 @@
     <div class="layui-tab-item layui-show">
         <div class="col-name">
             <div class="goods">商品</div>
-            <div class="total">订单金额</div>
+            <div class="total">单价</div>
             <div class="state">订单状态</div>
             <div class="control">操作</div>
         </div>
+        <template v-if="orderList.length === 0">
+            <h2>暂无订单</h2>
+        </template>
         <!-- ======== -->
         <div class="order-list-info">
-            <div class="order-hd">
-                <i class="ii-te"></i>
-                <span class="num">
-                    订单号：
-                    <a href="">22082784137477</a>
-                </span>
-                <span class="num order-gen-date">2022-08-27 15:40:30</span>
-            </div>
-            <div class="order-bd">
-                <div class="order-goods">
-                    <div class="good">
-                        <a href="">
-                            <img src="/images/temp/订单图片.jpg" width="50" height="63" alt>
-                        </a>
-                        <div class="goods-info">
-                            <div class="goods-name">
-                                <a href="" target="_blank" class="name"
-                                    title="JACK&amp;JONES 纯棉立领条纹春夏男装七分袖衬衫衣">JACK&amp;JONES
-                                    纯棉立领条纹春夏男装七分袖衬衫衣</a>
-                                <span class="size">L</span>
-                            </div>
-                            <div class="goods-num">
-                                <span class="num">×1</span>
+            <template v-for="o in orderList" :key="o.orderId">
+                <div class="order-hd">
+                    <i class="ii-te"></i>
+                    <span class="num">
+                        订单号：
+                        <a href="">{{ o.orderId }}</a>
+                    </span>
+                    <span class="num order-gen-date">{{ o.placeTime }}</span>
+                </div>
+                <!-- 具体商品 -->
+                <template v-for="od in o.orderDetails" :key="od.orderDetailsId">
+                    <div class="order-bd">
+                        <div class="order-goods">
+                            <div class="good">
+                                <a href="">
+                                    <img :src="od.proMainImageAddress" width="50" height="63" alt>
+                                </a>
+                                <div class="goods-info">
+                                    <div class="goods-name">
+                                        <a href="" target="_blank" class="name"
+                                            title="JACK&amp;JONES 纯棉立领条纹春夏男装七分袖衬衫衣">{{od.proName}}</a>
+                                        <span class="size">尺码:{{od.sizeType}}-颜色:{{od.colorName}}</span>
+                                    </div>
+                                    <div class="goods-num">
+                                        <span class="num">×{{od.proNum}}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="order-price">
-                    <strong>69.00</strong>
-                </div>
-                <!-- 订单待付款样式 -->
-                <template v-if="orderType == 0">
-                    <div class="order-state">
-                        <span class="red">未支付</span>
-
-                        <a href="order-detail.html" target="_blank" mars_sead="account_order_detail_btn">订单详情</a>
-                    </div>
-                    <div class="order-control">
-                        <p>
-                            <a href="javascript:;" role="button" mars_sead="account_order_secondpay_btn"
-                                class="ui-btn-mini ui-btn1 J_showUnpaid">支付</a>
-                        </p>
-
-                    </div>
-                    <div class="order-other">
-                        <p>
-                            <a href="">取消订单</a>
-                        </p>
-                    </div>
-                </template>
-                <!-- 待发货样式 -->
-                <template v-if="orderType == 1">
-                    <div class="order-state">
-                        <span class="green">已审核</span>
-
-                        <a href="order-detail.html" target="_blank" mars_sead="account_order_detail_btn">订单详情</a>
-                    </div>
-                    <div class="order-control">
-
-                    </div>
-                    <div class="order-other">
-                        <p>
-                            <a href="">提醒发货</a>
-                        </p>
-                        <p>
-                            <a href="">取消订单</a>
-                        </p>
-                    </div>
-                </template>
-                <!-- 待收货样式 -->
-                <template v-if="orderType == 3">
-                    <div class="order-state">
-                        <span class="green">已发货</span>
-
-                        <a href="order-detail.html" target="_blank" mars_sead="account_order_detail_btn">订单详情</a>
-                    </div>
-                    <div class="order-control">
-                        <div class="confirmSign-content J-confirmSign-content">
-                            <p><a class="ui-btn-mini ui-btn2 J_confirmSign" data-ordersn="22082784137477" role="button"
-                                    href="javascript:;">确认收货</a></p>
+                        <div class="order-price">
+                            <strong>￥{{od.proPrice}}</strong>
                         </div>
+                        <!-- 订单待付款样式 -->
+                        <template v-if="o.orderState == 0">
+                            <div class="order-state">
+                                <span class="red">未支付</span>
 
-                    </div>
-                    <div class="order-other"></div>
-                </template>
-                <!-- 已完成样式 -->
-                <template v-if="orderType == 4">
-                    <div class="order-state">
-                        <span class="gray">已签收</span>
-                        <a href="order-detail.html" target="_blank" mars_sead="account_order_detail_btn">订单详情</a>
-                    </div>
-                    <div class="order-control">
+                                <a href="order-detail.html" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</a>
+                            </div>
+                            <div class="order-control">
+                                <p>
+                                    <a :href="`http://localhost:2177/pay/goAliPay/${o.orderId}`" role="button" mars_sead="account_order_secondpay_btn"
+                                        class="ui-btn-mini ui-btn1 J_showUnpaid">支付</a>
+                                </p>
 
-                    </div>
-                    <div class="order-other">
-                        <p>
-                            <a href="javascript:;" class="comment" role="button">评价</a>
-                        </p>
+                            </div>
+                            <div class="order-other">
+                                <p>
+                                    <a href="">取消订单</a>
+                                </p>
+                            </div>
+                        </template>
+                        <!-- 待发货样式 -->
+                        <template v-if="o.orderState == 1">
+                            <div class="order-state">
+                                <span class="green">已支付</span>
+
+                                <a href="order-detail.html" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</a>
+                            </div>
+                            <div class="order-control">
+
+                            </div>
+                            <div class="order-other">
+                                <p>
+                                    <a href="">提醒发货</a>
+                                </p>
+                                <p>
+                                    <a href="">取消订单</a>
+                                </p>
+                            </div>
+                        </template>
+                        <!-- 已取消样式 -->
+                        <template v-if="o.orderState == 2">
+                            <div class="order-state">
+                                <span class="green">已取消</span>
+
+                                <a href="order-detail.html" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</a>
+                            </div>
+                            <div class="order-control">
+
+                            </div>
+                            <div class="order-other">
+                            </div>
+                        </template>
+                        <!-- 待收货样式 -->
+                        <template v-if="o.orderState == 3">
+                            <div class="order-state">
+                                <span class="green">已发货</span>
+
+                                <a href="order-detail.html" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</a>
+                            </div>
+                            <div class="order-control">
+                                <div class="confirmSign-content J-confirmSign-content">
+                                    <p><a class="ui-btn-mini ui-btn2 J_confirmSign" data-ordersn="22082784137477"
+                                            role="button" href="javascript:;">确认收货</a></p>
+                                </div>
+
+                            </div>
+                            <div class="order-other"></div>
+                        </template>
+                        <!-- 已完成样式 -->
+                        <template v-if="o.orderState == 4">
+                            <div class="order-state">
+                                <span class="gray">已签收</span>
+                                <a href="order-detail.html" target="_blank"
+                                    mars_sead="account_order_detail_btn">订单详情</a>
+                            </div>
+                            <div class="order-control">
+
+                            </div>
+                            <div class="order-other">
+                                <p>
+                                    <a href="javascript:;" class="comment" role="button">评价</a>
+                                </p>
+                            </div>
+                        </template>
                     </div>
                 </template>
-            </div>
+            </template>
         </div>
 
     </div>
@@ -117,16 +142,27 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
-import { ref, watch } from 'vue'
+import { onBeforeMount, ref, watch } from 'vue'
+import orderApi from '@/api/order.js'
 const route = useRoute()
 const router = useRouter()
 const orderType = ref(route.query.type)
+const orderList = ref([])
 // 当路由变化时重新加载数据
 watch(() => router.currentRoute.value.fullPath, () => {
     orderType.value = route.query.type
     // 加载数据
 }, { immediate: true }
 )
+onBeforeMount(() => {
+    loadOrder()
+})
+function loadOrder() {
+    orderApi.getAllOrders().then(response => {
+        console.log(response)
+        orderList.value = response.data.ordersList
+    })
+}
 </script>
 
 <style scoped>

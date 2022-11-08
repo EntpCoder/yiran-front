@@ -17,5 +17,11 @@ export default {
             url: `/order/getOrderAndDetail/${orderId}`,
             method: 'get',
         })
+    },
+    getAllOrders(){
+        return request({
+            url: `/order/getAllOrders`,
+            method: 'get',
+        })
     }
 }
