@@ -2,18 +2,18 @@
     <!-- 短信验证登录 -->
     <div class="login-form2">
         <!-- ====短信登录=== -->
-
         <div class="login-user">
             <i class="user-img"><img src="/svg/phone.svg" alt=""></i>
-            <input type="text" class="user" placeholder="请输入要验证的手机号码">
+            <input type="text" class="user" v-model="phoneNum"  placeholder="请输入要验证的手机号码">
         </div>
         <div class="user-none"></div>
         <div class="row-2">
             <div class="code">
                 <i class="code-img"><img src="/svg/code.svg" alt=""></i>
-                <input type="password" class="pwd" placeholder="请输入验证码">
+                <input type="password" v-model="message" class="pwd" placeholder="请输入验证码">
             </div>
-            <a href="#">获取验证码</a>
+            <span @click="sendMsm()">获取验证码</span>
+            <span v-if="data.second > 0">请在{{data.second}}秒前输入验证码</span>
         </div>
         <div class="code-none"></div>
         <div class="login-tiaokuan">
@@ -24,7 +24,7 @@
             <a href="">《唯品支付用户服务协议》</a>
         </div>
         <div class="no-agree"></div>
-        <a href="../index.html" class="denglu">登录</a>
+        <span class="denglu" @click="toDengLu">登录</span>
         <div class="fooder">
             <div class="wechat">
                 <i class="i1"></i>
@@ -36,15 +36,90 @@
     </div>
 </template>
 
-<script>
-</script>
+<script setup>
+import mobilLoginApi from '@/api/mobilLogin.js'
+import { reactive,computed, onMounted,ref, onBeforeUnmount} from 'vue'
+const phoneNum = ref()
+//输入的验证码
+const message = ref()
+let timeDifference = ref(0)
+const data = reactive({
+    second:0,timmer:{}
+})
+//页面加载
+onMounted(() => {    
+})
+onBeforeUnmount(()=>{
+    // 销毁定时器
+    clearInterval(data.timmer)
+})
 
+//获取验证码
+function sendMsm(){
+    mobilLoginApi.sendMsm(phoneNum.value).then(        
+        response => {
+            if(reactive(response)){
+                //倒计时开始
+                sendMsgSeconds()
+            }
+            else{
+                alert("获取验证码失败")
+            }                
+        }
+    )
+}
+//点击登录，验证验证码是否失效，是否正确
+function toDengLu(){
+    mobilLoginApi.getMsm(phoneNum.value,message.value).then(
+        response => {
+            //如果对比结果为true
+            if(reactive(response)) {
+                //登录成功
+            }
+            else{
+                alert("登陆失败")
+            }
+        }
+    )
+}    
+   
+
+//倒计时60s
+function sendMsgSeconds(){
+    let beginDate = new Date()
+    let endDate = new Date()
+    endDate.setSeconds(beginDate.getSeconds()+60)
+    timeDifference.value = endDate.getTime() - beginDate.getTime()
+    data.timmer = setInterval(()=>{
+        if(timeDifference.value < 0){
+            clearInterval(data.timmer)
+        }
+        timeDifference.value = timeDifference.value - 1000
+    },1000)
+}
+// 计算秒
+data.second = computed({
+    get(){
+        let i = Math.floor(timeDifference.value / (1000)-(data.second))
+        return i
+    },
+    set(){
+
+    }
+})
+
+
+
+
+
+
+</script>
 <style scoped>
 /* =========================短信登陆 ============================ */
 /* =========用户区 */
 .login-bg .login-panel .login-form2 {
     width: 300px;
-    height: 450px;
+    height: 450px;  
     /* background-color: rgb(245, 229, 229); */
     margin: 0 auto;
     /* border :1px solid; */
@@ -151,7 +226,7 @@
     padding: 0 10px;
 }
 
-.login-bg .login-panel .login-form2 .row-2 a {
+.login-bg .login-panel .login-form2 .row-2 span {
     float: left;
     padding: 0;
     width: 80px;
