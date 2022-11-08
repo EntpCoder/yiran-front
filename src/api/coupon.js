@@ -14,7 +14,7 @@ export default {
   },
   getReceiveCoupon(couponId){
     return request({
-      url: `/coupon/getReceiveCoupon/?couponId=${couponId}`,
+      url: `/coupon/getReceiveCoupon?couponId=${couponId}`,
       method: 'get'
     })
   },
@@ -23,5 +23,17 @@ export default {
       url:`/coupon/getUsableCoupon`,
       method:`get`
     })
-  }
+  },
+  getFailureCoupon(){
+    return request({
+      url:`/coupon/getFailureCoupon`,
+      method:`get`
+    })
+  },
+  getUsedCoupon(){
+    return request({
+      url:`/coupon/getUsedCoupon`,
+      method:`get`
+    })
+  },
 }

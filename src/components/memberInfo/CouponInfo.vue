@@ -4,103 +4,82 @@
       <div class="layui-tab-item layui-show">
         <ul class="m-thead-list clearfix">
           <li class="l1">额度 | 明细</li>
-          <li class="l2">适用范围</li>
+          <li class="l2">主题</li>
           <li class="l3">有效期</li>
           <li class="l4">获取途径</li>
         </ul>
         <table class="m-coupons-table">
           <!-- 优惠券1 -->
-          <tr>
+          <tr v-for="usable in usableCouponList" :key="usable.receiveId">
             <th class="detail">
-              <p class="red">40元(满300减40元)</p>
-              <p class="gray">编号V089209896836</p>
+              <p class="red">{{usable.discountAmount}}元(满{{usable.fullMoney}}减{{usable.discountAmount}}元)</p>
             </th>
             <th class="range">
               <div>
-                <div class="range-text">品牌券 | 自然堂指定商品可用</div>
+                <div class="range-text">{{usable.subject}}</div>
               </div>
             </th>
             <th class="time">
-              <p class="time-line">2022-08-15 20:00:00至2022-09-15 23:59:59</p>
+              <p class="time-line">{{usable.startTime}}至{{usable.expirationTime}}</p>
             </th>
             <th class="way">
               <p>页面领券</p>
             </th>
           </tr>
           <!-- 优惠券2 -->
-          <tr>
-            <th class="detail">
-              <p class="red">40元(满300减40元)</p>
-              <p class="gray">编号V089209896836</p>
-            </th>
-            <th class="range">
-              <div>
-                <div class="range-text">品牌券 | 自然堂指定商品可用</div>
-              </div>
-            </th>
-            <th class="time">
-              <p class="time-line">2022-08-15 20:00:00至2022-09-15 23:59:59</p>
-            </th>
-            <th class="way">
-              <p>页面领券</p>
-            </th>
-          </tr>
         </table>
       </div>
     </template>
     <template v-if="couponType == 1">
-        111
-      <div class="layui-tab-item">
+      <div>
         <ul class="m-thead-list clearfix">
           <li class="l1">额度 | 明细</li>
-          <li class="l2">适用范围</li>
+          <li class="l2">主题</li>
           <li class="l3">使用时间</li>
           <li class="l4">订单号</li>
         </ul>
         <table class="m-coupons-table">
           <!-- 优惠券1 -->
-          <tr>
+          <tr v-for="used in usedCouponList" :key="used.receiveId">
             <th class="detail">
-              <p class="red">40元(满300减40元)</p>
-              <p class="gray">编号V089209896836</p>
+              <p class="red">{{used.discountAmount}}元(满{{used.fullMoney}}减{{used.discountAmount}}元)</p>
             </th>
             <th class="range">
               <div>
-                <div class="range-text">品牌券 | 自然堂指定商品可用</div>
+                <div class="range-text">{{used.subject}}</div>
               </div>
             </th>
             <th class="time">
-              <p class="time-line">2022-08-15 20:00:00至2022-09-15 23:59:59</p>
+              <p class="time-line">{{used.updateTime}}</p>
             </th>
             <th class="way">
-              <p><a href="" target="_blank">22082784137477</a></p>
+              <p><a href="" target="_blank">{{used.numbers}}</a></p>
             </th>
           </tr>
         </table>
       </div>
     </template>
     <template v-if="couponType == 2">
-      <div class="layui-tab-item">
+      <div>
         <ul class="m-thead-list clearfix">
           <li class="l1">额度 | 明细</li>
-          <li class="l2">适用范围</li>
+          <li class="l2">主题</li>
           <li class="l3">有效期</li>
           <li class="l4">获取途径</li>
         </ul>
         <table class="m-coupons-table">
-          <!-- 优惠券1 -->
-          <tr>
+          <!-- 优惠券 -->
+          <tr v-for="failure in failureCouponList" :key="failure.receiveId">
             <th class="detail">
-              <p class="red">40元(满300减40元)</p>
-              <p class="gray">编号V089209896836</p>
+              <p class="red">{{failure.discountAmount}}元(满{{failure.fullMoney}}减{{failure.discountAmount}}元)</p>
             </th>
             <th class="range">
               <div>
-                <div class="range-text">品牌券 | 自然堂指定商品可用</div>
+                <div class="range-text">{{failure.subject}}</div>
               </div>
             </th>
             <th class="time">
-              <p class="time-line">2022-08-15 20:00:00至2022-09-15 23:59:59</p>
+              <p class="time-line">{{failure.startTime}}至{{failure.expirationTime}}</p>
             </th>
             <th class="way">
               <p>页面领券</p>
@@ -114,18 +93,50 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
-import { ref, watch } from 'vue'
+import { ref, watch,reactive} from 'vue'
+import couponApi from '@/api/coupon.js'
 const route = useRoute()
 const router = useRouter()
 const couponType = ref(route.query.type)
+let usableCouponList = ref([])
+let failureCouponList = ref([])
+let usedCouponList = ref([])
 // 当路由变化时重新加载数据
 watch(() => router.currentRoute.value.fullPath, () => {
     couponType.value = route.query.type
+    getUsableCoupon()
+    getFailureCoupon()
+    getUsedCoupon()
 }, { immediate: true }
 )
+//获得可使用优惠券
+function getUsableCoupon(){
+    couponApi.getUsableCoupon().then(
+      response => {
+        usableCouponList.value= reactive(response.data.usableCouponList)
+      }
+    )
+}
+//获得已使用优惠券
+function getUsedCoupon(){
+    couponApi.getUsedCoupon().then(
+      response => {
+        usedCouponList.value= reactive(response.data.usedCouponList)
+        console.log(response)
+      }
+    )
+}
+//获得已失效优惠券
+function getFailureCoupon(){
+    couponApi.getFailureCoupon().then(
+      response => {
+        failureCouponList.value= reactive(response.data.failureCouponList)
+      }
+    )
+}
 </script>
 
-<style>
+<style scoped>
 .u-active-input {
   width: 525px;
 }
@@ -280,6 +291,7 @@ table {
 .m-coupons-table .detail .red {
   color: #f10180;
   font-weight: 700;
+  font-size: 13px;
 }
 .range-text {
   font-size: 12px;
