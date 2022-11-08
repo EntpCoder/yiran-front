@@ -212,7 +212,6 @@ function chooseCoupon() {
             couponList.value.forEach(coupon => {
                 if (!coupon.default) { coupon.isChecked = false }
             });
-            console.log(response)
         }
     )
 }
@@ -229,7 +228,7 @@ function choosexiaogou(coupon){
         }
         else {
             c.isChecked = false
-            couponCheckedId = c.receiveId
+            
         }
     })
 }
