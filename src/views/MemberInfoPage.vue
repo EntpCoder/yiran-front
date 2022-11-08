@@ -1,6 +1,7 @@
 <template>
     <YiRanHeader></YiRanHeader>
     <SecondHeader></SecondHeader>
+    <RightNavigation></RightNavigation>
     <!-- 头部 -->
     <nav class="main-nav">
         <div class="layui-row">

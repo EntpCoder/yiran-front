@@ -173,8 +173,7 @@
     <el-pagination background layout="prev, pager, next" 
     :total="200" 
     :default-page-size="5" 
-    v-model:currentPage="currentPage"
-    @current-change="handleCurrentChange"/>
+    v-model:currentPage="currentPage"/>
 </template>
 
 <script setup>
@@ -209,7 +208,6 @@ const route = useRoute()
 const router = useRouter()
 let brandId = route.query.brandId
 let kindId = route.query.kindId
-console.log(router)
 // 当路由变化时重新加载数据
 watch(() => router.currentRoute.value.fullPath, () => {
     brandId = route.query.brandId
@@ -217,8 +215,6 @@ watch(() => router.currentRoute.value.fullPath, () => {
     loadData()
 }, { immediate: true }
 )
-console.log("brandId:", brandId)
-console.log("kindId:", kindId)
 // 请求商品列表数据
 onMounted(() => {
     loadData()
@@ -238,7 +234,6 @@ function loadData() {
 function getProListByBrandId(brandId) {
     productApi.getProListByBrandId(brandId).then(
         response => {
-            console.log(response)
             productList.value = reactive(response.data.result)
         }
     )
@@ -248,7 +243,6 @@ function getProListByBrandId(brandId) {
 function getProListByKindId(kindId) {
     productApi.getProListByKindId(kindId).then(
         response => {
-            //console.log(response)
             productList.value = reactive(response.data.result)
         }
     )
@@ -321,7 +315,6 @@ function pinPaiCheck(b) {
     //调用筛选方法
     productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
-            console.log(response)
             if (response.code === 200)
                 productList.value = reactive(response.data.result)
             else
@@ -352,11 +345,9 @@ function kindCheck(k) {
     });
     k.spanClass = { 'checked': true }
     param[1] = k.menuId
-    console.log(param)
     //调用筛选方法
     productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
-            console.log(response)
             if (response.code === 200)
                 productList.value = reactive(response.data.result)
             else
@@ -377,11 +368,9 @@ function sizeCheck(s) {
     });
     s.spanClass = { 'checked': true }
     param[2] = s.sizeId
-    console.log(param)
     //调用筛选方法
     productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
-            console.log(response)
             if (response.code === 200)
                 productList.value = reactive(response.data.result)
             else
@@ -402,20 +391,15 @@ function colorCheck(c) {
     });
     c.spanClass = { 'checked': true }
     param[3] = c.colorId
-    console.log(param)
     //调用筛选方法
     productApi.getByBrandKindSizeColor(param[0], param[1], param[2], param[3]).then(
         response => {
-            console.log(response)
             if (response.code === 200)
                 productList.value = reactive(response.data.result)
             else
                 productList.value = []
         }
     )
-}
-function handleCurrentChange(num){
-        console.log(num)
 }
 </script>
 

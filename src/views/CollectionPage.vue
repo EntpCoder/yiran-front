@@ -20,20 +20,24 @@
                     <div class="layui-col-md3" v-for="c in collectionsVOList" :key="c.proId">
                         <div class="goods-item">
                             <div class="goods-item-inner">
-                                <img :src="c.proMainImageAddress" alt="">
+                                <router-link :to="`/productDetail/explainSize/${c.proId}`"><img
+                                        :src="c.proMainImageAddress" alt="" /></router-link>
                                 <div class="goods-item-price-row layui-row">
                                     <div class="temai-label layui-inline">特卖价</div>
-                                    <div class="goods-item-sale-price layui-inline">￥{{c.proPrice}}</div>
-                                    <div class="goods-item-original-price layui-inline"><del>￥{{c.sellingPrice}}</del></div>
-                                    <div class="goods-item-discount layui-inline">{{c.discount}}折</div>
+                                    <div class="goods-item-sale-price layui-inline">￥{{ c.proPrice }}</div>
+                                    <div class="goods-item-original-price layui-inline"><del>￥{{ c.sellingPrice }}</del>
+                                    </div>
+                                    <div class="goods-item-discount layui-inline">{{ c.discount }}折</div>
                                 </div>
                                 <div class="goods-item-product-row layui-row">
-                                    <div class="goods-item-name">{{c.brandName}} | {{c.describe}}</div>
+                                    <div class="goods-item-name">{{ c.brandName }} | {{ c.describe }}</div>
                                 </div>
-                                <button type="button" class="add-car layui-btn">
-                                    <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
-                                    加入购物车
-                                </button>
+                                <router-link :to="`/productDetail/explainSize/${c.proId}`">
+                                    <button type="button" class="add-car layui-btn">
+                                        <embed width="18px" height="18px" src="/svg/shop-bag.svg" />
+                                        查看商品
+                                    </button>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -49,7 +53,7 @@ import SecondHeader from "@/components/SecondHeader.vue";
 import ShopNavigation from "@/components/ShopNavigation.vue";
 import RightNavigation from "@/components/RightNavigation.vue";
 import collectionApi from '@/api/collections.js'
-import { reactive, ref,onBeforeMount} from 'vue'
+import { reactive, ref, onBeforeMount } from 'vue'
 
 let collectionsVOList = ref([])
 // 页面挂挂载完毕执行
@@ -57,10 +61,10 @@ onBeforeMount(() => {
     viewMyCollections()
 })
 
-function viewMyCollections(){
+function viewMyCollections() {
     collectionApi.viewMyCollections().then(
         response => {
-            collectionsVOList.value = reactive(response.data.collectionsVOList)         
+            collectionsVOList.value = reactive(response.data.collectionsVOList)
         }
     )
 }
@@ -141,9 +145,10 @@ function viewMyCollections(){
     border: 1px solid rgb(231, 231, 231);
     position: relative;
 }
-.goods-item .goods-item-inner img{
-    width:245px ;
-    height:245px;
+
+.goods-item .goods-item-inner img {
+    width: 245px;
+    height: 245px;
 }
 
 .goods-item:hover .goods-item-inner {
@@ -191,7 +196,8 @@ function viewMyCollections(){
 .add-car:hover {
     color: rgb(241, 1, 128);
 }
-.banner{
+
+.banner {
     width: 100%;
 }
 </style>

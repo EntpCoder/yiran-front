@@ -4,44 +4,49 @@
         <!-- ==============头部=============== -->
         <div class="head">
             <div class="head-center">
+
                 <div class="user">
                     <ul class="user-nav">
-                        <li class="user-cart">
-                            <i class="user-img"></i>
-                            <router-link to="/login">登录</router-link>
-                            <div class="user-list">
-                                <!-- 上方登录片段-->
-                                <div class="user-hedar">
-                                    <img src="/images/tx.png">
-                                    <a href="pages/login.html">欢迎回来[请登录]</a>
+                        <template v-if="!isLogin">
+                            <li class="user-cart">
+                                <i class="user-img"></i>
+                                <router-link to="/login">登录</router-link>
+                                <div class="user-list">
+                                    <!-- 上方登录片段-->
+                                    <div class="user-hedar">
+                                        <img src="/images/tx.png">
+                                        <a href="pages/login.html">欢迎回来[请登录]</a>
+                                    </div>
+                                    <div class="user-uzi">
+                                        <ul class="user-uzi-a">
+                                            <li><a href="#">我的账户</a></li>
+                                            <li><a href="#">零钱</a></li>
+                                            <li><a href="#">我的唯品币</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="user-uzi">
+                                        <ul class="user-uzi-a">
+                                            <li><a href="#">我的订单</a></li>
+                                            <li><a href="#">我的优惠券</a></li>
+                                            <li><a href="#">唯品金融</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="user-uzi">
-                                    <ul class="user-uzi-a">
-                                        <li><a href="#">我的账户</a></li>
-                                        <li><a href="#">零钱</a></li>
-                                        <li><a href="#">我的唯品币</a></li>
-                                    </ul>
-                                </div>
-                                <div class="user-uzi">
-                                    <ul class="user-uzi-a">
-                                        <li><a href="#">我的订单</a></li>
-                                        <li><a href="#">我的优惠券</a></li>
-                                        <li><a href="#">唯品金融</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        </template>
                     </ul>
                 </div>
-                <ul class="user-ul">
-                    <li>退出登录</li>
-                </ul>
 
-                <a href="/register" class="zhuce">
-                    <i class="zhuce-img"></i>
-                    <span class="zhuce-name">注册</span>
-                </a>
-
+                <a href="javascript:;" class="zhuce" @click="quitLogin" v-if="isLogin">
+                        <i class="zhuce-img"></i>
+                        <span class="zhuce-name">退出登录</span>
+                    </a>
+                <template v-if="!isLogin">
+                    <a href="/register" class="zhuce">
+                        <i class="zhuce-img"></i>
+                        <span class="zhuce-name">注册</span>
+                    </a>
+                </template>
                 <a href="" class="qiandao">
                     <i class="qiandao-img"></i>
                     <span class="qiandao-name">签到有礼</span>
@@ -57,11 +62,20 @@
     </div>
 </template>
 <script setup>
-
+import { onMounted, ref } from "vue"
+import cookie from "js-cookie"
+const isLogin = ref(false)
+onMounted(() => {
+    if (cookie.get('user_token')) {
+        isLogin.value = true
+    }
+})
+function quitLogin(){
+    cookie.remove('user_token')
+    isLogin.value = false
+}
 </script>
 <style scoped>
-
-
 /*头部开始 */
 .head {
     width: 100%;

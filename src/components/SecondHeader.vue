@@ -24,26 +24,23 @@
                     <img src="/svg/sousuo.svg" alt="" class="sousuo-img" />
                 </router-link>
                 <div class="gouwuche">
-                    <ul class="header-right">
-                        <li class="cart">
-                            <img src="/svg/gouwuche.svg" class="gouwu-img">
-                            <router-link to="/cart">购物车
-                                <span>(0)</span>
-                            </router-link>
-                            <div class="cart-list">
-                                购物车中没有商品赶快去选购把！
-                            </div>
-                        </li>
-                    </ul>
+                    <router-link to="/cart">
+                        <ul class="header-right">
+                            <li class="cart">
+                                <img src="/svg/gouwuche.svg" class="gouwu-img">
+                                购物车
+                            </li>
+                        </ul>
+                    </router-link>
                 </div>
                 <div class="sousuo-a">
                     <ul class="sousuo-lift">
-                        <li><a href="#">衣服</a><span>|</span></li>
-                        <li><a href="#">衣服555</a><span>|</span></li>
-                        <li><a href="#">衣服555</a><span>|</span></li>
-                        <li><a href="#">衣服555</a><span>|</span></li>
-                        <li><a href="#">衣服555</a><span>|</span></li>
-                        <li><a href="#">衣服555</a></li>
+                        <li><router-link to="/search?s=牛仔裙">牛仔裙</router-link><span>|</span></li>
+                        <li><router-link to="/search?s=复古">复古</router-link><span>|</span></li>
+                        <li><router-link to="/search?s=牛仔裤">牛仔裤</router-link><span>|</span></li>
+                        <li><router-link to="/search?s=毛衣">毛衣</router-link><span>|</span></li>
+                        <li><router-link to="/search?s=2022">2022</router-link><span>|</span></li>
+                        <li><router-link to="/search?s=百褶裙">百褶裙</router-link></li>
                     </ul>
                 </div>
 
@@ -231,37 +228,7 @@ const search = ref('')
     background-color: #FFF;
     color: #424242;
 }
-
-/*单独挑出来悬停到A标签上*/
-.cart:hover>a {
-    color: #424242;
-}
-
-/*购物车单独悬停*/
-.cart-list {
-    z-index: 950;
-    position: absolute;
-    right: 0;
-    top: 40px;
-    width: 316px;
-    /* 隐藏元素的高度设置为0 */
-    height: 0;
-    /*垂直居中*/
-    line-height: 100px;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
-    color: #424242;
-    font-size: 12px;
-    transition: all .3s;
-    /*高度为0时 隐藏溢出的文字*/
-    overflow: hidden;
-}
-
-.cart:hover>.cart-list {
-    height: 100px;
-}
-
-/*购物车结束*/
+/* 购物车结束 */
 .fu-header .sousuo input[type=text] {
     margin-top: 5px;
     margin-left: 10px;

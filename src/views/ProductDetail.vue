@@ -228,7 +228,6 @@ function chaxun() {
   if (cookie.get('user_token')) {
     collectionApi.chaxun(proId.value)
       .then(response => {
-        console.log(response.data)
         if (response.data.iscollect) {
           iscollect.value = true
         }
@@ -241,7 +240,6 @@ function chaxun() {
 function getProById() {
   prodetailApi.getproductencode(proId.value)
     .then(response => {
-      console.log(response);
       data.product = response.data.result;
       // 定义colorList对象
       colorList.value = response.data.result.colorList
@@ -324,11 +322,11 @@ function changeColorsize(s) {
   iscollect.value = !iscollect.value
   if(iscollect.value){
     collectionApi.addCollection(proId.value).then(response=>{
-      console.log(response)
+      if(response.code == 200) return;
     })
   }else{
     collectionApi.unAddCollection(proId.value).then(response=>{
-      console.log(response)
+      if(response.code == 200) return;
     })
   }
 }

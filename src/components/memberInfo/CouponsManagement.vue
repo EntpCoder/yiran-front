@@ -43,7 +43,6 @@ function loadData(){
 function xuanze(c){
     couponApi.getReceiveCoupon(c.couponId).then(
         response => {
-            console.log(response)
             receiveCoupon.value = reactive(response.data.receiveCoupon)
         }
     )
@@ -109,7 +108,7 @@ input{
 .u-wavy-line {
     height: 10px;
     margin-top: -1px;
-    background: url(../images/bg-cou-add.png) no-repeat;
+    background: url(/images/bg-cou-add.png) no-repeat;
 }
 .m-panel-modules {
     background-color: #fff;
