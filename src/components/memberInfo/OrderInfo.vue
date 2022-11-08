@@ -17,7 +17,7 @@
                     <i class="ii-te"></i>
                     <span class="num">
                         订单号：
-                        <a href="">{{ o.orderId }}</a>
+                        <a href="">{{ o.numbers }}</a>
                     </span>
                     <span class="num order-gen-date">{{ o.placeTime }}</span>
                 </div>
@@ -32,7 +32,7 @@
                                 <div class="goods-info">
                                     <div class="goods-name">
                                         <a href="" target="_blank" class="name"
-                                            title="JACK&amp;JONES 纯棉立领条纹春夏男装七分袖衬衫衣">{{od.proName}}</a>
+                                            :title="od.proName">{{od.proName}}</a>
                                         <span class="size">尺码:{{od.sizeType}}-颜色:{{od.colorName}}</span>
                                     </div>
                                     <div class="goods-num">
@@ -49,7 +49,7 @@
                             <div class="order-state">
                                 <span class="red">未支付</span>
 
-                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                <router-link to="/memberInfo/orderdetail"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -70,7 +70,7 @@
                             <div class="order-state">
                                 <span class="green">已支付</span>
 
-                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                <router-link to="/memberInfo/orderdetail"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -90,7 +90,7 @@
                             <div class="order-state">
                                 <span class="green">已取消</span>
 
-                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                <router-link :to="`/memberInfo/orderdetail?orderId=${o.orderId}`"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -104,7 +104,7 @@
                             <div class="order-state">
                                 <span class="green">已发货</span>
 
-                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                <router-link to="/memberInfo/orderdetail"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -120,7 +120,7 @@
                         <template v-if="o.orderState == 4">
                             <div class="order-state">
                                 <span class="gray">已签收</span>
-                                <router-link to="/memberInfo/orderdetail" target="_blank"
+                                <router-link to="/memberInfo/orderdetail"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -151,16 +151,27 @@ const orderList = ref([])
 // 当路由变化时重新加载数据
 watch(() => router.currentRoute.value.fullPath, () => {
     orderType.value = route.query.type
+    if(orderType.value){
+        loadOrderByStatus()
+    }else{
+        loadAllOrder() 
+    }
     // 加载数据
 }, { immediate: true }
 )
 onBeforeMount(() => {
-    loadOrder()
+    loadAllOrder()
 })
-function loadOrder() {
+function loadAllOrder() {
     orderApi.getAllOrders().then(response => {
         console.log(response)
         orderList.value = response.data.ordersList
+    })
+}
+// 根据订单状态查询订单
+function loadOrderByStatus(){
+    orderApi.getOrdersByStatus(orderType.value).then(response => {
+        orderList.value = response.data.QueryStatusList
     })
 }
 </script>
@@ -220,7 +231,7 @@ function loadOrder() {
 }
 
 .ii-te {
-    background-image: url(../images/sprites.png);
+    background-image: url(/images/sprites.png);
     background-position: -242px -205px;
     width: 18px;
     height: 18px;

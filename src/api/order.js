@@ -23,5 +23,11 @@ export default {
             url: `/order/getAllOrders`,
             method: 'get',
         })
+    },
+    getOrdersByStatus(orderState){
+        return request({
+            url: `/order/getOrdersByStatus?orderState=${orderState}`,
+            method: 'get',
+        })
     }
 }

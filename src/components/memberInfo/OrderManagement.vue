@@ -56,7 +56,7 @@
     position: absolute;
     left: 15px;
     top: 15px;
-    background-image: url(../images/sprites.png);
+    background-image: url(/images/sprites.png);
     background-position: -145px -174px;
     width: 21px;
     height: 21px;
