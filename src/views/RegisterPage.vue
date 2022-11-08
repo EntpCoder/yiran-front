@@ -19,15 +19,19 @@
                 <div class="error"></div>
                 <div class="login-user">
                     <i class="user-img"><img src="/svg/regist-user.svg" alt=""></i>
-                    <input type="text" class="user" placeholder="请输入手机号码">
+                    <input type="text" class="user" placeholder="请输入手机号码" v-model="phoneNum">
                 </div>
                 <div class="login-pwd">
                     <i class="pwd-img"><img src="/svg/login-pwd.svg" alt=""></i>
-                    <input type="password" class="pwd" placeholder="密码">
+                    <input type="password" class="pwd" placeholder="密码" v-model="password">
                 </div>
-                <div class="login-pwd1">
-                    <i class="pwd-img"><img src="/svg/login-pwd.svg" alt=""></i>
-                    <input type="password" class="pwd" placeholder="请再次输入密码">
+                <div class="row-2">
+                    <div class="code">
+                        <i class="code-img"><img src="/svg/code.svg" alt=""></i>
+                        <input type="password" v-model="message" class="pwd" placeholder="请输入验证码">
+                    </div>
+                    <span v-if="data.second <= 0" @click="sendMsm">获取验证码</span>
+                    <span v-if="data.second > 0">{{data.second}}秒</span>
                 </div>
                 <div class="pwd-none"></div>
                 <!-- ===============底部 -->
@@ -39,17 +43,150 @@
                     <a href="">《唯品支付用户服务协议》</a>
                 </div>
                 <div class="no-agree"></div>
-                <a href="../pages/login.html" class="zhuce">立即注册</a>
+                <span class="zhuce"  @click="toRegister">立即注册</span>
             </div>
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
+import registerApi from '@/api/register.js'
+import { reactive,computed,ref, onBeforeUnmount} from 'vue'
+const phoneNum = ref()
+const message = ref()
+const password =ref()
+//输入的验证码
+let timeDifference = ref(0)
+const data = reactive({
+    second:-1,timmer:{}
+})
+onBeforeUnmount(()=>{
+    // 销毁定时器
+    clearInterval(data.timmer)
+})
+
+//获取验证码
+function sendMsm(){
+    registerApi.sendMsm(phoneNum.value).then(        
+        response => {
+            if(reactive(response.data.result)){
+                //倒计时开始
+                sendMsgSeconds()
+            }
+            else{
+                alert("获取验证码失败,请一分钟后再试")
+            }                
+        }
+    )
+}
+
+function toRegister(){
+    registerApi.toRegister(phoneNum.value,password.value,message.value).then(
+        response => {
+            console.log(phoneNum.value,message.value,password.value)
+            //如果对比结果为true
+            if(reactive(response.data.result)) {
+                window.location.href ="/"
+            }
+            else{
+                alert("注册失败")
+            }
+        }
+    )
+}
+
+//倒计时60s
+function sendMsgSeconds(){
+    let beginDate = new Date()
+    let endDate = new Date()
+    endDate.setSeconds(beginDate.getSeconds()+60)
+    timeDifference.value = endDate.getTime() - beginDate.getTime()
+    data.timmer = setInterval(()=>{
+        if(timeDifference.value < 0){
+            clearInterval(data.timmer)
+        }
+        timeDifference.value = timeDifference.value - 1000
+    },1000)
+}
+// 计算秒
+data.second = computed({
+    get(){
+        let i = Math.floor(timeDifference.value)/1000
+        return i
+    },
+    set(){
+
+    }
+})
+
+
+
+
+
 </script>
 
 <style scoped>
 /* ===============头部导航================== */
+.regist-bg .login-form .row-2 {
+    width: 300px;
+    height: 40px;
+}
+.regist-bg .login-form .row-2 .code {
+    padding-left: 40px;
+    margin-left: 40px;
+    position: relative;
+    top: 100px;
+    width: 150px;
+    height: 40px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    float: left;
+}
+
+.regist-bg .login-form .row-2 .code .code-img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    /* border: 1px solid; */
+    position: absolute;
+    top: 5px;
+    left: 11px;
+    float: left;
+
+}
+
+.regist-bg .login-form .row-2 .code input[type=password] {
+    width: 120px;
+    height: 20px;
+    position: absolute;
+    /* background-color: rgb(137, 102, 102); */
+    background-color: #fff;
+    top: 13px;
+    left: 40px;
+    float: left;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+}
+
+.regist-bg .login-form .row-2 span {
+    float: left;
+    padding: 0;
+    width: 80px;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    color: #e00078;
+    background-color: #fcedf2;
+    border: 1px solid #ffbee0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 58px;
+    margin-left: 250px;
+    text-decoration: none;
+}
 .nav {
     position: relative;
     z-index: 1;
@@ -223,17 +360,7 @@
     border-radius: 10px;
 }
 
-.regist-bg .regist-panel .login-form .login-pwd1 {
-    padding-left: 40px;
-    margin-left: 40px;
-    position: relative;
-    top: 110px;
-    width: 248px;
-    height: 40px;
-    line-height: 32px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
+
 
 .regist-bg .regist-panel .login-form .login-pwd .pwd-img {
     display: block;
@@ -247,17 +374,6 @@
 
 }
 
-.regist-bg .regist-panel .login-form .login-pwd1 .pwd-img {
-    display: block;
-    width: 20px;
-    height: 20px;
-    /* border: 1px solid; */
-    position: absolute;
-    top: 10px;
-    left: 9px;
-    float: left;
-
-}
 
 .regist-bg .regist-panel .login-form .login-pwd input[type=password] {
     width: 220px;
@@ -273,19 +389,6 @@
     ;
 }
 
-.regist-bg .regist-panel .login-form .login-pwd1 input[type=password] {
-    width: 220px;
-    height: 20px;
-    position: absolute;
-    top: 13px;
-    left: 40px;
-    float: left;
-    outline: none;
-    border: none;
-    padding: 0 10px;
-    background-color: #fff;
-    ;
-}
 
 /* 两次密码输入不一致 */
 .regist-bg .regist-panel .login-form .pwd-none {

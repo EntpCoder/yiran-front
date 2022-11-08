@@ -12,8 +12,8 @@
                 <i class="code-img"><img src="/svg/code.svg" alt=""></i>
                 <input type="password" v-model="message" class="pwd" placeholder="请输入验证码">
             </div>
-            <span @click="sendMsm()">获取验证码</span>
-            <span v-if="data.second > 0">请在{{data.second}}秒前输入验证码</span>
+            <span @click="sendMsm()" v-if="data.second <= 0">获取验证码</span>
+            <span v-if="data.second > 0">{{data.second}}秒</span>
         </div>
         <div class="code-none"></div>
         <div class="login-tiaokuan">
@@ -31,24 +31,23 @@
                 <span class="weixin-img"></span>
                 <i class="i2"></i>
             </div>
-            <router-link to="/register" class="register">免费注册</router-link>
+            <router-link to="/register" class="register" >免费注册</router-link>
         </div>
     </div>
 </template>
 
 <script setup>
 import mobilLoginApi from '@/api/mobilLogin.js'
-import { reactive,computed, onMounted,ref, onBeforeUnmount} from 'vue'
+
+import { reactive,computed,ref, onBeforeUnmount} from 'vue'
 const phoneNum = ref()
 //输入的验证码
 const message = ref()
 let timeDifference = ref(0)
 const data = reactive({
-    second:0,timmer:{}
+    second:-1,timmer:{}
 })
 //页面加载
-onMounted(() => {    
-})
 onBeforeUnmount(()=>{
     // 销毁定时器
     clearInterval(data.timmer)
@@ -58,26 +57,27 @@ onBeforeUnmount(()=>{
 function sendMsm(){
     mobilLoginApi.sendMsm(phoneNum.value).then(        
         response => {
-            if(reactive(response)){
+            if(reactive(response.data.result)){
                 //倒计时开始
                 sendMsgSeconds()
             }
             else{
-                alert("获取验证码失败")
+                alert("获取验证码失败,请一分钟后再试")
             }                
         }
     )
 }
 //点击登录，验证验证码是否失效，是否正确
 function toDengLu(){
-    mobilLoginApi.getMsm(phoneNum.value,message.value).then(
+    mobilLoginApi.getMsg(phoneNum.value,message.value).then(
         response => {
+            console.log(phoneNum.value,message.value)
             //如果对比结果为true
-            if(reactive(response)) {
-                //登录成功
+            if(reactive(response.data.result)) {
+                window.location.href ="/"
             }
             else{
-                alert("登陆失败")
+                alert("登陆失败，请重新登录")
             }
         }
     )
@@ -100,7 +100,7 @@ function sendMsgSeconds(){
 // 计算秒
 data.second = computed({
     get(){
-        let i = Math.floor(timeDifference.value / (1000)-(data.second))
+        let i = Math.floor(timeDifference.value)/1000
         return i
     },
     set(){
