@@ -229,7 +229,7 @@ function choosexiaogou(coupon){
         }
         else {
             c.isChecked = false
-            couponCheckedId = []
+            couponCheckedId = c.receiveId
         }
     })
 }
