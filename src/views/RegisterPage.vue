@@ -11,7 +11,7 @@
                 <div class="regist-acc">会员注册</div>
                 <div class="already-acc">
                     <span>已注册</span>
-                    <router-link to="/login">可直接登录</router-link >
+                    <span class="todenglu"><router-link to="/login">可直接登录</router-link ></span>
                 </div>
             </div>
             <!-- =============注册form====================== -->
@@ -67,29 +67,39 @@ onBeforeUnmount(()=>{
 
 //获取验证码
 function sendMsm(){
-    registerApi.sendMsm(phoneNum.value).then(        
-        response => {
-            if(response.data.result){
-                //倒计时开始
-                sendMsgSeconds()
+    if(phoneNum.value.length == 11){
+        registerApi.sendMsm(phoneNum.value).then(        
+            response => {
+                if(response.code === 200){
+                    //倒计时开始
+                    sendMsgSeconds()
+                    alert("验证码发送成功")
+                }
+                else{
+                    alert("获取验证码失败,请一分钟后再试")
+                }                
             }
-            else{
-                alert("获取验证码失败,请一分钟后再试")
-            }                
-        }
-    )
+        )
+    }
+    else{
+        phoneNum.value = ''
+        alert("请输入正确的手机号码")
+    }
+    
 }
 
 function toRegister(){
     registerApi.toRegister(phoneNum.value,password.value,message.value).then(
         response => {
-            console.log(phoneNum.value,message.value,password.value)
             //如果对比结果为true
-            if(response.data.result) {
-                window.location.href ="/"
+            if(response.code === 200) {
+                window.location.href ="./login/mobile"
             }
             else{
-                alert("注册失败")
+                phoneNum.value = ''
+                password.value = ''
+                message.value = ''
+                alert("验证码或手机号错误")
             }
         }
     )
@@ -130,6 +140,9 @@ data.second = computed({
 .regist-bg .login-form .row-2 {
     width: 300px;
     height: 40px;
+}
+a, body {
+  color: #e3219b;
 }
 .regist-bg .login-form .row-2 .code {
     padding-left: 40px;

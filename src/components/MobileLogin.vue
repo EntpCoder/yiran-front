@@ -56,17 +56,23 @@ onBeforeUnmount(()=>{
 
 //获取验证码
 function sendMsm(){
-    mobilLoginApi.sendMsm(user.phone).then(        
-        response => {
-            if(response.data.result){
-                //倒计时开始
-                sendMsgSeconds()
+    if(user.phone.length == 11){
+        mobilLoginApi.sendMsm(user.phone).then(        
+            response => {
+                if(response.data.result){
+                    //倒计时开始
+                    sendMsgSeconds()
+                }
+                else{
+                    alert("获取验证码失败,请一分钟后再试")
+                }                
             }
-            else{
-                alert("获取验证码失败,请一分钟后再试")
-            }                
-        }
-    )
+        )
+    }
+    else{
+        user.phone=''
+        alert("手机号码格式错误，请重新输入")
+    }
 }
 //点击登录，验证验证码是否失效，是否正确
 function toDengLu(){
@@ -74,7 +80,7 @@ function toDengLu(){
         response => {
             console.log(user.phone,message.value)
             //如果对比结果为true
-            if(response.data.result) {
+            if(response.code === 200) {
                 //根据user手机号返回token
                 mobilLoginApi.phoneLogin(user)
                 .then(response => {
@@ -147,6 +153,7 @@ data.second = computed({
     border-radius: 5px;
 
 }
+
 
 .login-bg .login-panel .login-form2 .login-user .user-img {
     display: block;
@@ -373,5 +380,8 @@ data.second = computed({
     float: left;
     padding-left: 75%;
     text-decoration: none;
+}
+.login-bg .login-panel .login-form2 .fooder .register[data-v-65e1816a]{
+    color: #ea097e;
 }
 </style>
