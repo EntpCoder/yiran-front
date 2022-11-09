@@ -69,7 +69,7 @@ onBeforeUnmount(()=>{
 function sendMsm(){
     registerApi.sendMsm(phoneNum.value).then(        
         response => {
-            if(reactive(response.data.result)){
+            if(response.data.result){
                 //倒计时开始
                 sendMsgSeconds()
             }
@@ -85,7 +85,7 @@ function toRegister(){
         response => {
             console.log(phoneNum.value,message.value,password.value)
             //如果对比结果为true
-            if(reactive(response.data.result)) {
+            if(response.data.result) {
                 window.location.href ="/"
             }
             else{

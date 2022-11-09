@@ -58,7 +58,7 @@ onBeforeUnmount(()=>{
 function sendMsm(){
     mobilLoginApi.sendMsm(user.phone).then(        
         response => {
-            if(reactive(response.data.result)){
+            if(response.data.result){
                 //倒计时开始
                 sendMsgSeconds()
             }
@@ -74,7 +74,7 @@ function toDengLu(){
         response => {
             console.log(user.phone,message.value)
             //如果对比结果为true
-            if(reactive(response.data.result)) {
+            if(response.data.result) {
                 //根据user手机号返回token
                 mobilLoginApi.phoneLogin(user)
                 .then(response => {
