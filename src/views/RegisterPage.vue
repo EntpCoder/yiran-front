@@ -30,7 +30,7 @@
                 <div class="row-2">
                     <div class="code">
                         <i class="code-img"><img src="/svg/code.svg" alt=""></i>
-                        <input type="password" v-model="message" class="pwd" placeholder="请输入验证码">
+                        <input type="text" v-model="message" class="pwd" placeholder="请输入验证码">
                     </div>
                     <span v-if="data.second <= 0" @click="sendMsm">获取验证码</span>
                     <span v-if="data.second > 0">{{data.second}}秒</span>
