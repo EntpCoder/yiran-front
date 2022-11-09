@@ -44,7 +44,7 @@
 }
 
 .nav .nav-san {
-    background-image: url("../images/maodian.png");
+    background-image: url("/images/maodian.png");
     background-position: 0 0;
     width: 304px;
     height: 100px;
