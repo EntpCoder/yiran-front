@@ -1,12 +1,12 @@
 <template>
     <p id="m-title">
-        <a href="my-info.html">我的唯品会</a>
+        <a href="my-info.html">我的依然</a>
         &nbsp;>&nbsp;订单管理
     </p>
     <div class="mad J-declare">
         <i class="i-horn"></i>
         <div class="J-declare-warning">
-            <p>安全提醒：唯品会不会以任何理由要求您提供银行卡信息或支付额外费用，请谨防钓鱼链接或诈骗电话。</p>
+            <p>安全提醒：依然-不会以任何理由要求您提供银行卡信息或支付额外费用，请谨防钓鱼链接或诈骗电话。</p>
             <p>*为保障您的信息安全，订单信息中的联系电话已被加密隐藏。</p>
         </div>
     </div>

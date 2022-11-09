@@ -21,9 +21,9 @@
         <div class="login-tiaokuan">
             <input type="checkbox">
             <strong>我已阅读并接受以下条款：</strong>
-            <a href="">《唯品会服务条款》</a>
-            <a href="">《唯品会隐私政策》</a>
-            <a href="">《唯品支付用户服务协议》</a>
+            <a href="">《依然服务条款》</a>
+            <a href="">《依然隐私政策》</a>
+            <a href="">《依然支付用户服务协议》</a>
         </div>
         <div class="no-agree"></div>
         <a href="javascript:;" class="denglu" @click="login">登录</a>

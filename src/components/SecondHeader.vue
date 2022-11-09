@@ -2,7 +2,7 @@
     <div class="fu-header">
         <div class="center-header">
             <router-link to="/">
-                <img src="/svg/viplogo.png" alt="" class="viplogo">
+                <img src="/images/logo.png" alt="" class="viplogo">
             </router-link>
             <div class="zhengpin">
                 <img src="/svg/zhengpin.svg" alt="" class="zhengpin-img">

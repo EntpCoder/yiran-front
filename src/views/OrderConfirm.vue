@@ -4,7 +4,7 @@
         <div class="layui-row">
             <div class="carlogo layui-col-md2">
                 <router-link to="/">
-                    <img class="toplogo" src="/images/checkoutHeader.png" />
+                    <img class="toplogo" src="/images/cartlogo.png" />
                 </router-link>
             </div>
             <div class="layui-col-md7 layui-col-md-offset3">
@@ -166,7 +166,7 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th><strong>唯品会 发货清单</strong></th>
+                            <th><strong>依然 发货清单</strong></th>
                             <th>尺码</th>
                             <th>单价</th>
                             <th>数量</th>
@@ -399,7 +399,9 @@ function getsubmitOrder() {
 }
 
 .toplogo {
-    padding-top: 16px;
+    width: 216px;
+    height: 50px;
+    padding-top: 10px;
 }
 
 .layui-container {

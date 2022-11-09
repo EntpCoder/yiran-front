@@ -1,6 +1,6 @@
 <template>
   <p id="m-title">
-                    <a href="my-info.html">我的唯品会</a>
+                    <a href="my-info.html">我的依然</a>
                     &nbsp;>&nbsp;优惠券
                 </p>
                 <div class="m-coupons-modules">

@@ -8,7 +8,7 @@
             <div class="layui-col-md8 layui-col-md-offset2">
                 <ul class="grid-demo">
                     <li class="nav-myvip">
-                        <router-link to="/">我的唯品会</router-link>
+                        <router-link to="/">我的依然</router-link>
                     </li>
                     <li class="nav-comingsoon"><a href="collection.html">我的特卖</a></li>
                     <li class="nav-category">

@@ -1,6 +1,6 @@
 <template>
   <p id="m-title">
-    <a href="my-info.html">我的唯品会</a>
+    <a href="my-info.html">我的依然</a>
     我的资料
   </p>
   <div class="account">
@@ -9,7 +9,7 @@
         <div class="userInfo">
           <div class="touxiang">
             <div class="layer">
-              <strong class="userName">唯品会会员（159*****974）</strong>
+              <strong class="userName">依然会员（159*****974）</strong>
             </div>
             <el-upload
               class="avatar-uploader"

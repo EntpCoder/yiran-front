@@ -4,7 +4,7 @@
         <div class="layui-row">
             <div class="carlogo layui-col-md2">
                 <router-link to="/">
-                    <img class="toplogo" src="/images/cartHeader.png" />
+                    <img class="toplogo" src="/images/cartlogo.png" />
                 </router-link>
             </div>
             <div class="layui-col-md7 layui-col-md-offset3">
@@ -276,7 +276,9 @@ function goConfirmOrder(){
 }
 
 .toplogo {
-    padding-top: 16px;
+    width: 216px;
+    height: 50px;
+    padding-top: 10px;
 }
 
 .layui-container {
