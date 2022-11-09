@@ -96,7 +96,7 @@
                     <td class="product-item">
                         <!-- 选框 -->
                         <div class="m-checkbox">
-                            <input type="checkbox" v-model="c.isChecked" />
+                            <input @change="checkCartId" type="checkbox" v-model="c.isChecked" />
                         </div>
                         <div class="product-img">
                             <img width="70px" height="70px" :src="c.proMainImageAddress">
@@ -165,7 +165,9 @@
                     <i id="st-tips" class="layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a href="javascript:;" class="settlement-button layui-btn layui-col-md4" @click="goConfirmOrder">立即结算
+                <a v-if="isOk" href="javascript:;" class="settlement-button layui-btn layui-col-md4" @click="goConfirmOrder">立即结算
+                </a>
+                <a v-if="!isOk" href="javascript:;" class="no-settlement-button layui-btn layui-col-md4">请选择商品
                 </a>
             </div>
         </div>
@@ -182,7 +184,9 @@ let cartList = ref([])
 let data = reactive({ isLoad: true, sumPrice: 0.0 })
 let couponList = ref([])
 // 勾选的购物车id
-let cartCheckedIds = []
+let cartCheckedIds = ref([])
+// 是否可以结算
+let isOk = ref(false)
 // 选择优惠券id
 let couponCheckedId = ref()
 // router
@@ -259,11 +263,18 @@ function deleteByCartId(cartId) {
             }
         })
 }
+// 更改是否可以提交的状态
+function checkCartId(){
+    let temp = cartList.value.filter(c => c.isChecked)
+    if(temp.length == 0) isOk.value=false
+    else isOk.value=true
+}
+// 结算
 function goConfirmOrder(){
     cartList.value.filter(c => c.isChecked).map(c => {
-        cartCheckedIds.push(c.cartId)
+        cartCheckedIds.value.push(c.cartId)
     })
-    router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds,receiveCouponId:couponCheckedId.value}})
+    router.push({path:'/orderConfirm',query:{cartIds:cartCheckedIds.value,receiveCouponId:couponCheckedId.value}})
 }
 
 </script>
@@ -669,6 +680,11 @@ function goConfirmOrder(){
 .settlement-button {
     height: 100%;
     background-color: rgb(244, 52, 153);
+    line-height: 60px;
+}
+.no-settlement-button{
+    height: 100%;
+    background-color: rgb(152, 152, 152);
     line-height: 60px;
 }
 
