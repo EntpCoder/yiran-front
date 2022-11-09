@@ -1,7 +1,9 @@
 <template>
     <!-- ===========头部导航============ -->
     <div class="nav">
-        <router-link to="/" class="nav-index"></router-link>
+        <router-link to="/" class="nav-index">
+            <img class="logo" src="/images/logo.png"/>
+        </router-link>
         <i class="nav-san"></i>
     </div>
     <!-- =============注册====================== -->
@@ -210,16 +212,6 @@ a, body {
     /* border: 1px solid; */
 }
 
-.nav .nav-index {
-    background-image: url("../images/maodian.png");
-    background-position: -308px -57px;
-    width: 125px;
-    height: 100px;
-    /* border: 1px solid; */
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-}
 
 .nav .nav-san {
     background-image: url("../images/maodian.png");
@@ -467,5 +459,9 @@ a, body {
     font-weight: bolder;
     text-align: left;
 
+}
+.logo{
+    width: 200px;
+    height: 100px;
 }
 </style>

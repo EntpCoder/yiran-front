@@ -1,23 +1,25 @@
 <template>
     <!-- ===========头部导航============ -->
     <div class="nav">
-        <router-link to="/" class="nav-index"></router-link>
+        <router-link to="/" class="nav-index">
+            <img class="logo" src="/images/logo.png" />
+        </router-link>
         <i class="nav-san"></i>
     </div>
     <!-- =============登录====================== -->
     <div class="login-bg">
-         
 
-         <div class="login-panel">
-             <!-- 登录注册 -->
-             <div class="login-head">
-                 <router-link class="duanxin-login" to="/login/mobile">短信验证登录</router-link> 
-                 <i class="a">|</i> 
-                 <router-link class="acc-login" to="/login/account">账户登录</router-link>   
-             </div>   
-             <RouterView></RouterView>
-         </div>
-     </div>
+
+        <div class="login-panel">
+            <!-- 登录注册 -->
+            <div class="login-head">
+                <router-link class="duanxin-login" to="/login/mobile">短信验证登录</router-link>
+                <i class="a">|</i>
+                <router-link class="acc-login" to="/login/account">账户登录</router-link>
+            </div>
+            <RouterView></RouterView>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -39,17 +41,6 @@
     height: 100px;
     zoom: 1;
     /* border: 1px solid; */
-}
-
-.nav .nav-index {
-    background-image: url("../images/maodian.png");
-    background-position: -308px -57px;
-    width: 125px;
-    height: 100px;
-    /* border: 2px solid; */
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
 }
 
 .nav .nav-san {
@@ -138,5 +129,10 @@
     text-decoration: none;
     float: right;
     cursor: pointer;
+}
+
+.logo {
+    width: 200px;
+    height: 100px;
 }
 </style>
