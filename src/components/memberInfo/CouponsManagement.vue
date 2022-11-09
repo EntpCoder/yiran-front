@@ -5,9 +5,20 @@
                 </p>
                 <div class="m-coupons-modules">
                     <p class="u-active-title">领取优惠券</p>
-                    <div class="m-active-area">
-                        <div  class="m-active-area coupon" v-on:click="xuanze(c)" v-for="c in couponList" :key="c.couponId">
-                            <p>满{{c.discountAmount}}减{{c.fullMoney}}&nbsp; &nbsp;&nbsp;优惠类型{{c.subject}}</p>
+                    <div class="coupon-item" v-for="c in couponList" :key="c.couponId">
+                        <div class="style-two">
+                        <div class="info-box">
+                            <p class="nick">{{c.subject}}</p>
+                        <div class="coupon-money">
+                        <div class="lay of">￥<em>{{c.discountAmount}}</em></div>
+                        <div class="lay">
+                            <p class="tit">优惠劵</p>
+                            <p class="demand">满{{c.fullMoney}}元可用</p>
+                        </div>
+                        </div>
+                        </div>
+                            <a href="javascript:void(0)" @click="getReceiveCoupon(c)" class="get-btn">
+                            <span>立即领取</span></a>
                         </div>
                     </div>
                 </div>
@@ -40,10 +51,15 @@ function loadData(){
         }
     )
 }
-function xuanze(c){
+function getReceiveCoupon(c){
     couponApi.getReceiveCoupon(c.couponId).then(
         response => {
             receiveCoupon.value = reactive(response.data.receiveCoupon)
+            if(response.code==200){
+                alert('领取成功')
+            }else{
+                alert('您已领取过该优惠券')
+            }
         }
     )
 }
@@ -154,5 +170,103 @@ table {
     text-align: center;
     cursor: pointer;
 }
-
+.style-one, .style-two, .style-three, .style-four, .style-five, .style-six, .style-seven{width: 100%; height:8rem; position: relative;margin: 5% 0;
+ 
+ display: -webkit-box; display: -webkit-flex; display: flex; align-items: center; justify-content: center;
+ 
+ background-color: #fff; border:1px solid #E5004F;}
+ .style-one .info-box, .style-two .info-box, .style-three .info-box, .style-four .info-box, .style-five .info-box , .style-six .info-box, .style-seven .info-box{
+ 
+ -webkit-box: 1; -webkit-flex: 1; flex: 1; padding: 0 3% 0 10%; position: relative;}
+ .style-two .info-box:before, .style-two .info-box:after,
+ 
+.style-two .get-btn:before,  .style-two .get-btn:after{
+ 
+content:""; width: 1.4rem; height: 1.8rem; position: absolute; z-index: 9;
+ 
+border-right: 1px solid #E5004F;  -webkit-border-radius: 50%; border-radius: 50%; background-color: #f5f5f5;
+ 
+}
+ 
+.style-one .info-box:before, .style-two .info-box:before{ top:-1.5rem; left:-.5rem; -webkit-transform: rotate(36deg); transform: rotate(36deg);}
+ 
+.style-one .info-box:after, .style-two .info-box:after{ bottom:-1.5rem; left:-.5rem; -webkit-transform: rotate(-36deg); transform: rotate(-36deg);}
+ 
+.style-one .get-btn:before, .style-two .get-btn:before{ top:-.5rem; right:-.35rem; -webkit-transform: rotate(136deg); transform: rotate(136deg);}
+ 
+.style-one .get-btn:after, .style-two .get-btn:after{bottom:-.5rem; right:-.35rem; -webkit-transform: rotate(-136deg); transform: rotate(-136deg);}
+ 
+  
+ 
+.style-one .get-btn, .style-two .get-btn, .style-three .get-btn, .style-four .get-btn, .style-six .get-btn, .style-seven .get-btn{
+ 
+width: 24%; height: 8rem; text-align: center; color: #fff; font-size: 1.6rem; background-color: #E5004F; position: relative;}
+ 
+.style-one .get-btn span{width: 1.6rem; padding: .66rem 2rem .66rem 0; display: inherit; margin:0 auto; word-break: break-all;}
+.style-two{ background-color: #ED008C; border:1px solid #ED008C; color: #fff;}
+ 
+.style-two:before, .style-two:after{
+ 
+content:""; height: .5rem; position: absolute; display: block; z-index: 9;
+ 
+background-image: linear-gradient(135deg,transparent, transparent 45%, #ED008C, #ED008C 55%, transparent 100%),
+ 
+  linear-gradient(45deg, transparent, #ED008C 45%, #ED008C, transparent 55%, transparent 100%);
+ 
+background-size: 1rem 1rem; background-repeat: repeat-x, repeat-x;
+ 
+}
+ 
+.style-two:before{top: -.36rem; left: .8rem; right: 1rem;}
+ 
+.style-two:after{bottom: -.36rem; -webkit-transform: rotate(180deg);transform: rotate(180deg); left: 1.1rem; right: 1.2rem;}
+ 
+.style-two .get-btn{background-color: #ed008c;}
+ 
+.style-two .get-btn span, .style-three .get-btn span, .style-six .get-btn span, .style-seven .get-btn span{
+ 
+width:4rem; height: 8rem; display: inline-block; padding:1.66rem 0; font-size: 2rem; word-break: break-all;
+ 
+}
+ 
+.style-two .of{color:#FFF100;}
+.style-two.have .info-box:before, .style-two.have .info-box:after{border-right:1px solid #c1c1c1;}
+.style-two.have .get-btn:before, .style-two.have .get-btn:after{border-right: #c1c1c1;}
+.style-two.have, .style-three.have{background-color: #c1c1c1; border:none;}
+ 
+.style-two.have .of{color: #fff;}
+ 
+.style-two.have:before, .style-two.have:after{background-image: linear-gradient(135deg,transparent, transparent 45%, #c1c1c1, #c1c1c1 55%, transparent 100%),
+ 
+ linear-gradient(45deg, transparent, #c1c1c1 45%, #c1c1c1, transparent 55%, transparent 100%);}
+ 
+.style-two.have .get-btn{background-color: #c1c1c1;}
+ 
+.style-two.have .get-btn span, .style-three.have .get-btn span,
+ 
+.style-six.have .get-btn span, .style-seven.have .get-btn span{width: 1.6rem; padding: 1.36rem 0; font-size: 1.6rem;}
+.coupon-wrapper .coupon-item{width: 100%;}
+ 
+.coupon-wrapper h3{ height: 3rem; line-height: 1.8rem;font-size: 1.4rem; color:#454545; padding: 2% 0;}
+ 
+.coupon-item .nick{padding:.66% 0; color: #fff; font-size: 1px;}
+ 
+.coupon-item .coupon-money {width: 100%; display: -webkit-box; display: -webkit-flex; display: flex; font-size: 1.2rem; align-items: center;}
+ 
+.coupon-item .coupon-money em{font-size: 3.8rem;}
+ 
+.coupon-item .coupon-money .lay:last-child{flex: 1; padding:0 3%;line-height: 1.66rem;}
+.coupon-item {margin: 0; height: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;font-size: 62.5%; }
+ 
+  
+ 
+.coupon-item { width: 100%; max-width: 640px;min-width:320px; height: 100%; margin: 0 auto; padding: 0; font-family: "Microsoft Yahei";
+ 
+ }
+ 
+  
+ 
+a { text-decoration: none; color: #a1a1a1; background: transparent; -webkit-tap-highlight-color: transparent; }
+ 
+a:active { color: #8c88ff; border: none; outline: none; }
 </style>
