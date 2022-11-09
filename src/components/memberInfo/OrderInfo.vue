@@ -31,18 +31,17 @@
                                 </a>
                                 <div class="goods-info">
                                     <div class="goods-name">
-                                        <a href="" target="_blank" class="name"
-                                            :title="od.proName">{{od.proName}}</a>
-                                        <span class="size">尺码:{{od.sizeType}}-颜色:{{od.colorName}}</span>
+                                        <a href="" target="_blank" class="name" :title="od.proName">{{ od.proName }}</a>
+                                        <span class="size">尺码:{{ od.sizeType }}-颜色:{{ od.colorName }}</span>
                                     </div>
                                     <div class="goods-num">
-                                        <span class="num">×{{od.proNum}}</span>
+                                        <span class="num">×{{ od.proNum }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="order-price">
-                            <strong>￥{{od.proPrice}}</strong>
+                            <strong>￥{{ od.proPrice }}</strong>
                         </div>
                         <!-- 订单待付款样式 -->
                         <template v-if="o.orderState == 0">
@@ -54,7 +53,8 @@
                             </div>
                             <div class="order-control">
                                 <p>
-                                    <a :href="`http://localhost:2177/pay/goAliPay/${o.orderId}`" role="button" mars_sead="account_order_secondpay_btn"
+                                    <a :href="`http://localhost:2177/pay/goAliPay/${o.orderId}`" role="button"
+                                        mars_sead="account_order_secondpay_btn"
                                         class="ui-btn-mini ui-btn1 J_showUnpaid">支付</a>
                                 </p>
 
@@ -105,7 +105,8 @@
                             <div class="order-control">
                                 <div class="confirmSign-content J-confirmSign-content">
                                     <p><a class="ui-btn-mini ui-btn2 J_confirmSign" data-ordersn="22082784137477"
-                                            role="button" href="javascript:;">确认收货</a></p>
+                                            @click="confirmReceipt(o.orderId)" role="button"
+                                            href="javascript:;">确认收货</a></p>
                                 </div>
 
                             </div>
@@ -146,10 +147,10 @@ const orderList = ref([])
 // 当路由变化时重新加载数据
 watch(() => router.currentRoute.value.fullPath, () => {
     orderType.value = route.query.type
-    if(orderType.value){
+    if (orderType.value) {
         loadOrderByStatus()
-    }else{
-        loadAllOrder() 
+    } else {
+        loadAllOrder()
     }
     // 加载数据
 }, { immediate: true }
@@ -163,9 +164,23 @@ function loadAllOrder() {
     })
 }
 // 根据订单状态查询订单
-function loadOrderByStatus(){
+function loadOrderByStatus() {
     orderApi.getOrdersByStatus(orderType.value).then(response => {
         orderList.value = response.data.QueryStatusList
+    })
+}
+// 确认收货
+function confirmReceipt(orderId) {
+    orderApi.confirmReceipt(orderId).then(response => {
+        if (response.code === 200) {
+            if (orderType.value) {
+                loadOrderByStatus()
+            } else {
+                loadAllOrder()
+            }
+        }else{
+            alert("收货失败")
+        }
     })
 }
 </script>

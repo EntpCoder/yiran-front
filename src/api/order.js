@@ -35,5 +35,11 @@ export default {
             url: `/order/getOrderDetailsByOrderId/${orderId}`,
             method: 'get',
         })
+    },
+    confirmReceipt(orderId){
+        return request({
+            url: `/order/updateOrderStatusByOrderId/${orderId}`,
+            method: 'get',
+        })
     }
 }
