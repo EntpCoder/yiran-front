@@ -49,7 +49,7 @@
                             <div class="order-state">
                                 <span class="red">未支付</span>
 
-                                <router-link to="/memberInfo/orderdetail"
+                                <router-link :to="`/memberInfo/orderdetail?orderId=${o.orderId}`"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -69,12 +69,10 @@
                         <template v-if="o.orderState == 1">
                             <div class="order-state">
                                 <span class="green">已支付</span>
-
-                                <router-link to="/memberInfo/orderdetail"
+                                <router-link :to="`/memberInfo/orderdetail?orderId=${o.orderId}`"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
-
                             </div>
                             <div class="order-other">
                                 <p>
@@ -89,9 +87,6 @@
                         <template v-if="o.orderState == 2">
                             <div class="order-state">
                                 <span class="green">已取消</span>
-
-                                <router-link :to="`/memberInfo/orderdetail?orderId=${o.orderId}`"
-                                    mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
 
@@ -104,7 +99,7 @@
                             <div class="order-state">
                                 <span class="green">已发货</span>
 
-                                <router-link to="/memberInfo/orderdetail"
+                                <router-link :to="`/memberInfo/orderdetail?orderId=${o.orderId}`"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -120,7 +115,7 @@
                         <template v-if="o.orderState == 4">
                             <div class="order-state">
                                 <span class="gray">已签收</span>
-                                <router-link to="/memberInfo/orderdetail"
+                                <router-link :to="`/memberInfo/orderdetail?orderId=${o.orderId}`"
                                     mars_sead="account_order_detail_btn">订单详情</router-link>
                             </div>
                             <div class="order-control">
@@ -164,7 +159,6 @@ onBeforeMount(() => {
 })
 function loadAllOrder() {
     orderApi.getAllOrders().then(response => {
-        console.log(response)
         orderList.value = response.data.ordersList
     })
 }
