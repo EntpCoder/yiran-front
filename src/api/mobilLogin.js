@@ -10,5 +10,12 @@ export default {
         return request({
           url: `msm/getMsg/?phoneNum=${phoneNum}&code=${code}`
         })
+      },
+      phoneLogin(user) {
+        return request({
+          url: `/user/phoneLogin`,
+          method: 'post',
+          data:{phoneNum:user.phone}
+        })
       }
 }

@@ -4,7 +4,7 @@
         <!-- ====短信登录=== -->
         <div class="login-user">
             <i class="user-img"><img src="/svg/phone.svg" alt=""></i>
-            <input type="text" class="user" v-model="phoneNum"  placeholder="请输入要验证的手机号码">
+            <input type="text" class="user" v-model="user.phone"  placeholder="请输入要验证的手机号码">
         </div>
         <div class="user-none"></div>
         <div class="row-2">
@@ -38,9 +38,10 @@
 
 <script setup>
 import mobilLoginApi from '@/api/mobilLogin.js'
-
+import cookie from "js-cookie"
 import { reactive,computed,ref, onBeforeUnmount} from 'vue'
-const phoneNum = ref()
+let user = reactive({ phone: ''})
+
 //输入的验证码
 const message = ref()
 let timeDifference = ref(0)
@@ -55,7 +56,7 @@ onBeforeUnmount(()=>{
 
 //获取验证码
 function sendMsm(){
-    mobilLoginApi.sendMsm(phoneNum.value).then(        
+    mobilLoginApi.sendMsm(user.phone).then(        
         response => {
             if(reactive(response.data.result)){
                 //倒计时开始
@@ -69,12 +70,22 @@ function sendMsm(){
 }
 //点击登录，验证验证码是否失效，是否正确
 function toDengLu(){
-    mobilLoginApi.getMsg(phoneNum.value,message.value).then(
+    mobilLoginApi.getMsg(user.phone,message.value).then(
         response => {
-            console.log(phoneNum.value,message.value)
+            console.log(user.phone,message.value)
             //如果对比结果为true
             if(reactive(response.data.result)) {
-                window.location.href ="/"
+                //根据user手机号返回token
+                mobilLoginApi.phoneLogin(user)
+                .then(response => {
+                    if (response.code === 200) {
+                        cookie.set('user_token', response.data.token, { domain: 'localhost' })
+                        window.location.href = "/";
+                    }else{
+                        user.phone = ''
+                        alert("手机号码未注册")
+                    }
+                })
             }
             else{
                 alert("登陆失败，请重新登录")
