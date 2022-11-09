@@ -14,7 +14,7 @@
                 </div>
                 <div class="A">
                     <span>
-                        <img src="/svg/answer .svg" height="24px" width="24px">
+                        <img src="/svg/answer.svg" height="24px" width="24px">
                         商品尺码表是平铺测量尺寸仅供参考，部分商品由于版型特殊及个人测量方法位置不同，误差范围1-2cm为正常值。
                     </span>
                 </div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="A">
                     <span>
-                        <img src="/svg/answer .svg" height="24px" width="24px">
+                        <img src="/svg/answer.svg" height="24px" width="24px">
                         由于商品制作完成后立即包装，可能会导致部分商品存在一定的气味，都是比较淡且安全的，这个是正常现象，商品开封一段时间后，气味会散去哦。
                     </span>
                 </div>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="A">
                     <span>
-                        <img src="/svg/answer .svg" height="24px" width="24px">
+                        <img src="/svg/answer.svg" height="24px" width="24px">
                         商品采用专业相机拍摄，平铺图更接近实物颜色；但由于不同的显示器显示出来的亮度不同，可能导致实物与图片存在色差，最终颜色以实物为准。
                     </span>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="A">
                     <span>
                         <div id="image">
-                            <img src="/svg/answer .svg" height="24px" width="24px">
+                            <img src="/svg/answer.svg" height="24px" width="24px">
                         </div>
                         <div id="centent">
                             1、特卖价：指商品销售价,

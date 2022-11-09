@@ -14,13 +14,13 @@
         <!-- 小图片 -->
         <div class="layui-row layui-col-space5">
           <div class="layui-col-md1">
-            <span><img src="/svg/箭头 -左.svg" /></span>
+            <span><img src="/svg/箭头左.svg" /></span>
           </div>
           <div class="layui-col-md2" v-for="p in data.product.proImageList" :key="p">
             <img class="smallImg" :src="p" @click="checkPicture(p)" :class="p.clickThePicture" />
           </div>
           <div class="layui-col-md1">
-            <span><img src="/svg/箭头 -右.svg" /></span>
+            <span><img src="/svg/箭头右.svg" /></span>
           </div>
         </div>
         <!-- 商品编码 & 商品收藏 -->
