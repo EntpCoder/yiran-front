@@ -84,8 +84,7 @@ function sendMsm(){
     else{
         phoneNum.value = ''
         alert("请输入正确的手机号码")
-    }
-    
+    }    
 }
 
 function toRegister(){
@@ -99,7 +98,7 @@ function toRegister(){
                 phoneNum.value = ''
                 password.value = ''
                 message.value = ''
-                alert("验证码或手机号错误")
+                alert("验证码错误，或手机号已被注册")
             }
         }
     )
