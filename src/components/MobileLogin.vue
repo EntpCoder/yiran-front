@@ -88,7 +88,7 @@ function toDengLu(){
                 })
             }
             else{
-                alert("登陆失败，请重新登录")
+                alert("登陆失败可能是验证码或者手机号错误")
             }
         }
     )
