@@ -38,7 +38,7 @@
                 <dt>订单金额：</dt>
                 <dd><b class="money">¥{{order.orderAmount}}</b><span>（含运费¥0.00）</span></dd>
                 <dt>收货信息：</dt>
-                <dd>{{address.name}},{{address.phone}}，{{address.province}} {{address.city}} {{address.area}} {{address.detail}}</dd>
+                <dd>{{address.name}},{{address.phone}}，{{address.province}} {{address.city}} {{address.area}} {{address.stree}} {{address.detail}}</dd>
                 <dt>支付方式：</dt>
                 <dd>支付宝</dd>
             </dl>
@@ -73,7 +73,7 @@
                             <img :src="od.proMainImageAddress" width="50" height="63" alt="">
                         </a>
                         <div class="m-goods-info">
-                            <a target="_blank" class="name" href="" title="纯棉立领条纹春夏男装七分袖衬衫衣">{{od.proName}}</a>
+                            <a target="_blank" class="name" href="" :title="od.proName">{{od.proName}}</a>
                             <span class="size">L</span>
                             <div class="supportTip">
                             </div>

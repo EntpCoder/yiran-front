@@ -60,11 +60,11 @@
         </div>
         <div class="channel-tips layui-row">
             <span class="area-delivery-info">
-                配送至
-                <strong class="area-delivery-province">苏州工业园区 驰星教育</strong>
+                
+                <strong class="area-delivery-province">依然-购物车</strong>
             </span>
             <div class="shop-tips inline-block-item">
-                勾选商品“<img src="/images/shop-lock-success.png">”即可锁定库存20分钟，倒计时内不用担心商品被抢走～
+                勾选商品“<img src="/images/shop-lock-success.png">”后结算
             </div>
         </div>
         <!-- 商品列表 -->
