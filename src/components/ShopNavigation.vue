@@ -26,18 +26,18 @@
           </ul>
         </div>
       </div>
-      <a href="" class="nav-b tuijian">推荐</a>
-      <a href="" class="nav-b">3折疯抢</a>
-      <a href="" class="nav-b">唯品快抢</a>
-      <a href="" class="nav-b">唯品奢</a>
-      <a href="" class="nav-b">女装</a>
-      <a href="" class="nav-b">运动</a>
-      <a href="" class="nav-b">鞋包</a>
-      <a href="" class="nav-b">美妆</a>
-      <a href="" class="nav-b">母婴</a>
-      <a href="" class="nav-b">电器</a>
-      <a href="" class="nav-b">男装</a>
-      <a href="" class="nav-b">首饰</a>
+      <router-link to="/productList?kindId=108" class="nav-b tuijian">推荐</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">3折疯抢</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">唯品快抢</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">唯品奢</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">女装</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">运动</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">鞋包</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">美妆</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">母婴</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">电器</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">男装</router-link>
+      <router-link to="/productList?kindId=108" class="nav-b">首饰</router-link>
     </div>
   </div>
 </template>
