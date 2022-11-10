@@ -71,7 +71,7 @@ onMounted(() => {
     }
 })
 function quitLogin(){
-    cookie.remove('user_token')
+    cookie.remove('user_token',{ domain: '.songyang.top' })
     isLogin.value = false
 }
 </script>
