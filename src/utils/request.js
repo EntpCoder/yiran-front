@@ -1,10 +1,8 @@
 import axios from 'axios'
 import cookie from "js-cookie"
-// import { MessageBox, Message } from 'element-ui'
-//import cookie from "js-cookie"
 // 创建axios实例
 const service = axios.create({
-  baseURL: 'http://localhost:2177/', // api的base_url
+  baseURL: 'http://api.songyang.top/', // api的base_url
   timeout: 20000, // 请求超时时间
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'

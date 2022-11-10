@@ -85,7 +85,7 @@ function toDengLu(){
                 mobilLoginApi.phoneLogin(user)
                 .then(response => {
                     if (response.code === 200) {
-                        cookie.set('user_token', response.data.token, { domain: 'localhost' })
+                        cookie.set('user_token', response.data.token, { domain: '.songyang.top' })
                         window.location.href = "/";
                     }else{
                         user.phone = ''

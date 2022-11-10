@@ -53,7 +53,7 @@
                             </div>
                             <div class="order-control">
                                 <p>
-                                    <a :href="`http://localhost:2177/pay/goAliPay/${o.orderId}`" role="button"
+                                    <a :href="`http://api.songyang.top/pay/goAliPay/${o.orderId}`" role="button"
                                         mars_sead="account_order_secondpay_btn"
                                         class="ui-btn-mini ui-btn1 J_showUnpaid">支付</a>
                                 </p>

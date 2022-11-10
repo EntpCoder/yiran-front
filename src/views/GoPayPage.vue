@@ -191,7 +191,7 @@
                     <i class="st-tips layui-icon"
                         style="font-size: 15px; color: rgb(97,137,248); margin-right: 20px; margin-left: 10px;">&#xe607;</i>
                 </div>
-                <a :href="`http://localhost:2177/pay/goAliPay/${orderId}`"
+                <a :href="`http://api.songyang.top/pay/goAliPay/${orderId}`"
                     class="settlement-button layui-btn layui-col-md4" v-if="data.minute >= 0">支付</a>
                 <span class="timeout-button layui-btn layui-col-md4" v-if="data.minute < 0">已超时</span>
             </div>

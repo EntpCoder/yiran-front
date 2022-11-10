@@ -117,6 +117,20 @@
       </div>
     </div>
   </div>
+  <div class="bottom-box">
+    <hr />
+    <div>
+      <a>Copyright © 2022-现在 songyang.top All Rights Reserved</a>
+    </div>
+    <div>
+      <a class="beian" href="https://beian.miit.gov.cn/" target="_blank">黑ICP备19004466号-3
+      </a>
+    </div>
+    <div>
+      <p class="warn">仅学习使用，所有数据均为假数据，支付为沙箱测试。</p>
+      <p class="warn">如有侵权请联系entpcoder@163.com</p>
+    </div>
+  </div>
 </template>
 <script setup>
 import YiRanHeader from "@/components/YiRanHeader.vue";
@@ -330,5 +344,31 @@ let tupian = ["https://img0.baidu.com/it/u=3315921660,2451197639&fm=253&fmt=auto
 
 .banner {
   width: 100%;
+}
+
+/* 页脚 */
+.bottom-box {
+  width: 100%;
+  height: 100px;
+  background-color: rgb(245, 234, 251);
+}
+
+.bottom-box>div {
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+}
+
+.bottom-box>div>a {
+  color: rgb(128, 128, 128);
+  font-size: smaller;
+}
+
+.warn {
+  color: rgb(255, 0, 0);
+  font-size: smaller;
+}
+.beian:hover{
+  color: rgb(241,1,128);
 }
 </style>
